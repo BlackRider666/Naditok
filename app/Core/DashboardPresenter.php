@@ -28,4 +28,21 @@ class DashboardPresenter
             ]
         ]);
     }
+
+    public function getCreatePage(array $fields,string $name)
+    {
+        return view('components.create-page',[
+            'fields'    =>  $fields,
+            'name'      =>  $name,
+        ]);
+    }
+
+    public function getEditPage(Model $model,string $name,array $fields)
+    {
+        return view('components.edit-page',[
+            'model'  =>  $model,
+            'name'   =>  $name,
+            'fields' =>  $fields,
+        ]);
+    }
 }

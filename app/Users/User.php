@@ -25,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'admin'
     ];
 
     protected $appends = [
@@ -46,7 +47,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'first_name'    => 'string',
+        'last_name'     => 'string',
+        'email'         => 'email',
+        'password'      => 'password',
+        'password_confirmation' =>  'password',
+        'phone'                 => 'phone',
+        'admin'                 =>  'boolean',
     ];
 
     /**

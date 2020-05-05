@@ -18,7 +18,7 @@
         <td class="row border-0">
             <a class="col" href="{{route('admin.'.$name.'.show',$item->id)}}"><i class="far fa-eye text-info"></i></a>
             <a class="col" href="{{route('admin.'.$name.'.edit', $item->id)}}"><i class="far fa-edit text-warning"></i></a>
-            <form class="col" action="{{route('admin.'.$name.'.delete',$item->id)}}" method="POST">
+            <form class="col" action="{{route('admin.'.$name.'.destroy',$item->id)}}" method="POST">
                 {{method_field('DELETE')}}
                 @csrf
                 <button type="submit" class="border-0 bg-white">

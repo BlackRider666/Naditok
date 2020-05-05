@@ -3,7 +3,7 @@
 
 namespace App\Users;
 
-
+use App\Users\User;
 use App\Core\DashboardPresenter;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -29,5 +29,26 @@ class UserDashboardPresenter
             'email'         =>  'Email',
         ];
         return (new DashboardPresenter())->getShowPage($header, $user, $fields);
+    }
+
+    public function getCreatePage()
+    {
+        $casts = (new User)->getCasts();
+        unset($casts['id']);
+        $name = 'users';
+        return (new DashboardPresenter())->getCreatePage($casts,$name);
+    }
+
+    public function getEditPage(User $user)
+    {
+        $name = 'users';
+        $fields = [
+            'first_name',
+            'last_name',
+            'email',
+            'phone',
+            'admin'
+        ];
+        return (new DashboardPresenter())->getEditPage($user,$name,$fields);
     }
 }
