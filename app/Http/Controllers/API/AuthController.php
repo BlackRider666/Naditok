@@ -61,8 +61,9 @@ class AuthController extends Controller
                 'errors'     =>  $validator->failed(),
             ],422);
         }
-
-        $user = User::create($validator->validated());
+        $data = $validator->validated();
+        $data['password'] = Hash::make($data['password']);
+        $user = User::create($data);
 
         return response()->json([
             'token'     =>  $user->createToken('clinic')->plainTextToken,
@@ -81,11 +82,10 @@ class AuthController extends Controller
     }
 
     /**
-     * @param int $id
      * @param Request $request
      * @return JsonResponse
      */
-    public function updateUser(int $id, Request $request): JsonResponse
+    public function updateUser(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'first_name'     =>  'required|string|max:255',
@@ -97,7 +97,7 @@ class AuthController extends Controller
                 'errors'     =>  $validator->failed(),
             ],422);
         }
-        $user = User::find($id)->update($validator->validated());
+        $user = $request->user()->update($validator->validated());
         if ($request->get('city')) {
             $user->address->create($request->only(['city','street','number','room']));
         }
@@ -108,11 +108,10 @@ class AuthController extends Controller
     }
 
     /**
-     * @param int $id
      * @param Request $request
      * @return JsonResponse
      */
-    public function changePassword(int $id, Request $request): JsonResponse
+    public function changePassword(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'old_password'     =>  'required|string|max:255|min:6',
@@ -124,7 +123,7 @@ class AuthController extends Controller
             ],422);
         }
 
-        $user = User::find($id);
+        $user = $request->user();
         if (! $user || ! Hash::check($request->get('old_password'), $user->password)) {
             return response()->json([
                 'message'   =>  'Wrong credentials',
