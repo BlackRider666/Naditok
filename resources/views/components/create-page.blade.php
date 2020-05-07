@@ -1,13 +1,15 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        Create {{ucfirst(substr($name, 0, -1))}}
-                    </div>
-                    <div class="card-body">
+    <div class="row">
+        <div class="col-lg-12 col-xl-6">
+            <div class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Edit {{ucfirst(substr($name, 0, -1))}}
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
                         <form action="{{route('admin.'.$name.'.store')}}" method="POST">
                             @csrf
                             @include('components.create',$fields)
@@ -19,6 +21,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 @endsection

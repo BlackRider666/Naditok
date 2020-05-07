@@ -1,17 +1,18 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
+    <div class="row">
+        <div class="col-lg-12 col-xl-6">
+            <div class="panel">
+                <div class="panel-hdr">
+                    <h2>
                         {{$header}}
-                    </div>
-                    <div class="card-body">
-                        @include('components.show',$data)
-                    </div>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    @include('components.show',$data)
                 </div>
             </div>
+
         </div>
     </div>
 @endsection
