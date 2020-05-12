@@ -53,7 +53,7 @@ class UsersController extends Controller
             'phone'         =>  'required|string|max:255',
             'admin'         =>  'required|boolean'
         ]);
-        $user = User::create($validator->validated());
+        User::create($validator->validated());
         return redirect()->route('admin.users.index');
     }
     public function show(User $user)

@@ -3,10 +3,18 @@
     @if($model->getCasts()[$field] !== 'boolean')
         <div class="form-group">
             <label for="{{$field}}" class="form-label">{{str_replace('_', ' ', ucfirst($field))}}</label>
-            @include('components.inputs.'.$model->getCasts()[$field],[
-                'name'  =>  $field,
-                'value' =>  $model->$field,
-                ])
+            @if($model->getCasts()[$field] === 'select')
+                @include('components.inputs.'.$model->getCasts()[$field],[
+                    'name'  =>  $field,
+                    'value' =>  $model->$field,
+                    'items' =>  $options['for_select'],
+                    ])
+            @else
+                @include('components.inputs.'.$model->getCasts()[$field],[
+                    'name'  =>  $field,
+                    'value' =>  $model->$field,
+                    ])
+            @endif
             @error($field)
             <span class="invalid-feedback">
                     {{ $message }}

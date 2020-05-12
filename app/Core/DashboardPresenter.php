@@ -29,20 +29,22 @@ class DashboardPresenter
         ]);
     }
 
-    public function getCreatePage(array $fields,string $name)
+    public function getCreatePage(array $fields,string $name, array $options = [])
     {
         return view('components.create-page',[
             'fields'    =>  $fields,
             'name'      =>  $name,
+            'options'   =>  $options,
         ]);
     }
 
-    public function getEditPage(Model $model,string $name,array $fields)
+    public function getEditPage(Model $model,string $name,array $fields, array $options = [])
     {
         return view('components.edit-page',[
             'model'  =>  $model,
             'name'   =>  $name,
             'fields' =>  $fields,
+            'options'   =>  $options,
         ]);
     }
 }

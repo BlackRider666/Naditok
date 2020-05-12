@@ -17,7 +17,7 @@
                     @foreach($headers as $key => $value)
                         <td>{{$item->$key}}</td>
                     @endforeach
-                    <td class="row border-0">
+                    <td class="row">
                         <a class="col" href="{{route('admin.'.$name.'.show',$item->id)}}"><i class="fal fa-eye text-info"></i></a>
                         <a class="col" href="{{route('admin.'.$name.'.edit', $item->id)}}"><i class="fal fa-edit text-warning"></i></a>
                         <form class="col" action="{{route('admin.'.$name.'.destroy',$item->id)}}" method="POST">

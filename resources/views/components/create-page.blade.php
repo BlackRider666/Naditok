@@ -12,7 +12,10 @@
                     <div class="panel-content">
                         <form action="{{route('admin.'.$name.'.store')}}" method="POST">
                             @csrf
-                            @include('components.create',$fields)
+                            @include('components.create',[
+                                'fields'    =>  $fields,
+                                'options'   =>  $options,
+                            ])
                             @include('components.inputs.submit', [
                                 'function'  => 'Create',
                                 'name'  => substr($name, 0, -1),

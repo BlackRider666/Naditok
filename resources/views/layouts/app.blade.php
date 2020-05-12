@@ -121,6 +121,13 @@
                             <span class="nav-link-text">Users</span>
                         </a>
                     </li>
+                    <li class="nav-title">Category</li>
+                    <li class="{{request()->is('categories')?'active':''}}">
+                        <a href="{{route('admin.categories.index')}}" title="Category" data-filter-tags="category">
+                            <i class="fal fa-folder"></i>
+                            <span class="nav-link-text">Category</span>
+                        </a>
+                    </li>
                 </ul>
                 <div class="filter-message js-filter-message bg-success-600"></div>
             </nav>
@@ -211,7 +218,7 @@
             <!-- BEGIN Page Footer -->
             <footer class="page-footer" role="contentinfo">
                 <div class="d-flex align-items-center flex-1 text-muted">
-                    <span class="hidden-md-down fw-700">2020 © NaditokAdmin by&nbsp;<a href='https://github.com/BlackRider666' class='text-primary fw-500' title='BlackRider666' target='_blank'>BlackRider666</a></span>
+                    <span class="hidden-md-down fw-700">2020 © NaditokAdmin</span>
                 </div>
             </footer>
             <!-- END Page Footer -->

@@ -16,6 +16,7 @@
                             @include('components.edit',[
                                 'model'     =>  $model,
                                 'fields'    =>  $fields,
+                                'options'   =>  $options,
                             ])
                             @include('components.inputs.submit', [
                                 'function'  => 'Update',

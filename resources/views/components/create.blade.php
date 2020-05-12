@@ -3,10 +3,18 @@
     @if($value !== 'boolean')
         <div class="form-group">
             <label for="{{$key}}" class="form-label">{{str_replace('_', ' ', ucfirst($key))}}</label>
-            @include('components.inputs.'.$value,[
-                'name'  =>  $key,
-                'value' =>  null,
-                ])
+            @if($value === 'select')
+                @include('components.inputs.'.$value,[
+                    'name'  =>  $key,
+                    'value' =>  null,
+                    'items' =>  $options['for_select'],
+                    ])
+            @else
+                @include('components.inputs.'.$value,[
+                    'name'  =>  $key,
+                    'value' =>  null,
+                    ])
+            @endif
         </div>
         @error($key)
         <span class="invalid-feedback">

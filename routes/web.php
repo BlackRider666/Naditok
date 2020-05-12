@@ -13,6 +13,7 @@
 
 Route::name('admin.')->middleware('auth')->group(function (){
     Route::resource('users','Admin\UsersController');
+    Route::resource('categories','Admin\CategoryController');
     Route::get('/','Admin\PagesController@index')->name('index');
 });
 Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
