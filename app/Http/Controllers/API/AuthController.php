@@ -94,7 +94,6 @@ class AuthController extends Controller
             'first_name'    =>  'required|string|max:255',
             'last_name'     =>  'required|string|max:255',
             'email'         =>  'required|string|email|max:255',
-            'avatar'        =>  'image',
             'address.region'        =>  'string|max:255',
             'address.city'          =>  'string|max:255',
             'address.street'        =>  'string|max:255',
@@ -127,11 +126,6 @@ class AuthController extends Controller
         }
         //
         $data = $validator->validated();
-        if($request->file('avatar'))
-        {
-            $data['avatar'] = (new StorageManager())
-                ->savePicture($request->file('avatar'),'user_avatar',400);
-        }
         $user = $request->user()->update($data);
         if ($request->get('address.region')) {
             $data = $request->only(['address']);
@@ -176,5 +170,17 @@ class AuthController extends Controller
         return response()->json([
             'message'   =>  'Success',
         ],200);
+    }
+    public function updateAvatar(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'avatar'    =>  'required|image'
+        ]);
+        $data['avatar'] = (new StorageManager())
+                ->savePicture($request->file('avatar'),'user_avatar',400);
+        $request->user()->update($data);
+        $user = User::find($request->user()->getKey());
+
+        return response()->json($user,200);
     }
 }

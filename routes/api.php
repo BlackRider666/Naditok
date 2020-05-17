@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/update-user','API\AuthController@updateUser')->name('user.update')->middleware('auth:sanctum');
+Route::post('/update-avatar','API\AuthController@updateAvatar')->name('user.updateAvatar')->middleware('auth:sanctum');
 Route::post('/change-password','API\AuthController@changePassword')->name('user.change-password')->middleware('auth:sanctum');
 
