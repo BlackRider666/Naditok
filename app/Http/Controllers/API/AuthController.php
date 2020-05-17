@@ -143,7 +143,8 @@ class AuthController extends Controller
                 UserChild::create($data);
             }
         }
-        return response()->json($request->user(),200);
+        $user = User::find($request->user()->getKey());
+        return response()->json($user,200);
     }
 
     /**
