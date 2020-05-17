@@ -91,7 +91,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name'    =>  'required|string|max:255',
             'last_name'     =>  'required|string|max:255',
-            'email'         =>  'required|string|email|max:255|unique:users',
+            'email'         =>  'required|string|email|max:255',
             'avatar'        =>  'image',
             'region'        =>  'string|max:255',
             'city'          =>  'string|max:255',
@@ -109,6 +109,21 @@ class AuthController extends Controller
                 'errors'     =>  $validator->failed(),
             ],422);
         }
+        //email => unique:users in validator broke route
+        $user = User::where('email', $request->get('email'))->first();
+        if (
+            $user &&
+            $user->getKey() !== $request->user()->getKey()
+        ) {
+            return response()->json([
+                'message'   =>  'Wrong credentials',
+                'errors'    => [
+                    'email' => 'This email has already been taken.'
+                ],
+                'status'    =>  false,
+            ],422);
+        }
+        //
         $data = $validator->validated();
         if($request->file('avatar'))
         {
