@@ -22,3 +22,4 @@ Route::post('/update-user','API\AuthController@updateUser')->name('user.update')
 Route::post('/update-user-avatar','API\AuthController@updateAvatar')->middleware('auth:sanctum');
 Route::post('/change-password','API\AuthController@changePassword')->name('user.change-password')->middleware('auth:sanctum');
 
+Route::get('/category','API\CategoryControlelr@index');
