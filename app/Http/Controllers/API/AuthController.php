@@ -145,7 +145,7 @@ class AuthController extends Controller
                 UserChild::create($data);
             }
         }
-        return response()->json($request->user()->with(['address','children']),200);
+        return response()->json($request->user(),200);
     }
 
     /**
