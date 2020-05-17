@@ -85,6 +85,9 @@ class UsersController extends Controller
         $data = $validator->validated();
         if($request->file('avatar'))
         {
+            if ($user->avatar !== null) {
+                (new StorageManager())->deleteFile($department->thumb,'user_avatar');
+            }
             $data['avatar'] = (new StorageManager())
                 ->savePicture($request->file('avatar'),'user_avatar',400);
         }
