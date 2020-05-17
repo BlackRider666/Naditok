@@ -178,7 +178,7 @@ class AuthController extends Controller
     }
     public function updateAvatar(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        Validator::make($request->all(), [
             'avatar'    =>  'required|image'
         ]);
         $data['avatar'] = (new StorageManager())
