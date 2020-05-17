@@ -176,9 +176,19 @@ class AuthController extends Controller
             'message'   =>  'Success',
         ],200);
     }
-    public function updateAvatar(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updatePhoto(Request $request): JsonResponse
     {
-        
+        Validator::make($request->all(), [
+            'avatar'    =>  'required|image'
+        ]);
+        $data['avatar'] = (new StorageManager())
+                ->savePicture($request->file('avatar'),'user_avatar',400);
+        $request->user()->update($data);
         $user = User::find($request->user()->getKey());
 
         return response()->json($user,200);
