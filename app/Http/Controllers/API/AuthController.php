@@ -129,7 +129,7 @@ class AuthController extends Controller
         $request->user()->update($data);
         if ($request->get('address')['region']) {
             $data = $request->get('address');
-            if($data['id'])
+            if(array_key_exists('id',$data))
             {
                 UserAddress::find($data['id'])->update($data);
             }
