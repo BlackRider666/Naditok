@@ -2,6 +2,7 @@
 
 namespace App\Users;
 
+use App\Core\PathManager;
 use App\Users\UserAddress\UserAddress;
 use App\Users\UserChild\UserChild;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,11 +26,13 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'admin'
+        'admin',
+        'avatar',
     ];
 
     protected $appends = [
-      'full_name'
+        'full_name',
+        'avatar_url',
     ];
 
     /**
@@ -52,8 +55,9 @@ class User extends Authenticatable
         'email'         => 'email',
         'password'      => 'password',
         'password_confirmation' =>  'password',
-        'phone'                 => 'phone',
+        'phone'                 =>  'phone',
         'admin'                 =>  'boolean',
+        'avatar'                =>  'image',
     ];
 
     /**
@@ -78,5 +82,16 @@ class User extends Authenticatable
     public function getFullNameAttribute(): string
     {
         return $this->first_name.' '.$this->last_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatarUrlAttribute(): string
+    {
+        return $this->avatar?
+            (new PathManager())->getFile($this->avatar,'user_avatar')
+            :
+            (new PathManager())->getDefaultPicture();
     }
 }

@@ -15,13 +15,13 @@ class CreateUserAddressesTable extends Migration
     {
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('region');
             $table->string('city');
             $table->string('street')->nullable();
             $table->string('number')->nullable();
             $table->string('room')->nullable();
+            $table->integer('branch_number');
             $table->unsignedBigInteger('user_id');
-
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

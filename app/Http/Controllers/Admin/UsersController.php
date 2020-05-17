@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Core\StorageManager;
 use App\Http\Controllers\Controller;
 use App\Users\User;
 use App\Users\UserDashboardPresenter;
@@ -51,9 +52,16 @@ class UsersController extends Controller
             'email'         =>  'required|string|email|max:255|unique:users',
             'password'      =>  'required|string|min:6|confirmed',
             'phone'         =>  'required|string|max:255',
-            'admin'         =>  'required|boolean'
+            'admin'         =>  'required|boolean',
+            'avatar'        =>  'image',
         ]);
-        User::create($validator->validated());
+        $data = $validator->validated();
+        if($request->file('avatar'))
+        {
+            $data['avatar'] = (new StorageManager())
+                ->savePicture($request->file('avatar'),'user_avatar',400);
+        }
+        User::create($data);
         return redirect()->route('admin.users.index');
     }
     public function show(User $user)
@@ -71,9 +79,16 @@ class UsersController extends Controller
             'last_name'     =>  'required|string|max:255',
             'email'         =>  'required|string|email|max:255',
             'phone'         =>  'required|string|max:255',
-            'admin'         =>  'required|boolean'
+            'admin'         =>  'required|boolean',
+            'avatar'        =>  'image',
         ]);
-        $user->update($validator->validated());
+        $data = $validator->validated();
+        if($request->file('avatar'))
+        {
+            $data['avatar'] = (new StorageManager())
+                ->savePicture($request->file('avatar'),'user_avatar',400);
+        }
+        $user->update($data);
         return redirect()->route('admin.users.index');
     }
     public function destroy(User $user)

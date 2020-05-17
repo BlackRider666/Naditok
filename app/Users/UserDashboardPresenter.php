@@ -47,7 +47,8 @@ class UserDashboardPresenter
             'last_name',
             'email',
             'phone',
-            'admin'
+            'admin',
+            'avatar'
         ];
         return (new DashboardPresenter())->getEditPage($user,$name,$fields);
     }

@@ -5,12 +5,12 @@
             <div class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Edit {{ucfirst(substr($name, 0, -1))}}
+                        Create {{ucfirst(substr($name, 0, -1))}}
                     </h2>
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <form action="{{route('admin.'.$name.'.store')}}" method="POST">
+                        <form action="{{route('admin.'.$name.'.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @include('components.create',[
                                 'fields'    =>  $fields,

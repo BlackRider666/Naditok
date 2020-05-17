@@ -10,7 +10,7 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <form action="{{route('admin.'.$name.'.update',$model->getKey())}}" method="POST">
+                        <form action="{{route('admin.'.$name.'.update',$model->getKey())}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             {{method_field('PUT')}}
                             @include('components.edit',[

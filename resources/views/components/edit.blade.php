@@ -3,7 +3,13 @@
     @if($model->getCasts()[$field] !== 'boolean')
         <div class="form-group">
             <label for="{{$field}}" class="form-label">{{str_replace('_', ' ', ucfirst($field))}}</label>
-            @if($model->getCasts()[$field] === 'select')
+            @if($model->getCasts()[$field] === 'image')
+                <?php $url = $field.'_url' ?>
+                @include('components.inputs.'.$model->getCasts()[$field],[
+                    'name'  =>  $field,
+                    'value' =>  $model->$url,
+                    ])
+            @elseif($model->getCasts()[$field] === 'select')
                 @include('components.inputs.'.$model->getCasts()[$field],[
                     'name'  =>  $field,
                     'value' =>  $model->$field,
@@ -16,9 +22,9 @@
                     ])
             @endif
             @error($field)
-            <span class="invalid-feedback">
+            <div class="invalid-feedback">
                     {{ $message }}
-                </span>
+                </div>
             @enderror
         </div>
     @else
@@ -31,9 +37,9 @@
                 <label class="custom-control-label" for="{{$field}}">{{str_replace('_', ' ', ucfirst($field))}}</label>
             </div>
             @error($field)
-            <span class="invalid-feedback">
+            <div class="invalid-feedback">
                         {{ $message }}
-                    </span>
+                    </div>
             @enderror
         </div>
     @endif

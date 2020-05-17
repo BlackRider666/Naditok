@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Core\StorageManager;
 use App\Http\Controllers\Controller;
 use App\Users\User;
 use Exception;
@@ -32,7 +33,7 @@ class AuthController extends Controller
 
         $user = User::where('email',$request->get('email'))->first();
 
-        if (! $user || ! Hash::check($request->get('password'), $user->password || !$user->admin)) {
+        if (! $user || ! Hash::check($request->get('password'), $user->password)) {
             return response()->json([
                 'message'   =>  'Wrong credentials',
             ],401);
@@ -88,21 +89,40 @@ class AuthController extends Controller
     public function updateUser(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'first_name'     =>  'required|string|max:255',
+            'first_name'    =>  'required|string|max:255',
             'last_name'     =>  'required|string|max:255',
             'email'         =>  'required|string|email|max:255|unique:users',
+            'avatar'        =>  'image',
+            'region'        =>  'string|max:255',
+            'city'          =>  'string|max:255',
+            'street'        =>  'string|max:255',
+            'number'        =>  'string|max:255',
+            'room'          =>  'string|max:255',
+            'branch_number' =>  'integer',
+            'children'      =>  'array',
+            'children.child_name'       =>  'string|max:255',
+            'children.child_gender'     =>  'string|max:255',
+            'children.child_birthday'   =>  'date'
         ]);
         if ($validator->fails()) {
             return response()->json([
                 'errors'     =>  $validator->failed(),
             ],422);
         }
-        $user = $request->user()->update($validator->validated());
-        if ($request->get('city')) {
-            $user->address->create($request->only(['city','street','number','room']));
+        $data = $validator->validated();
+        if($request->file('avatar'))
+        {
+            $data['avatar'] = (new StorageManager())
+                ->savePicture($request->file('avatar'),'user_avatar',400);
         }
-        if ($request->get('child_name')) {
-            $user->children->create($request->only(['child_name','child_gender','child_birthday']));
+        $user = $request->user()->update($data);
+        if ($request->get('region')) {
+            $user->address->create($request->only(['region','city','street','number','room','branch_number']));
+        }
+        if ($request->get('children')) {
+            foreach ($request->get('children') as $child) {
+                $user->children->create($child);
+            }
         }
         return response()->json($user,200);
     }
@@ -127,7 +147,7 @@ class AuthController extends Controller
         if (! $user || ! Hash::check($request->get('old_password'), $user->password)) {
             return response()->json([
                 'message'   =>  'Wrong credentials',
-            ],401);
+            ],422);
         }
         $user->update([
             'password'  => Hash::make($request->get('password')),

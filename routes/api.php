@@ -18,6 +18,6 @@ Route::post('/logout','API\AuthController@logout')->name('api.logout')->middlewa
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/update-user/{id}','API\AuthController@updateuser')->name('user.update')->middleware('auth:sanctum');
-Route::post('/change-password/{id}','API\AuthController@changePassword')->name('user.change-password')->middleware('auth:sanctum');
+Route::post('/update-user','API\AuthController@updateUser')->name('user.update')->middleware('auth:sanctum');
+Route::post('/change-password','API\AuthController@changePassword')->name('user.change-password')->middleware('auth:sanctum');
 
