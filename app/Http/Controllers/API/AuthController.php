@@ -178,12 +178,7 @@ class AuthController extends Controller
     }
     public function updateAvatar(Request $request)
     {
-        Validator::make($request->all(), [
-            'avatar'    =>  'required|image'
-        ]);
-        $data['avatar'] = (new StorageManager())
-                ->savePicture($request->file('avatar'),'user_avatar',400);
-        $request->user()->update($data);
+        
         $user = User::find($request->user()->getKey());
 
         return response()->json($user,200);
