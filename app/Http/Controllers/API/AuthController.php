@@ -139,7 +139,7 @@ class AuthController extends Controller
                 $user->children->create($child);
             }
         }
-        return response()->json($user,200);
+        return response()->json($request->user(),200);
     }
 
     /**
