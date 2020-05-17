@@ -126,9 +126,13 @@ class AuthController extends Controller
         }
         //
         $data = $validator->validated();
-        $user = $request->user()->update($data);
-        if ($request->get('address.region')) {
-            $data = $request->only(['address']);
+        $request->user()->update($data);
+        if ($request->get('address')['region']) {
+            $data = $request->get('address');
+            if($data['id'])
+            {
+                UserAddress::find($data['id'])->update($data);
+            }
             $data['user_id'] = $request->user()->getKey();
             UserAddress::create($data);
         }

@@ -28,6 +28,7 @@ class User extends Authenticatable
         'phone',
         'admin',
         'avatar',
+        'subscribe',
     ];
 
     protected $appends = [
