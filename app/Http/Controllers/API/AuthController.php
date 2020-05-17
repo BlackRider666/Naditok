@@ -95,12 +95,12 @@ class AuthController extends Controller
             'last_name'     =>  'required|string|max:255',
             'email'         =>  'required|string|email|max:255',
             'avatar'        =>  'image',
-            'region'        =>  'string|max:255',
-            'city'          =>  'string|max:255',
-            'street'        =>  'string|max:255',
-            'number'        =>  'string|max:255',
-            'room'          =>  'string|max:255',
-            'branch_number' =>  'integer',
+            'address.region'        =>  'string|max:255',
+            'address.city'          =>  'string|max:255',
+            'address.street'        =>  'string|max:255',
+            'address.number'        =>  'string|max:255',
+            'address.room'          =>  'string|max:255',
+            'address.branch_number' =>  'integer',
             'children'      =>  'array',
             'children.child_name'       =>  'string|max:255',
             'children.child_gender'     =>  'string|max:255',
@@ -133,8 +133,8 @@ class AuthController extends Controller
                 ->savePicture($request->file('avatar'),'user_avatar',400);
         }
         $user = $request->user()->update($data);
-        if ($request->get('region')) {
-            $data = $request->only(['region','city','street','number','room','branch_number']);
+        if ($request->get('address.region')) {
+            $data = $request->only(['address']);
             $data['user_id'] = $request->user()->getKey();
             UserAddress::create($data);
         }
