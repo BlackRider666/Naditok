@@ -86,7 +86,7 @@ class UsersController extends Controller
         if($request->file('avatar'))
         {
             if ($user->avatar !== null) {
-                (new StorageManager())->deleteFile($department->thumb,'user_avatar');
+                (new StorageManager())->deleteFile($user->avatar,'user_avatar');
             }
             $data['avatar'] = (new StorageManager())
                 ->savePicture($request->file('avatar'),'user_avatar',400);
