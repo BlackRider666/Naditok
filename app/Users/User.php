@@ -34,7 +34,7 @@ class User extends Authenticatable
         'full_name',
         'avatar_url',
     ];
-
+    protected $with = ['address','children'];
     /**
      * The attributes that should be hidden for arrays.
      *
