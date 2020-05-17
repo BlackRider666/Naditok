@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Core\StorageManager;
 use App\Http\Controllers\Controller;
 use App\Users\User;
+use App\Users\UserAddress\UserAddress;
+use App\Users\UserChild\UserChild;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -132,11 +134,15 @@ class AuthController extends Controller
         }
         $user = $request->user()->update($data);
         if ($request->get('region')) {
-            $user->address->create($request->only(['region','city','street','number','room','branch_number']));
+            $data = $request->only(['region','city','street','number','room','branch_number']);
+            $data['user_id'] = $request->user()->getKey();
+            UserAddress::create($data);
         }
         if ($request->get('children')) {
             foreach ($request->get('children') as $child) {
-                $user->children->create($child);
+                $data = $child;
+                $data['user_id'] = $request->user()->getKey();
+                UserChild::create($data);
             }
         }
         return response()->json($request->user(),200);

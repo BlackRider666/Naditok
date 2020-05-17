@@ -11,11 +11,13 @@ class Category extends Model
     protected $fillable = [
         'title',
         'parent_id',
+        'thumb',
     ];
 
     protected $casts = [
-      'title'       =>  'string',
-      'parent_id'   =>  'select'
+        'title'       =>  'string',
+        'parent_id'   =>  'select',
+        'thumb'       =>  'image',
     ];
     public function child()
     {
