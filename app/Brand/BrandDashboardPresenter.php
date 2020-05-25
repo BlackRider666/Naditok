@@ -22,7 +22,8 @@ class BrandDashboardPresenter
     {
         $header = $brand->title;
         $fields = [
-            'title'    =>  'Title',
+            'title'     =>  'Title',
+            'thumb_url' =>  'Thumb',
         ];
         return (new DashboardPresenter())->getShowPage($header, $brand, $fields);
     }
