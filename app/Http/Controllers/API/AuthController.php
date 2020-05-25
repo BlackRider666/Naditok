@@ -187,6 +187,9 @@ class AuthController extends Controller
         Validator::make($request->all(), [
             'avatar'    =>  'required|image'
         ]);
+        if ($request->user()->avatar !== '') {
+            (new StorageManager())->deleteFile($request->user()->avatar,'user_avatar');
+        }
         $data['avatar'] = (new StorageManager())
                 ->savePicture($request->file('avatar'),'user_avatar',400);
         $request->user()->update($data);

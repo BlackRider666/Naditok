@@ -7,6 +7,7 @@ use App\Category\CategoryDashboardPresenter;
 use App\Core\StorageManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -75,13 +76,22 @@ class CategoryController extends Controller
     }
 
     /**
-     * @param CategoryRequest $request
+     * @param CategoryUpdateRequest $request
      * @param Category $category
      * @return RedirectResponse
      */
-    public function update(CategoryRequest $request, Category $category): RedirectResponse
+    public function update(CategoryUpdateRequest $request, Category $category): RedirectResponse
     {
-        $category->update($request->validated());
+        $data = $request->validated();
+        if($data['thumb'])
+        {
+            if ($category->thumb !== '') {
+                (new StorageManager())->deleteFile($category->thumb,'category');
+            }
+            $data['thumb'] = (new StorageManager())
+                ->savePicture($request->file('thumb'),'category',1000);
+        }
+        $category->update($data);
         return redirect()->route('admin.categories.index');
     }
 

@@ -7,6 +7,7 @@ use App\Brand\BrandDashboardPresenter;
 use App\Core\StorageManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandRequest;
+use App\Http\Requests\BrandUpdateRequest;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -74,13 +75,20 @@ class BrandController extends Controller
     }
 
     /**
-     * @param BrandRequest $request
+     * @param BrandUpdateRequest $request
      * @param Brand $brand
      * @return RedirectResponse
      */
-    public function update(BrandRequest $request, Brand $brand): RedirectResponse
+    public function update(BrandUpdateRequest $request, Brand $brand): RedirectResponse
     {
-        $brand->update($request->validated());
+        $data = $request->validated();
+        if($data['thumb'])
+        {
+            (new StorageManager())->deleteFile($brand->thumb,'brand');
+            $data['thumb'] = (new StorageManager())
+                ->savePicture($request->file('thumb'),'brand',1000);
+        }
+        $brand->update($data);
         return redirect()->route('admin.brands.index');
     }
 
@@ -91,7 +99,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand): RedirectResponse
     {
-        (new StorageManager())->deleteFile($brand->thumb,'category');
+        (new StorageManager())->deleteFile($brand->thumb,'brand');
         $brand->delete();
         return redirect()->route('admin.brands.index');
     }
