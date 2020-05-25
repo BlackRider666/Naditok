@@ -22,7 +22,7 @@ class Brand extends Model
     protected $appends = [
         'thumb_url',
     ];
-    public function getAvatarUrlAttribute(): string
+    public function getThumbUrlAttribute(): string
     {
         return $this->thumb?
             (new PathManager())->getFile($this->thumb,'brand')
