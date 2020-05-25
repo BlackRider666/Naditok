@@ -5,7 +5,7 @@
             <th>{{$fields[$key]}}</th>
             @if($key === 'thumb_url')
                <td>
-                   <img src="{{$value}}" alt="{{$key}}" class="img-thumbnail">
+                   <img src="{{$value}}" alt="{{$key}}" class="img-thumbnail col-6">
                </td>
             @else
             <td>{{$value}}</td>

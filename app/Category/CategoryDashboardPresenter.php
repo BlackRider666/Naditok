@@ -24,6 +24,7 @@ class CategoryDashboardPresenter
         $fields = [
             'title'    =>  'Title',
             'parent_id'     =>  'Parent id',
+            'thumb_url'     =>  'Thumb',
         ];
         return (new DashboardPresenter())->getShowPage($header, $category, $fields);
     }
