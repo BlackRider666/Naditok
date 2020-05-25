@@ -7,6 +7,7 @@ use App\Category\CategoryDashboardPresenter;
 use App\Core\StorageManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -87,10 +88,11 @@ class CategoryController extends Controller
     /**
      * @param Category $category
      * @return RedirectResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(Category $category): RedirectResponse
     {
+        (new StorageManager())->deleteFile($category->thumb,'category');
         $category->delete();
         return redirect()->route('admin.categories.index');
     }

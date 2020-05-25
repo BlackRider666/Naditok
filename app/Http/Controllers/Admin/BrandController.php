@@ -91,6 +91,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand): RedirectResponse
     {
+        (new StorageManager())->deleteFile($brand->thumb,'category');
         $brand->delete();
         return redirect()->route('admin.brands.index');
     }
