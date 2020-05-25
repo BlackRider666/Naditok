@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class BrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,6 @@ class CategoryRequest extends FormRequest
     {
         return [
             'title'     =>  'required|string|max:255',
-            'parent_id' =>  'int|exists:categories,id',
             'thumb'     =>  'required|image',
         ];
     }

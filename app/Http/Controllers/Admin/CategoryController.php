@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category\Category;
 use App\Category\CategoryDashboardPresenter;
+use App\Core\StorageManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -40,25 +42,54 @@ class CategoryController extends Controller
         return $this->dashboardPresenter->getCreatePage();
     }
 
-    public function store(CategoryRequest $request)
+    /**
+     * @param CategoryRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CategoryRequest $request): RedirectResponse
     {
-        Category::create($request->validated());
+        $data = $request->validated();
+        $data['thumb'] = (new StorageManager())
+            ->savePicture($request->file('thumb'),'category',1000);
+        Category::create($data);
         return redirect()->route('admin.categories.index');
     }
+
+    /**
+     * @param Category $category
+     * @return Factory|View
+     */
     public function show(Category $category)
     {
         return $this->dashboardPresenter->getShowPage($category);
     }
+
+    /**
+     * @param Category $category
+     * @return Factory|View
+     */
     public function edit(Category $category)
     {
         return $this->dashboardPresenter->getEditPage($category);
     }
-    public function update(CategoryRequest $request, Category $category)
+
+    /**
+     * @param CategoryRequest $request
+     * @param Category $category
+     * @return RedirectResponse
+     */
+    public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
         return redirect()->route('admin.categories.index');
     }
-    public function destroy(Category $category)
+
+    /**
+     * @param Category $category
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
         return redirect()->route('admin.categories.index');
