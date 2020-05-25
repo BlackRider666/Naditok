@@ -3,5 +3,5 @@
     <label class="custom-file-label" for="customFile">Choose file</label>
 </div>
 @if($value)
-    <img src="{{$value}}" alt="{{$name}}" class="img-thumbnail">
+    <img src="{{$value}}" alt="{{$name}}" class="img-thumbnail col-6">
 @endif
