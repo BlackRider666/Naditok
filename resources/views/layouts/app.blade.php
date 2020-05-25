@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="info-card">
-                    <img src="{{asset('img/demo/avatars/avatar-admin.png')}}" class="profile-image rounded-circle" alt="Dr. Codex Lantern">
+                    <img src="{{Auth::user()->avatar_url}}" class="profile-image rounded-circle" alt="Dr. Codex Lantern" style="height: 3rem">
                     <div class="info-card-text">
                         <a href="#" class="d-flex align-items-center text-white">
                             <a href="#" class="d-flex align-items-center text-white">
