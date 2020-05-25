@@ -41,6 +41,7 @@ class BrandDashboardPresenter
         $name = 'brands';
         $fields = [
             'title',
+            'thumb',
         ];
         return (new DashboardPresenter())->getEditPage($brand,$name,$fields);
     }

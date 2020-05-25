@@ -46,6 +46,7 @@ class CategoryDashboardPresenter
         $fields = [
             'title',
             'parent_id',
+            'thumb',
         ];
         $options = [
             'for_select'    =>  Category::where('id','!=',$category->getKey())->get(),
