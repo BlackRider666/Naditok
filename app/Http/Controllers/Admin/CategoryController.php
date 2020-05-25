@@ -83,7 +83,7 @@ class CategoryController extends Controller
     public function update(CategoryUpdateRequest $request, Category $category): RedirectResponse
     {
         $data = $request->validated();
-        if($data['thumb'])
+        if(array_key_exists('thumb',$data))
         {
             if ($category->thumb !== '') {
                 (new StorageManager())->deleteFile($category->thumb,'category');

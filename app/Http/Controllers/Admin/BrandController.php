@@ -82,7 +82,7 @@ class BrandController extends Controller
     public function update(BrandUpdateRequest $request, Brand $brand): RedirectResponse
     {
         $data = $request->validated();
-        if($data['thumb'])
+        if(array_key_exists('thumb',$data))
         {
             (new StorageManager())->deleteFile($brand->thumb,'brand');
             $data['thumb'] = (new StorageManager())
