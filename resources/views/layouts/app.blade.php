@@ -115,20 +115,20 @@
                 </div>
                 <ul id="js-nav-menu" class="nav-menu">
                     <li class="nav-title">Users</li>
-                    <li class="{{request()->is('users.*')?'active':''}}">
+                    <li class="{{request()->is('users/*')?'active':''}}">
                         <a href="{{route('admin.users.index')}}" title="Users" data-filter-tags="users">
                             <i class="fal fa-users"></i>
                             <span class="nav-link-text">Users</span>
                         </a>
                     </li>
                     <li class="nav-title">Category</li>
-                    <li class="{{request()->is('categories.*')?'active':''}}">
+                    <li class="{{request()->is('categories/*')?'active':''}}">
                         <a href="{{route('admin.categories.index')}}" title="Category" data-filter-tags="category">
                             <i class="fal fa-folder"></i>
                             <span class="nav-link-text">Category</span>
                         </a>
                     </li>
-                    <li class="{{request()->is('brands.*')?'active':''}}">
+                    <li class="{{request()->is('brands/*')?'active':''}}">
                         <a href="{{route('admin.brands.index')}}" title="Brand" data-filter-tags="brand">
                             <i class="fal fa-copyright"></i>
                             <span class="nav-link-text">Brand</span>
