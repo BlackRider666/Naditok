@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+class CreateProductGroupCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('product_group_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('product_group_id');
+            $table->string('author');
+            $table->text('comment');
+            $table->float('rating');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('product_group_comments');
     }
 }

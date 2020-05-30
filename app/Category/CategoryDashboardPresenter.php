@@ -35,7 +35,7 @@ class CategoryDashboardPresenter
         unset($casts['id']);
         $name = 'categories';
         $options = [
-            'for_select'    =>  Category::all(),
+            'parent_id'    =>  Category::all()->toArray(),
         ];
         return (new DashboardPresenter())->getCreatePage($casts,$name,$options);
     }

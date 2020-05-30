@@ -22,4 +22,6 @@ Route::post('/update-user','API\AuthController@updateUser')->name('user.update')
 Route::post('/update-photo','API\AuthController@updatePhoto')->middleware('auth:sanctum');
 Route::post('/change-password','API\AuthController@changePassword')->name('user.change-password')->middleware('auth:sanctum');
 
-Route::get('/category','API\CategoryController@index');
+Route::get('/categories','API\CategoryController@index');
+Route::get('/brands','API\BrandController@index');
+Route::get('/products','API\ProductController@index');

@@ -7,7 +7,7 @@
                 @include('components.inputs.'.$value,[
                     'name'  =>  $key,
                     'value' =>  null,
-                    'items' =>  $options['for_select'],
+                    'items' =>  $options[$key],
                     ])
             @else
                 @include('components.inputs.'.$value,[
