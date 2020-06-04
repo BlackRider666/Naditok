@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Core\StorageManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductImageRequest;
 use App\ProductGroup\Product\ProductImage\ProductImage;
@@ -48,6 +49,8 @@ class ProductPhotoController extends Controller
     public function store(ProductImageRequest $request): RedirectResponse
     {
         $data = $request->validated();
+        $data['thumb'] = (new StorageManager())
+            ->savePicture($request->file('thumb'),'product-photo',1000);
         ProductImage::create($data);
         return redirect()->route('admin.products.show',$data['product_id']);
     }
