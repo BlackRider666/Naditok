@@ -13,22 +13,61 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::create([
-            'title' =>  'test',
+            'title' =>  'Одежда и обувь',
+        ]);
+        Category::create([
+            'title'     =>  'Игрушки',
+        ]);
+        Category::create([
+            'title'     =>  'Детская комната',
+        ]);
+        Category::create([
+            'title'     =>  'Коляски и автокресла',
+        ]);
+        Category::create([
+            'title'     =>  'Все для кормления',
+        ]);
+        Category::create([
+            'title'     =>  'Уход и гигиена',
+        ]);
+        Category::create([
+            'title'     =>  'Детский транспорт',
+        ]);
+        Category::create([
+            'title'     =>  'Детские аксессуары',
         ]);
 
         Category::create([
-            'title'     =>  'test_sub1',
+            'title'     =>  'Test',
             'parent_id' =>  1,
         ]);
-
         Category::create([
-            'title'     =>  'test_sub2',
-            'parent_id' =>  1,
-        ]);
-
-        Category::create([
-            'title'     =>  'test_sub_sub3',
+            'title'     =>  'Test',
             'parent_id' =>  2,
+        ]);
+        Category::create([
+            'title'     =>  'Test',
+            'parent_id' =>  3,
+        ]);
+        Category::create([
+            'title'     =>  'Test',
+            'parent_id' =>  4,
+        ]);
+        Category::create([
+            'title'     =>  'Test',
+            'parent_id' =>  5,
+        ]);
+        Category::create([
+            'title'     =>  'Test',
+            'parent_id' =>  6,
+        ]);
+        Category::create([
+            'title'     =>  'Test',
+            'parent_id' =>  7,
+        ]);
+        Category::create([
+            'title'     =>  'Test',
+            'parent_id' =>  8,
         ]);
     }
 }

@@ -36,11 +36,12 @@ class ProductSizeController extends Controller
     }
 
     /**
+     * @param int $product_id
      * @return Factory|View
      */
-    public function create()
+    public function create(int $product_id)
     {
-        return $this->dashboardPresenter->getCreatePage();
+        return $this->dashboardPresenter->getCreatePage($product_id);
     }
 
     /**
@@ -51,7 +52,7 @@ class ProductSizeController extends Controller
     {
         $data = $request->validated();
         ProductSize::create($data);
-        return redirect()->route('admin.product-sizes.index');
+        return redirect()->route('admin.products.show',$data['product_id']);
     }
 
     /**
@@ -81,7 +82,7 @@ class ProductSizeController extends Controller
     {
         $data = $request->validated();
         $productSize->update($data);
-        return redirect()->route('admin.product-sizes.index');
+        return redirect()->route('admin.products.show',$data['product_id']);
     }
 
     /**
@@ -91,7 +92,9 @@ class ProductSizeController extends Controller
      */
     public function destroy(ProductSize $productSize): RedirectResponse
     {
+        $id = ProductSize::find($productSize);
+        dd($id);
         $productSize->delete();
-        return redirect()->route('admin.product-sizes.index');
+        return redirect()->route('admin.products.show',$id);
     }
 }

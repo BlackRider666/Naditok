@@ -25,7 +25,7 @@ class ProductUpdateRequest extends FormRequest
     {
         return [
             'title'             =>  'required|string|max:255',
-            'price'             =>  'required|float',
+            'price'             =>  'required|numeric',
             'quantity'          =>  'required|integer',
             'minimum'           =>  'required|integer',
             'status'            =>  'required|string',

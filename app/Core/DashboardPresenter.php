@@ -18,14 +18,15 @@ class DashboardPresenter
         ]);
     }
 
-    public function getShowPage(string $header, Model $item, array $fields)
+    public function getShowPage(string $header, Model $item, array $fields, array $relation =[])
     {
         return view('components.show-page',[
             'header'    =>  $header,
             'data'      =>  [
                 'item' => $item->only(array_keys($fields)),
                 'fields' => $fields,
-            ]
+            ],
+            'relation'  =>  $relation
         ]);
     }
 

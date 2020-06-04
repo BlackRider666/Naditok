@@ -15,7 +15,11 @@
                 <tr>
                     <th scope="row">{{$item->id}}</th>
                     @foreach($headers as $key => $value)
-                        <td>{{$item->$key}}</td>
+                        @if($key === 'color')
+                            <td><input type="color" value="{{$item->$key}}" disabled></td>
+                        @else
+                            <td>{{$item->$key}}</td>
+                        @endif
                     @endforeach
                     <td class="row">
                         <a class="col" href="{{route('admin.'.$name.'.show',$item->id)}}"><i class="fal fa-eye text-info"></i></a>

@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->integer('quantity');
             $table->integer('minimum');
             $table->string('status');
-            $table->integer('view_count');
+            $table->integer('view_count')->default(0);
             $table->string('color');
             $table->string('product_code');
             $table->timestamps();

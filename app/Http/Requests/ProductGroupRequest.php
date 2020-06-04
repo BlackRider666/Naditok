@@ -27,7 +27,7 @@ class ProductGroupRequest extends FormRequest
             'title'         =>  'required|string|max:255',
             'brand_id'      =>  'required|int|exists:brands,id',
             'category_id'   =>  'required|int|exists:categories,id',
-            'desc'          =>  'required|text',
+            'desc'          =>  'required|string',
             'weight'        =>  'integer',
             'length'        =>  'integer',
             'width'         =>  'integer',

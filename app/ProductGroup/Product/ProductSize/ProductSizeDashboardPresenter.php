@@ -29,7 +29,7 @@ class ProductSizeDashboardPresenter
         return (new DashboardPresenter())->getShowPage($header, $productSize, $fields);
     }
 
-    public function getCreatePage()
+    public function getCreatePage(int $product_id)
     {
         $casts = (new ProductSize())->getCasts();
         unset($casts['id']);
@@ -37,7 +37,11 @@ class ProductSizeDashboardPresenter
         $options = [
             'product_id'    =>  Product::all()->toArray(),
         ];
-        return (new DashboardPresenter())->getCreatePage($casts,$name,$options);
+        return view('components.create-page',[
+            'fields'    =>  $casts,
+            'name'      =>  $name,
+            'options'   =>  $options,
+        ]);
     }
 
     public function getEditPage(ProductSize $productGroup)

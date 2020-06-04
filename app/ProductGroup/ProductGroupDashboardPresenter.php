@@ -33,7 +33,23 @@ class ProductGroupDashboardPresenter
             'width'         =>  'Width',
             'height'        =>  'Height',
         ];
-        return (new DashboardPresenter())->getShowPage($header, $productGroup, $fields);
+        return view('pages.group_show',[
+            'header'    =>  $header,
+            'data'      =>  [
+                'item' => $productGroup->only(array_keys($fields)),
+                'fields' => $fields,
+            ],
+            'relation'  =>  [
+                'headers'       =>  [
+                    'title' =>  'Title',
+                    'color' =>  'Color',
+                ],
+                'name'          =>  'products',
+                'items'         =>  $productGroup->products,
+                'brand_id'      =>  $productGroup->brand->title,
+                'category_id'   =>  $productGroup->category->title,
+            ],
+        ]);
     }
 
     public function getCreatePage()

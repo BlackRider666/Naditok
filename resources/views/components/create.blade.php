@@ -6,13 +6,13 @@
             @if($value === 'select')
                 @include('components.inputs.'.$value,[
                     'name'  =>  $key,
-                    'value' =>  null,
+                    'value' =>  session($key)?:old($key),
                     'items' =>  $options[$key],
                     ])
             @else
                 @include('components.inputs.'.$value,[
                     'name'  =>  $key,
-                    'value' =>  null,
+                    'value' =>  old($key),
                     ])
             @endif
         </div>

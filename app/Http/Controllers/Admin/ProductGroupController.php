@@ -49,8 +49,9 @@ class ProductGroupController extends Controller
     public function store(ProductGroupRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        ProductGroup::create($data);
-        return redirect()->route('admin.product-groups.index');
+        $product_group = ProductGroup::create($data);
+        return redirect()->route('admin.products.create')
+            ->with('product_group_id', $product_group->getKey());
     }
 
     /**

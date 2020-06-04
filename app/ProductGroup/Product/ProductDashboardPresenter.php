@@ -33,7 +33,32 @@ class ProductDashboardPresenter
             'color'             =>  'Color',
             'product_code'      =>  'Product Code',
         ];
-        return (new DashboardPresenter())->getShowPage($header, $product, $fields);
+        $relation = [
+            'product_group_id'  =>  $product->group->title,
+            'photos'            =>  [
+                'headers'   =>  [
+                    'thumb'  =>  'Thumb',
+                ],
+                'name'      =>  'product-photos',
+                'items'     =>  $product->images,
+            ],
+            'sizes'             =>  [
+                'headers'   =>  [
+                    'size'  =>  'Sizes',
+                ],
+                'name'      =>  'product-sizes',
+                'items'     =>  $product->sizes,
+            ],
+            'product_id'        =>  $product->getKey(),
+        ];
+        return view('pages.product_show',[
+            'header'    =>  $header,
+            'data'      =>  [
+                'item' => $product->only(array_keys($fields)),
+                'fields' => $fields,
+            ],
+            'relation'  =>  $relation,
+        ]);
     }
 
     public function getCreatePage()

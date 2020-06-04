@@ -50,8 +50,8 @@ class ProductController extends Controller
     public function store(ProductRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        Product::create($data);
-        return redirect()->route('admin.products.index');
+        $product = Product::create($data);
+        return redirect()->route('admin.product-groups.show',$product->product_group_id);
     }
 
     /**
