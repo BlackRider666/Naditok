@@ -31,6 +31,7 @@ Route::name('admin.')->middleware('auth')->group(function (){
     Route::delete('product-sizes/{size_id}','Admin\ProductSizeController@destroy')->name('product-sizes.destroy');
     Route::get('product-photos/{product_id}','Admin\ProductPhotoController@create')->name('product-images.create');
     Route::post('product-photos','Admin\ProductPhotoController@store')->name('product-images.store');
+    Route::delete('product-photos/{photo_id}','Admin\ProductPhotoController@destroy')->name('product-images.destroy');
     Route::get('/','Admin\PagesController@index')->name('index');
 });
 Route::get('/login','Auth\LoginController@showLoginForm')->name('login');

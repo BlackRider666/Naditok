@@ -40,7 +40,7 @@ class ProductPhotoController extends Controller
     {
         $data = $request->validated();
         $data['thumb'] = (new StorageManager())
-            ->savePicture($request->file('thumb'),'product-photo',1000);
+            ->savePicture($request->file('thumb'),'product-image',1000);
         ProductImage::create($data);
         return redirect()->route('admin.products.show',$data['product_id']);
     }
@@ -53,6 +53,7 @@ class ProductPhotoController extends Controller
     {
         $productImage = ProductImage::find($id);
         $product_id = $productImage->product->getKey();
+        (new StorageManager())->deleteFile($productImage->thumb,'product-image');
         $productImage->delete();
         return redirect()->route('admin.products.show',$product_id);
     }
