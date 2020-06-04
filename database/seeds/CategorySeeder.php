@@ -69,5 +69,18 @@ class CategorySeeder extends Seeder
             'title'     =>  'Test',
             'parent_id' =>  8,
         ]);
+
+        Category::create([
+            'title'     =>  'Test',
+            'parent_id' =>  9,
+        ]);
+        Category::create([
+            'title'     =>  'Test',
+            'parent_id' =>  10,
+        ]);
+        Category::create([
+            'title'     =>  'Test',
+            'parent_id' =>  11,
+        ]);
     }
 }
