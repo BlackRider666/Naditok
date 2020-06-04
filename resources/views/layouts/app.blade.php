@@ -134,6 +134,12 @@
                             <span class="nav-link-text">Brand</span>
                         </a>
                     </li>
+                    <li class="{{request()->is('product-groups/*')|| request()->is('product-groups')?'active':''}}">
+                        <a href="{{route('admin.product-groups.index')}}" title="Product" data-filter-tags="product">
+                            <i class="fal fa-box-open"></i>
+                            <span class="nav-link-text">Product</span>
+                        </a>
+                    </li>
                 </ul>
                 <div class="filter-message js-filter-message bg-success-600"></div>
             </nav>
