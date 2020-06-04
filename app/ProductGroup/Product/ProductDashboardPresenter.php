@@ -21,7 +21,6 @@ class ProductDashboardPresenter
 
     public function getShowPage(Product $product)
     {
-        dd($product);
         $header = $product->group->title.', '.$product->title;
         $fields = [
             'title'             =>  'Title',
