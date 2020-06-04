@@ -23,5 +23,6 @@ Route::post('/update-photo','API\AuthController@updatePhoto')->middleware('auth:
 Route::post('/change-password','API\AuthController@changePassword')->name('user.change-password')->middleware('auth:sanctum');
 
 Route::get('/categories','API\CategoryController@index');
+Route::get('/categories/{category_id}','API\CategoryController@show');
 Route::get('/brands','API\BrandController@index');
 Route::get('/products','API\ProductController@index');
