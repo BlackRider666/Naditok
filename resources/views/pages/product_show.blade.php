@@ -19,7 +19,7 @@
                             <a class="btn btn-primary" href="{{route('admin.'.$relation['photos']['name'].'.create',$relation['product_id'])}}"><i class="fal fa-plus"></i> Add photo</a>
                         </div>
                     </div>
-                    @include('components.table',$relation['photos'])
+                    @include('components.grid',$relation['photos'])
 
                     <div class="panel-hdr">
                         <h2>

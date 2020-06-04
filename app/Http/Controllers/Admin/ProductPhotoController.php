@@ -9,7 +9,6 @@ use App\ProductGroup\Product\ProductImage\ProductImage;
 use App\ProductGroup\Product\ProductImage\ProductImageDashboardPresenter;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductPhotoController extends Controller
@@ -22,15 +21,6 @@ class ProductPhotoController extends Controller
     public function __construct(ProductImageDashboardPresenter $dashboardPresenter)
     {
         $this->dashboardPresenter = $dashboardPresenter;
-    }
-
-    /**
-     * @return Factory|View
-     */
-    public function index()
-    {
-        $productSizes = ProductImage::all();
-        return $this->dashboardPresenter->getTablePage($productSizes);
     }
 
     /**
@@ -52,36 +42,6 @@ class ProductPhotoController extends Controller
         $data['thumb'] = (new StorageManager())
             ->savePicture($request->file('thumb'),'product-photo',1000);
         ProductImage::create($data);
-        return redirect()->route('admin.products.show',$data['product_id']);
-    }
-
-    /**
-     * @param ProductImage $productImage
-     * @return Factory|View
-     */
-    public function show(ProductImage $productImage)
-    {
-        return $this->dashboardPresenter->getShowPage($productImage);
-    }
-
-    /**
-     * @param ProductImage $productImage
-     * @return Factory|View
-     */
-    public function edit(ProductImage $productImage)
-    {
-        return $this->dashboardPresenter->getEditPage($productImage);
-    }
-
-    /**
-     * @param ProductImageRequest $request
-     * @param ProductImage $productImage
-     * @return RedirectResponse
-     */
-    public function update(ProductImageRequest $request, ProductImage $productImage): RedirectResponse
-    {
-        $data = $request->validated();
-        $productImage->update($data);
         return redirect()->route('admin.products.show',$data['product_id']);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\ProductGroup\Product\ProductImage;
 
+use App\Core\PathManager;
 use App\ProductGroup\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,11 +21,23 @@ class ProductImage extends Model
         'thumb'         =>  'image',
     ];
 
+    protected $appends = [
+        'thumb_url',
+    ];
+
     /**
      * @return BelongsTo
      */
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function getThumbUrlAttribute(): string
+    {
+        return $this->thumb?
+            (new PathManager())->getFile($this->thumb,'product-image')
+            :
+            (new PathManager())->getDefaultPicture();
     }
 }
