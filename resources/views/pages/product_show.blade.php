@@ -16,7 +16,7 @@
                             Photos
                         </h2>
                         <div class="panel-toolbar">
-                            <a class="btn btn-primary" href="{{route('admin.product-photos.create',$relation['product_id'])}}"><i class="fal fa-plus"></i> Add photo</a>
+                            <a class="btn btn-primary" href="{{route('admin.'.$relation['photos']['name'].'.create',$relation['product_id'])}}"><i class="fal fa-plus"></i> Add photo</a>
                         </div>
                     </div>
                     @include('components.table',$relation['photos'])
@@ -26,7 +26,7 @@
                             Sizes
                         </h2>
                         <div class="panel-toolbar">
-                            <a class="btn btn-primary" href="{{route('admin.product-sizes.create',$relation['product_id'])}}"><i class="fal fa-plus"></i> Add size</a>
+                            <a class="btn btn-primary" href="{{route('admin.'.$relation['sizes']['name'].'.create',$relation['product_id'])}}"><i class="fal fa-plus"></i> Add size</a>
                         </div>
                     </div>
                     @include('components.table',$relation['sizes'])

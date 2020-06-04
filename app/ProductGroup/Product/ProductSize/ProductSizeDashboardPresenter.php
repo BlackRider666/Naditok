@@ -36,6 +36,9 @@ class ProductSizeDashboardPresenter
         $name = 'product-sizes';
         $options = [
             'product_id'    =>  Product::all()->toArray(),
+            'choose'    => [
+                'product_id'    =>  $product_id,
+            ],
         ];
         return (new DashboardPresenter())->getCreatePage($casts,$name,$options);
     }

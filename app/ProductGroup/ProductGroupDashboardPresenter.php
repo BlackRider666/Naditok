@@ -48,6 +48,7 @@ class ProductGroupDashboardPresenter
                 'items'         =>  $productGroup->products,
                 'brand_id'      =>  $productGroup->brand->title,
                 'category_id'   =>  $productGroup->category->title,
+                'product_group_id'  =>  $productGroup->getKey(),
             ],
         ]);
     }

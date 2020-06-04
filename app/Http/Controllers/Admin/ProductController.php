@@ -38,9 +38,9 @@ class ProductController extends Controller
     /**
      * @return Factory|View
      */
-    public function create()
+    public function create(int $product_group_id)
     {
-        return $this->dashboardPresenter->getCreatePage();
+        return $this->dashboardPresenter->getCreatePage($product_group_id);
     }
 
     /**
@@ -55,11 +55,12 @@ class ProductController extends Controller
     }
 
     /**
-     * @param Product $product
+     * @param int $id
      * @return Factory|View
      */
-    public function show(Product $product)
+    public function show(int $id)
     {
+        $product = Product::find($id);
         return $this->dashboardPresenter->getShowPage($product);
     }
 

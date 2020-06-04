@@ -50,8 +50,7 @@ class ProductGroupController extends Controller
     {
         $data = $request->validated();
         $product_group = ProductGroup::create($data);
-        return redirect()->route('admin.products.create')
-            ->with('product_group_id', $product_group->getKey());
+        return redirect()->route('admin.products.create',$product_group->getKey());
     }
 
     /**

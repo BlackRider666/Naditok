@@ -35,7 +35,7 @@ class Product extends Model
         'color'             =>  'color',
         'product_code'      =>  'string',
     ];
-
+    protected $with = ['images','sizes'];
     /**
      * @return BelongsTo
      */

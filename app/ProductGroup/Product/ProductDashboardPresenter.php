@@ -21,6 +21,7 @@ class ProductDashboardPresenter
 
     public function getShowPage(Product $product)
     {
+        dd($product);
         $header = $product->group->title.', '.$product->title;
         $fields = [
             'title'             =>  'Title',
@@ -39,7 +40,7 @@ class ProductDashboardPresenter
                 'headers'   =>  [
                     'thumb'  =>  'Thumb',
                 ],
-                'name'      =>  'product-photos',
+                'name'      =>  'product-images',
                 'items'     =>  $product->images,
             ],
             'sizes'             =>  [
@@ -61,7 +62,7 @@ class ProductDashboardPresenter
         ]);
     }
 
-    public function getCreatePage()
+    public function getCreatePage(int $product_group_id)
     {
         $casts = (new Product())->getCasts();
         unset($casts['id']);
@@ -77,6 +78,9 @@ class ProductDashboardPresenter
                     'id'    =>  'test2',
                     'title' =>  'test2',
                 ]
+            ],
+            'choose'    => [
+                'product_group_id'    =>  $product_group_id,
             ],
         ];
         return (new DashboardPresenter())->getCreatePage($casts,$name,$options);

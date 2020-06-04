@@ -15,6 +15,11 @@ class ProductImage extends Model
         'thumb',
     ];
 
+    protected $casts = [
+        'product_id'    =>  'select',
+        'thumb'         =>  'image',
+    ];
+
     /**
      * @return BelongsTo
      */

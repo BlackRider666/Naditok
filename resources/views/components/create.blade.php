@@ -6,7 +6,7 @@
             @if($value === 'select')
                 @include('components.inputs.'.$value,[
                     'name'  =>  $key,
-                    'value' =>  session($key)?:old($key),
+                    'value' =>  array_key_exists('choose',$options) && array_key_exists($key,$options['choose'])?$options['choose'][$key]:old($key),
                     'items' =>  $options[$key],
                     ])
             @else
