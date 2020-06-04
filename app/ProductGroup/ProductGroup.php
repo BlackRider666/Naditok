@@ -35,7 +35,7 @@ class ProductGroup extends Model
         'width'         =>  'integer',
         'height'        =>  'integer',
     ];
-
+    protected $with = 'products';
     /**
      * @return HasMany
      */

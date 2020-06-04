@@ -13,10 +13,4 @@ class CategoryController extends Controller
         $categories = Category::where('parent_id',null)->get();
         return response()->json($categories,200);
     }
-
-    public function show(int $id)
-    {
-        $category = Category::find($id);
-        return response()->json($category,200);
-    }
 }

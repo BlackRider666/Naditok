@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ProductSizeDashboardPresenter
 {
-    public function getTablePage(Collection $product_sizes)
+    public function getTablePage(Collection $productSizes)
     {
         $headers = [
             'size' => 'Size',
         ];
         $name = 'product-sizes';
-        return (new DashboardPresenter())->getTablePage($headers, $name, $product_sizes);
+        return (new DashboardPresenter())->getTablePage($headers, $name, $productSizes);
     }
 
     public function getShowPage(ProductSize $productSize)
@@ -37,20 +37,16 @@ class ProductSizeDashboardPresenter
         $options = [
             'product_id'    =>  Product::all()->toArray(),
         ];
-        return view('components.create-page',[
-            'fields'    =>  $casts,
-            'name'      =>  $name,
-            'options'   =>  $options,
-        ]);
+        return (new DashboardPresenter())->getCreatePage($casts,$name,$options);
     }
 
-    public function getEditPage(ProductSize $productGroup)
+    public function getEditPage(ProductSize $productSize)
     {
         $name = 'product-sizes';
         $fields = [
             'size',
             'product_id',
         ];
-        return (new DashboardPresenter())->getEditPage($productGroup,$name,$fields);
+        return (new DashboardPresenter())->getEditPage($productSize,$name,$fields);
     }
 }

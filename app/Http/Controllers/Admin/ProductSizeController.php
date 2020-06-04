@@ -86,15 +86,14 @@ class ProductSizeController extends Controller
     }
 
     /**
-     * @param ProductSize $productSize
+     * @param int $id
      * @return RedirectResponse
-     * @throws Exception
      */
-    public function destroy(ProductSize $productSize): RedirectResponse
+    public function destroy(int $id): RedirectResponse
     {
-        $id = ProductSize::find($productSize);
-        dd($id);
+        $productSize = ProductSize::find($id);
+        $product_id = $productSize->product->getKey();
         $productSize->delete();
-        return redirect()->route('admin.products.show',$id);
+        return redirect()->route('admin.products.show',$product_id);
     }
 }

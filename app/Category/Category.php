@@ -27,6 +27,7 @@ class Category extends Model
     ];
 
     protected $with = 'child';
+
     public function getThumbUrlAttribute(): string
     {
         return $this->thumb?
