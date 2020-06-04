@@ -1,6 +1,6 @@
 <div class="panel-content">
     <div class="frame-wrap">
-        <div class="card-deck">
+        <div class="card-columns">
             @foreach($items as $item)
                 <div class="card" style="max-width: 18rem;">
                     <img src="{{$item->thumb_url}}" class="card-img-top" alt="...">
