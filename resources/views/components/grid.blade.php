@@ -1,5 +1,6 @@
 <div class="panel-content">
     <div class="frame-wrap">
+        <div class="card-deck">
             @foreach($items as $item)
                 <div class="card border m-auto m-lg-0" style="max-width: 18rem;">
                     <img src="{{$item->thumb_url}}" class="card-img-top" alt="...">
@@ -14,5 +15,6 @@
                     </div>
                 </div>
             @endforeach
+        </div>
     </div>
 </div>
