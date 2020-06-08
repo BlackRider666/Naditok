@@ -32,4 +32,14 @@ class ProductController extends Controller
         $products = $query->whereHas('products')->get()->forPage($page,$perPage);
         return response()->json($products,200);
     }
+
+    public function show(int $id)
+    {
+        $product = ProductGroup::find($id);
+        if(!$product)
+        {
+            return response()->json('Not found!',404);
+        }
+        return response()->json($product,200);
+    }
 }

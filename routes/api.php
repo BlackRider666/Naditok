@@ -25,3 +25,4 @@ Route::post('/change-password','API\AuthController@changePassword')->name('user.
 Route::get('/categories','API\CategoryController@index');
 Route::get('/brands','API\BrandController@index');
 Route::get('/products','API\ProductController@index');
+Route::get('/products/{id}','API\ProductController@show');
