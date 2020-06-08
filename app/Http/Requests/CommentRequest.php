@@ -27,7 +27,7 @@ class CommentRequest extends FormRequest
             'product_group_id'  =>  'required|int|exists:product_groups,id',
             'author'            =>  'required|string|max:255',
             'comment'           =>  'required|string',
-            'rating'            =>  'required|float',
+            'rating'            =>  'required|numeric',
         ];
     }
 }

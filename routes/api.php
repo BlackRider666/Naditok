@@ -26,3 +26,5 @@ Route::get('/categories','API\CategoryController@index');
 Route::get('/brands','API\BrandController@index');
 Route::get('/products','API\ProductController@index');
 Route::get('/products/{id}','API\ProductController@show');
+
+Route::post('/comments/create','API\CommentController@create');
