@@ -36,6 +36,13 @@ class ProductGroup extends Model
         'width'         =>  'integer',
         'height'        =>  'integer',
     ];
+
+    protected $appends = [
+        'category_title',
+        'brand_title',
+        'comment_count',
+        'comment_average_rating',
+    ];
     protected $with = 'products';
     /**
      * @return HasMany
@@ -68,4 +75,23 @@ class ProductGroup extends Model
     {
         return $this->hasMany(ProductGroupComment::class);
     }
+
+    public function getCategoryTitleAttribute(): string
+    {
+        return $this->category->title;
+    }
+
+    public function getBrandTitleAttribute(): string
+    {
+        return $this->brand->title;
+    }
+    public function getCommentCountAttribute()
+    {
+        return $this->comments->count();
+    }
+    public function getCommentAverageRatingAttribute()
+    {
+        return $this->comments->average('rating');
+    }
+
 }
