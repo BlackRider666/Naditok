@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductGroupSearchRequest;
 use App\ProductGroup\Product\Product;
 use App\ProductGroup\ProductGroup;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -17,7 +18,13 @@ class ProductController extends Controller
         $perPage = array_key_exists('perPage',$data)?$data['perPage']:12;
         $query = ProductGroup::query();
         if (array_key_exists('text',$data)) {
-            $query->where('title','LIKE','%'.$data['text'].'%');
+            $query->where(function($sub) use ($data) {
+                $sub->where('title','LIKE','%'.$data['text'].'%')
+                    ->orWhere('desc','LIKE','%'.$data['text'].'%')
+                    ->orWhereHas('products', function ($subsub) use ($data) {
+                        $subsub->where('title', 'LIKE','%'.$data['text'].'%');
+                    });
+            });
         }
         if (array_key_exists('categoryId',$data)) {
             $query->where('category_id',$data['categoryId']);

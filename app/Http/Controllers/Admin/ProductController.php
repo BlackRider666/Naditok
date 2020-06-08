@@ -65,11 +65,12 @@ class ProductController extends Controller
     }
 
     /**
-     * @param Product $product
+     * @param int $id
      * @return Factory|View
      */
-    public function edit(Product $product)
+    public function edit(int $id)
     {
+        $product = Product::find($id);
         return $this->dashboardPresenter->getEditPage($product);
     }
 
@@ -78,11 +79,12 @@ class ProductController extends Controller
      * @param Product $product
      * @return RedirectResponse
      */
-    public function update(ProductUpdateRequest $request, Product $product): RedirectResponse
+    public function update(ProductUpdateRequest $request, int $id): RedirectResponse
     {
+        $product = Product::find($id);
         $data = $request->validated();
         $product->update($data);
-        return redirect()->route('admin.products.index');
+        return redirect()->route('admin.product-groups.show',$product->product_group_id);
     }
 
     /**

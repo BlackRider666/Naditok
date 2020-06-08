@@ -87,7 +87,7 @@ class ProductDashboardPresenter
 
     public function getEditPage(Product $product)
     {
-        $name = 'product-groups';
+        $name = 'products';
         $fields = [
             'title',
             'price',
@@ -97,6 +97,18 @@ class ProductDashboardPresenter
             'color',
             'product_code',
         ];
-        return (new DashboardPresenter())->getEditPage($product,$name,$fields);
+        $options = [
+            'status'            =>  [
+                [
+                    'id'    =>  'test',
+                    'title' =>  'test',
+                ],
+                [
+                    'id'    =>  'test2',
+                    'title' =>  'test2',
+                ]
+            ],
+        ];
+        return (new DashboardPresenter())->getEditPage($product,$name,$fields,$options);
     }
 }

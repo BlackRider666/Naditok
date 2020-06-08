@@ -13,7 +13,7 @@
                 @include('components.inputs.'.$model->getCasts()[$field],[
                     'name'  =>  $field,
                     'value' =>  $model->$field,
-                    'items' =>  $options['for_select'],
+                    'items' =>  $options[$field],
                     ])
             @else
                 @include('components.inputs.'.$model->getCasts()[$field],[
