@@ -15,7 +15,8 @@
                             <input type="hidden" name="discount_id" value="{{$discount_id}}">
                             @include('components.inputs.select',[
                                 'items'    =>  $items,
-                                'name'     =>  'product',
+                                'name'     =>  'product_id',
+                                'value'    =>   old('product_id')
                             ])
                             @include('components.inputs.submit', [
                                 'function'  => 'Add',
