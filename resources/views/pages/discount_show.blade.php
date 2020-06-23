@@ -14,16 +14,16 @@
                 <div class="panel-container show">
                     <table class="table">
                         <tbody>
-                        @foreach($item as $key => $value)
+                        @foreach($data['item'] as $key => $value)
                             <tr>
-                                <th>{{$fields[$key]}}</th>
+                                <th>{{$data['fields'][$key]}}</th>
                                 @if($key === 'thumb_url')
                                     <td>
                                         <img src="{{$value}}" alt="{{$key}}" class="img-thumbnail col-6">
                                     </td>
                                 @elseif($key === 'type')
                                     <td>
-                                    <th>{{$fields[$key] === 0 ?'%':' грн.'}}</th>
+                                    <th>{{$data['fields'][$key] === 0 ?'%':' грн.'}}</th>
                                     </td>
                                 @else
                                     <td>{{array_key_exists($key,$relation)?$relation[$key]:$value}}</td>
