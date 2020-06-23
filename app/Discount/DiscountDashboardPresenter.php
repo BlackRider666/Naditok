@@ -5,6 +5,7 @@ namespace App\Discount;
 
 
 use App\Core\DashboardPresenter;
+use App\ProductGroup\Product\Product;
 use Illuminate\Database\Eloquent\Collection;
 
 class DiscountDashboardPresenter
@@ -69,5 +70,14 @@ class DiscountDashboardPresenter
             'finish',
         ];
         return (new DashboardPresenter())->getEditPage($discount,$name,$fields);
+    }
+
+    public function getAddProduct(int $id)
+    {
+        $products = Product::all();
+        return view('pages.add_product_to_discount',[
+            'discount_id'   =>  $id,
+            'items'         =>  $products,
+        ]);
     }
 }

@@ -21,10 +21,14 @@ use Illuminate\View\View;
 class DiscountController extends Controller
 {
     /**
-     * @var CategoryDashboardPresenter
+     * @var DiscountDashboardPresenter
      */
     private $dashboardPresenter;
 
+    /**
+     * DiscountController constructor.
+     * @param DiscountDashboardPresenter $dashboardPresenter
+     */
     public function __construct(DiscountDashboardPresenter $dashboardPresenter)
     {
         $this->dashboardPresenter = $dashboardPresenter;
@@ -55,7 +59,7 @@ class DiscountController extends Controller
     {
         $data = $request->validated();
         $data['thumb'] = (new StorageManager())
-            ->savePicture($request->file('thumb'),'discount',1000);
+            ->savePicture($request->file('thumb'), 'discount', 1000);
         Discount::create($data);
         return redirect()->route('admin.discounts.index');
     }
@@ -97,13 +101,18 @@ class DiscountController extends Controller
      */
     public function destroy(Discount $discount): RedirectResponse
     {
-        (new StorageManager())->deleteFile($discount->thumb,'discount');
+        (new StorageManager())->deleteFile($discount->thumb, 'discount');
         $discount->delete();
         return redirect()->route('admin.discounts.index');
     }
 
-    public function addProduct()
+    public function getAddProduct(int $id)
     {
-        //
+        return $this->dashboardPresenter->getAddProduct($id);
+    }
+
+    public function addProduct(Request $request)
+    {
+        return redirect()->route('admin.discounts.show',$request->get('discount_id'));
     }
 }

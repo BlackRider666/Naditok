@@ -34,7 +34,8 @@ Route::name('admin.')->middleware('auth')->group(function (){
     Route::post('product-photos','Admin\ProductPhotoController@store')->name('product-images.store');
     Route::delete('product-photos/{photo_id}','Admin\ProductPhotoController@destroy')->name('product-images.destroy');
     Route::get('/','Admin\PagesController@index')->name('index');
-    Route::get('/discount-add-product','Admin\DiscountController@addProduct')->name('discounts.add_product');
+    Route::get('/discount-add-product/{discount_id}','Admin\DiscountController@getAddProduct')->name('discounts.get_add_product');
+    Route::post('discount-add-product','Admin\DiscountController@addProduct')->name('discounts.add_product');
 });
 Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login','Auth\LoginController@login');
