@@ -12,6 +12,7 @@ use App\Http\Requests\CategoryRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Http\Requests\DiscountRequest;
 use App\Http\Requests\DiscountUpdateRequest;
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -92,11 +93,17 @@ class DiscountController extends Controller
     /**
      * @param Discount $discount
      * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy(Discount $discount): RedirectResponse
     {
         (new StorageManager())->deleteFile($discount->thumb,'discount');
         $discount->delete();
         return redirect()->route('admin.discounts.index');
+    }
+
+    public function addProduct()
+    {
+        //
     }
 }

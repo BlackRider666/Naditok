@@ -8,7 +8,7 @@
                         {{$header}}
                     </h2>
                     <div class="panel-toolbar">
-                        <a class="btn btn-primary" href="{{route('admin.'.$name.'.add_product')}}"><i class="fal fa-plus"></i> Add Product</a>
+                        <a class="btn btn-primary" href="{{route('admin.discounts.add_product')}}"><i class="fal fa-plus"></i> Add Product</a>
                     </div>
                 </div>
                 <div class="panel-container show">
