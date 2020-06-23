@@ -2,6 +2,7 @@
 
 namespace App\ProductGroup\Product;
 
+use App\Discount\Discount;
 use App\ProductGroup\Product\ProductImage\ProductImage;
 use App\ProductGroup\Product\ProductSize\ProductSize;
 use App\ProductGroup\ProductGroup;
@@ -23,6 +24,7 @@ class Product extends Model
         'view_count',
         'color',
         'product_code',
+        'discount_id',
     ];
 
     protected $casts = [
@@ -35,7 +37,9 @@ class Product extends Model
         'color'             =>  'color',
         'product_code'      =>  'string',
     ];
-    protected $with = ['images','sizes'];
+
+    protected $with = ['images','sizes','discount'];
+
     /**
      * @return BelongsTo
      */
@@ -58,5 +62,13 @@ class Product extends Model
     public function sizes(): HasMany
     {
         return $this->hasMany(ProductSize::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function discount(): BelongsTo
+    {
+        return $this->belongsTo(Discount::class);
     }
 }

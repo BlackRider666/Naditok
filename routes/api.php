@@ -28,3 +28,4 @@ Route::get('/products','API\ProductController@index');
 Route::get('/products/{id}','API\ProductController@show');
 
 Route::post('/comments/create','API\CommentController@create');
+Route::get('/comments','API\CommentController@index');

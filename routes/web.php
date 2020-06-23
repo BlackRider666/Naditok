@@ -15,6 +15,7 @@ Route::name('admin.')->middleware('auth')->group(function (){
     Route::resource('users','Admin\UsersController');
     Route::resource('categories','Admin\CategoryController');
     Route::resource('brands','Admin\BrandController');
+    Route::resource('discounts','Admin\DiscountController');
     Route::resource('product-groups','Admin\ProductGroupController');
     Route::get('products/{product_group_id}/create','Admin\ProductController@create')->name('products.create');
     Route::post('products','Admin\ProductController@store')->name('products.store');

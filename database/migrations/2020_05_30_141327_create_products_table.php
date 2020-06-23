@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->integer('view_count')->default(0);
             $table->string('color');
             $table->string('product_code');
+            $table->unsignedBigInteger('discount_id')->nullable();
             $table->timestamps();
         });
     }
