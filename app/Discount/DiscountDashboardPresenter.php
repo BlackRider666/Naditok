@@ -29,7 +29,14 @@ class DiscountDashboardPresenter
             'start' => 'Start date',
             'finish'=> 'Finish date',
         ];
-        return (new DashboardPresenter())->getShowPage($header, $discount, $fields);
+        return view('pages.discount_show',[
+            'header'    =>  $header,
+            'data'      =>  [
+                'item' => $discount->only(array_keys($fields)),
+                'fields' => $fields,
+            ],
+            'relation'  =>  []
+        ]);
     }
 
     public function getCreatePage()
