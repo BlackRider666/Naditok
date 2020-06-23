@@ -33,8 +33,9 @@ class DiscountDashboardPresenter
         return view('pages.discount_show',[
             'header'    =>  $header,
             'data'      =>  [
-                'item' => $discount->only(array_keys($fields)),
-                'fields' => $fields,
+                'item'      =>  $discount->only(array_keys($fields)),
+                'item_id'   =>  $discount->getKey(),
+                'fields'    =>  $fields,
             ],
             'relation'  =>  []
         ]);
