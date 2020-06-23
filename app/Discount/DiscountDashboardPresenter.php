@@ -37,7 +37,15 @@ class DiscountDashboardPresenter
                 'item_id'   =>  $discount->getKey(),
                 'fields'    =>  $fields,
             ],
-            'relation'  =>  []
+            'relation'  =>  [
+                'products'             =>  [
+                    'headers'   =>  [
+                        'size'  =>  'Products',
+                    ],
+                    'name'      =>  'products',
+                    'items'     =>  $discount->products,
+                ],
+            ]
         ]);
     }
 

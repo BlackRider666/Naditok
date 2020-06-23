@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category\Category;
-use App\Category\CategoryDashboardPresenter;
 use App\Core\StorageManager;
 use App\Discount\Discount;
 use App\Discount\DiscountDashboardPresenter;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
-use App\Http\Requests\CategoryUpdateRequest;
+use App\Http\Requests\AddProductToDiscountRequest;
 use App\Http\Requests\DiscountRequest;
 use App\Http\Requests\DiscountUpdateRequest;
+use App\ProductGroup\Product\Product;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DiscountController extends Controller
@@ -111,8 +108,10 @@ class DiscountController extends Controller
         return $this->dashboardPresenter->getAddProduct($id);
     }
 
-    public function addProduct(Request $request)
+    public function addProduct(AddProductToDiscountRequest $request)
     {
+        Product::find($request->get('product_id'))
+            ->update(['discount_id' => $request->get('discount_id')]);
         return redirect()->route('admin.discounts.show',$request->get('discount_id'));
     }
 }

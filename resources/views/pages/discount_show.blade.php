@@ -32,6 +32,12 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="panel-hdr">
+                        <h2>
+                            Products
+                        </h2>
+                    </div>
+                    @include('components.table',$relation['products'])
                 </div>
             </div>
 
