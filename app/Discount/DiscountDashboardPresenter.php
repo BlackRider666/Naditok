@@ -40,7 +40,7 @@ class DiscountDashboardPresenter
             'relation'  =>  [
                 'products'             =>  [
                     'headers'   =>  [
-                        'size'  =>  'Products',
+                        'title'  =>  'Title',
                     ],
                     'name'      =>  'products',
                     'items'     =>  $discount->products,
