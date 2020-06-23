@@ -140,6 +140,12 @@
                             <span class="nav-link-text">Product</span>
                         </a>
                     </li>
+                    <li class="{{request()->is('discounts/*')|| request()->is('discounts')?'active':''}}">
+                        <a href="{{route('admin.discounts.index')}}" title="Discount" data-filter-tags="discount">
+                            <i class="fal fa-percent"></i>
+                            <span class="nav-link-text">Discount</span>
+                        </a>
+                    </li>
                 </ul>
                 <div class="filter-message js-filter-message bg-success-600"></div>
             </nav>
