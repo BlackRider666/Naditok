@@ -23,7 +23,7 @@
                                     </td>
                                 @elseif($key === 'type')
                                     <td>
-                                    <th>{{$data['fields'][$key] === 0 ?'%':' грн.'}}</th>
+                                    <th>{{$data['fields'][$key] == 0 ? '%' : ' грн.'}}</th>
                                     </td>
                                 @else
                                     <td>{{array_key_exists($key,$relation)?$relation[$key]:$value}}</td>
