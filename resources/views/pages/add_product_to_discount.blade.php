@@ -13,11 +13,15 @@
                         <form action="{{route('admin.discounts.add_product')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="discount_id" value="{{$discount_id}}">
-                            @include('components.inputs.select',[
-                                'items'    =>  $items,
-                                'name'     =>  'product_id',
-                                'value'    =>   old('product_id')
-                            ])
+                            <div class="form-group">
+                                <label for="product_id" class="form-label">Product</label>
+                                @include('components.inputs.select',[
+                                    'items'    =>  $items,
+                                    'name'     =>  'product_id',
+                                    'value'    =>   old('product_id')
+                                ])
+                            </div>
+
                             @include('components.inputs.submit', [
                                 'function'  => 'Add',
                                 'name'  => 'product',
