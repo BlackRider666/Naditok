@@ -23,7 +23,7 @@ class DiscountDashboardPresenter
         $header = $discount->title;
         $fields = [
             'title' => 'Title',
-            'thumb' => 'Thumb',
+            'thumb_url' =>  'Thumb',
             'size'  => 'Size',
             'type'  => 'Type',
             'start' => 'Start date',

@@ -2,6 +2,7 @@
 
 namespace App\Discount;
 
+use App\Core\PathManager;
 use App\ProductGroup\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -29,6 +30,17 @@ class Discount extends Model
         'finish'=>  'date',
     ];
 
+    protected $appends = [
+        'thumb_url',
+    ];
+
+    public function getThumbUrlAttribute(): string
+    {
+        return $this->thumb?
+            (new PathManager())->getFile($this->thumb,'discount')
+            :
+            (new PathManager())->getDefaultPicture();
+    }
     /**
      * @return hasMany
      */
