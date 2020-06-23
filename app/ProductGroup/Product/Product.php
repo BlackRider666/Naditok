@@ -40,6 +40,9 @@ class Product extends Model
 
     protected $with = ['images','sizes','discount'];
 
+    protected $appends = [
+        'new_price'
+    ];
     /**
      * @return BelongsTo
      */
@@ -70,5 +73,18 @@ class Product extends Model
     public function discount(): BelongsTo
     {
         return $this->belongsTo(Discount::class);
+    }
+
+    public function getNewPriceAttribute(): ?int
+    {
+        if($this->discount->type === 0)
+        {
+            return $this->price*(100-$this->discount->size)/100;
+        }
+        if($this->discount->type === 1)
+        {
+            return $this->price-$this->discount->size;
+        }
+        return null;
     }
 }
