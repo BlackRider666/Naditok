@@ -77,11 +77,11 @@ class Product extends Model
 
     public function getNewPriceAttribute(): ?int
     {
-        if($this->discount->type === 0)
+        if($this->discount && $this->discount->type === 0)
         {
             return $this->price*(100-$this->discount->size)/100;
         }
-        if($this->discount->type === 1)
+        if($this->discount && $this->discount->type === 1)
         {
             return $this->price-$this->discount->size;
         }
