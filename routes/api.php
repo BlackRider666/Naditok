@@ -31,3 +31,5 @@ Route::get('/products/{id}','API\ProductController@show');
 
 Route::post('/comments/create','API\CommentController@create');
 Route::get('/comments','API\CommentController@index');
+
+Route::get('/discounts','API\DiscountController@index');
