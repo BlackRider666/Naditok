@@ -207,7 +207,7 @@ class AuthController extends Controller
      */
     public function redirectToProvider(string $driver)
     {
-        if ($driver !== 'google'|| $driver !== 'facebook') {
+        if ($driver !== 'google' && $driver !== 'facebook') {
             return response()->json([
                 'message'    => 'This auth method not enabled'
             ],401);
