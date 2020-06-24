@@ -207,7 +207,7 @@ class AuthController extends Controller
      */
     public function redirectToProvider(string $driver): RedirectResponse
     {
-        return Socialite::driver($driver)->redirect();
+        return Socialite::driver($driver)->stateless()->redirect();
     }
 
     /**
@@ -216,7 +216,7 @@ class AuthController extends Controller
      */
     public function handleProviderCallback(string $driver): JsonResponse
     {
-        $soc = Socialite::driver($driver)->user();
+        $soc = Socialite::driver($driver)->stateless()->user();
         dd($soc);
         $user = User::firstOrCreate([
             'email' =>  $soc->email,
