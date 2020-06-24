@@ -227,7 +227,6 @@ class AuthController extends Controller
            ],401);
         }
         $soc = Socialite::driver($driver)->stateless()->user();
-        dd($soc);
         if ($driver === 'google') {
             $user = User::firstOrCreate([
                 'email' =>  $soc->email,
@@ -236,9 +235,6 @@ class AuthController extends Controller
                 'last_name'     =>  $soc->user['family_name'],
                 'password'      =>  Hash::make(Str::random()),
             ]);
-            if ($user->avatar === '') {
-                (new StorageManager())->savePictureFromUrl($soc->original);
-            }
         } elseif ($driver === 'facebook') {
             $names = explode(' ',$soc->name);
             $user = User::firstOrCreate([
@@ -247,6 +243,11 @@ class AuthController extends Controller
                 'first_name'    =>  $names[0],
                 'last_name'     =>  $names[1],
                 'password'      =>  Hash::make(Str::random()),
+            ]);
+        }
+        if ($user->avatar === '') {
+            $user->update([
+                'avatar' => (new StorageManager())->savePictureFromUrl($soc->avatar),
             ]);
         }
         return response()->json([

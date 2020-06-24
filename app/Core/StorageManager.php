@@ -50,4 +50,19 @@ class StorageManager
     {
         $this->getLocalPublicDisk()->delete($type.'/'.$file);
     }
+
+    public function savePictureFromUrl(string $avatar): string
+    {
+        $file = file_get_contents($avatar);
+        $image = Image::make($file)->resize(400,null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save();
+        $filename = uniqid(time(), true) . '.jpg';
+        if (!$this->getLocalPublicDisk()->exists('user_avatar')) {
+            $this->getLocalPublicDisk()->makeDirectory('user_avatar');
+        }
+        $this->getLocalPublicDisk()->put('user_avatar/' . $filename, $image);
+
+        return $filename;
+    }
 }
