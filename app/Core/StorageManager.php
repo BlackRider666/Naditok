@@ -56,13 +56,13 @@ class StorageManager
         $file = file_get_contents($avatar);
         $image = Image::make($file)->resize(400,null, function ($constraint) {
             $constraint->aspectRatio();
-        })->save();
+        })->save(public_path('temp_images'));
         $filename = uniqid(time(), true) . '.jpg';
         if (!$this->getLocalPublicDisk()->exists('user_avatar')) {
             $this->getLocalPublicDisk()->makeDirectory('user_avatar');
         }
         $this->getLocalPublicDisk()->put('user_avatar/' . $filename, $image);
-
+        Storage::delete(public_path('temp_images/'.$image->filename));
         return $filename;
     }
 }
