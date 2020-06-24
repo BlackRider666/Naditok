@@ -236,12 +236,12 @@ class AuthController extends Controller
                 'password'      =>  Hash::make(Str::random()),
             ]);
         } elseif ($driver === 'facebook') {
-            dd($soc);
+            $names = explode(' ',$soc->name);
             $user = User::firstOrCreate([
                 'email' =>  $soc->email,
             ],[
-                'first_name'    =>  $soc->user['given_name'],
-                'last_name'     =>  $soc->user['family_name'],
+                'first_name'    =>  $names[0],
+                'last_name'     =>  $names[1],
                 'password'      =>  Hash::make(Str::random()),
             ]);
         }
