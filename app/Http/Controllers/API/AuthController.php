@@ -220,8 +220,8 @@ class AuthController extends Controller
         $user = User::firstOrCreate([
             'email' =>  $soc->email,
         ],[
-            'first_name'    =>  $soc->user->given_name,
-            'last_name'     =>  $soc->user->family_name,
+            'first_name'    =>  $soc->user['given_name'],
+            'last_name'     =>  $soc->user['family_name'],
             'password'      =>  Hash::make(Str::random()),
         ]);
         return response()->json([
