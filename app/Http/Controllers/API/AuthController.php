@@ -247,7 +247,7 @@ class AuthController extends Controller
         }
         if ($user->avatar === '') {
             $user->update([
-                'avatar' => (new StorageManager())->savePictureFromUrl($soc->avatar),
+                'avatar' => (new StorageManager())->savePictureFromUrl($soc->avatar_original),
             ]);
         }
         return response()->json([
