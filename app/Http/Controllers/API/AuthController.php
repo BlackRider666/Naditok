@@ -227,6 +227,7 @@ class AuthController extends Controller
            ],401);
         }
         $soc = Socialite::driver($driver)->stateless()->user();
+        dd($soc);
         if ($driver === 'google') {
             $user = User::firstOrCreate([
                 'email' =>  $soc->email,
