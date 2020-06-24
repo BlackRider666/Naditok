@@ -203,10 +203,15 @@ class AuthController extends Controller
 
     /**
      * @param string $driver
-     * @return RedirectResponse
+     * @return JsonResponse|RedirectResponse
      */
-    public function redirectToProvider(string $driver): RedirectResponse
+    public function redirectToProvider(string $driver)
     {
+        if ($driver !== 'google'|| $driver !== 'facebook') {
+            return response()->json([
+                'message'    => 'This auth method not enabled'
+            ],401);
+        }
         return Socialite::driver($driver)->stateless()->redirect();
     }
 
@@ -216,14 +221,30 @@ class AuthController extends Controller
      */
     public function handleProviderCallback(string $driver): JsonResponse
     {
+        if ($driver !== 'google'|| $driver !== 'facebook') {
+           return response()->json([
+               'message'    => 'This auth method not enabled'
+           ],401);
+        }
         $soc = Socialite::driver($driver)->stateless()->user();
-        $user = User::firstOrCreate([
-            'email' =>  $soc->email,
-        ],[
-            'first_name'    =>  $soc->user['given_name'],
-            'last_name'     =>  $soc->user['family_name'],
-            'password'      =>  Hash::make(Str::random()),
-        ]);
+        if ($driver === 'google') {
+            $user = User::firstOrCreate([
+                'email' =>  $soc->email,
+            ],[
+                'first_name'    =>  $soc->user['given_name'],
+                'last_name'     =>  $soc->user['family_name'],
+                'password'      =>  Hash::make(Str::random()),
+            ]);
+        } elseif ($driver === 'facebook') {
+            dd($soc);
+            $user = User::firstOrCreate([
+                'email' =>  $soc->email,
+            ],[
+                'first_name'    =>  $soc->user['given_name'],
+                'last_name'     =>  $soc->user['family_name'],
+                'password'      =>  Hash::make(Str::random()),
+            ]);
+        }
         return response()->json([
             'token'     =>  $user->createToken('clinic')->plainTextToken,
         ],200);
