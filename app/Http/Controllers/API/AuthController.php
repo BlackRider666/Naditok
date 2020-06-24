@@ -227,7 +227,6 @@ class AuthController extends Controller
            ],401);
         }
         $soc = Socialite::driver($driver)->stateless()->user();
-        dd($soc);
         if ($driver === 'google') {
             $user = User::firstOrCreate([
                 'email' =>  $soc->email,
@@ -248,7 +247,7 @@ class AuthController extends Controller
         }
         if ($user->avatar === '') {
             $user->update([
-                'avatar' => (new StorageManager())->savePictureFromUrl($soc->avatar_original),
+                'avatar' => (new StorageManager())->savePictureFromUrl($soc->avatar),
             ]);
         }
         return response()->json([
