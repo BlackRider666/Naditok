@@ -217,12 +217,11 @@ class AuthController extends Controller
     public function handleProviderCallback(string $driver): JsonResponse
     {
         $soc = Socialite::driver($driver)->stateless()->user();
-        dd($soc);
         $user = User::firstOrCreate([
             'email' =>  $soc->email,
         ],[
-            'first_name'    =>  $soc->first_name,
-            'last_name'     =>  $soc->last_name,
+            'first_name'    =>  $soc->user->given_name,
+            'last_name'     =>  $soc->user->family_name,
             'password'      =>  Hash::make(Str::random()),
         ]);
         return response()->json([
