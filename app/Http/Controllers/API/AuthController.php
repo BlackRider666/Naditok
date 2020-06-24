@@ -12,6 +12,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AuthController extends Controller
 {
@@ -196,5 +199,34 @@ class AuthController extends Controller
         $user = User::find($request->user()->getKey());
 
         return response()->json($user,200);
+    }
+
+    /**
+     * @param string $driver
+     * @return RedirectResponse
+     */
+    public function redirectToProvider(string $driver): RedirectResponse
+    {
+        return Socialite::driver($driver)->redirect();
+    }
+
+    /**
+     * @param string $driver
+     * @return JsonResponse
+     */
+    public function handleProviderCallback(string $driver): JsonResponse
+    {
+        $soc = Socialite::driver($driver)->user();
+        dd($soc);
+        $user = User::firstOrCreate([
+            'email' =>  $soc->email,
+        ],[
+            'first_name'    =>  $soc->first_name,
+            'last_name'     =>  $soc->last_name,
+            'password'      =>  Hash::make(Str::random()),
+        ]);
+        return response()->json([
+            'token'     =>  $user->createToken('clinic')->plainTextToken,
+        ],200);
     }
 }

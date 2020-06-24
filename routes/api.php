@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/login/{driver}', 'API\AuthController@redirectToProvider');
+Route::get('/login/{driver}/callback', 'API\AuthController@handleProviderCallback');
 Route::post('/login','API\AuthController@login')->name('api.login');
 Route::post('/register','API\AuthController@register')->name('api.register');
 Route::post('/logout','API\AuthController@logout')->name('api.logout')->middleware('auth:sanctum');
