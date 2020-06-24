@@ -30,7 +30,7 @@ class ProductController extends Controller
             $query->where('category_id',$data['categoryId']);
         }
         if (array_key_exists('orderBy',$data)) {
-            $query->orderByDesc('created_at');
+            $query->orderByDesc($data['orderBy']);
         }
         if (array_key_exists('discount',$data)) {
             $query->whereHas('discount');
