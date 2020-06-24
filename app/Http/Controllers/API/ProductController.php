@@ -29,6 +29,15 @@ class ProductController extends Controller
         if (array_key_exists('categoryId',$data)) {
             $query->where('category_id',$data['categoryId']);
         }
+        if (array_key_exists('orderBy',$data)) {
+            $query->orderByDesc('created_at');
+        }
+        if (array_key_exists('discount',$data)) {
+            $query->whereHas('discount');
+        }
+        if (array_key_exists('discount_id',$data)) {
+            $query->where('discount_id',$data['discount_id']);
+        }
         $products = $query->whereHas('products')->get()->forPage($page,$perPage);
         return response()->json($products,200);
     }
