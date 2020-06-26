@@ -33,3 +33,8 @@ Route::post('/comments/create','API\CommentController@create');
 Route::get('/comments','API\CommentController@index');
 
 Route::get('/discounts','API\DiscountController@index');
+
+Route::get('/shipments','API\ShipmentController@index')->middleware('auth:sanctum');
+Route::post('/shipments-add','API\ShipmentController@add_product')->middleware('auth:sanctum');
+Route::post('/shipments-update/{shipment_id}','API\ShipmentController@update_product')->middleware('auth:sanctum');
+Route::delete('/shipments-delete/{shipment_id}','API\ShipmentController@delete_product')->middleware('auth:sanctum');

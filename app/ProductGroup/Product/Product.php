@@ -6,6 +6,7 @@ use App\Discount\Discount;
 use App\ProductGroup\Product\ProductImage\ProductImage;
 use App\ProductGroup\Product\ProductSize\ProductSize;
 use App\ProductGroup\ProductGroup;
+use App\Shipment\Shipment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -43,6 +44,7 @@ class Product extends Model
     protected $appends = [
         'new_price'
     ];
+
     /**
      * @return BelongsTo
      */
@@ -75,6 +77,9 @@ class Product extends Model
         return $this->belongsTo(Discount::class);
     }
 
+    /**
+     * @return int|null
+     */
     public function getNewPriceAttribute(): ?int
     {
         if($this->discount && $this->discount->type === 0)
@@ -86,5 +91,13 @@ class Product extends Model
             return $this->price-$this->discount->size;
         }
         return null;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function shipments(): HasMany
+    {
+        return $this->hasMany(Shipment::class);
     }
 }

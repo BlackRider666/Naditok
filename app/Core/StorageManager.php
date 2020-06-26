@@ -53,7 +53,7 @@ class StorageManager
 
     public function savePictureFromUrl(string $avatar): string
     {
-        $file = file_get_contents($avatar);;
+        $file = file_get_contents($avatar);
         $filename = uniqid(time(), true) . '.jpg';
         if (!$this->getLocalPublicDisk()->exists('user_avatar')) {
             $this->getLocalPublicDisk()->makeDirectory('user_avatar');

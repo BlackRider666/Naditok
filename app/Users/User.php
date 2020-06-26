@@ -3,6 +3,7 @@
 namespace App\Users;
 
 use App\Core\PathManager;
+use App\Shipment\Shipment;
 use App\Users\UserAddress\UserAddress;
 use App\Users\UserChild\UserChild;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -35,7 +36,9 @@ class User extends Authenticatable
         'full_name',
         'avatar_url',
     ];
+
     protected $with = ['address','children'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -94,5 +97,13 @@ class User extends Authenticatable
             (new PathManager())->getFile($this->avatar,'user_avatar')
             :
             (new PathManager())->getDefaultPicture();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function shipments(): HasMany
+    {
+        return $this->hasMany(Shipment::class);
     }
 }
