@@ -249,6 +249,6 @@ class AuthController extends Controller
                 'avatar' => (new StorageManager())->savePictureFromUrl($soc->avatar),
             ]);
         }
-        return http_redirect('http://localhost:3000',['access _token' => $user->createToken('clinic')->plainTextToken]);
+        return redirect('http://localhost:3000',['access _token' => $user->createToken('clinic')->plainTextToken]);
     }
 }
