@@ -41,4 +41,4 @@ Route::delete('/shipments-delete/{shipment_id}','API\ShipmentController@delete_p
 
 Route::get('/favorites','API\FavoriteController@index')->middleware('auth:sanctum');
 Route::post('/favorites-add','API\FavoriteController@addToFavorites')->middleware('auth:sanctum');
-Route::delete('/favorites-delete','API\FavoriteController@removeFromFavorites')->middleware('auth:sanctum');
+Route::delete('/favorites-delete/{fav_id}','API\FavoriteController@removeFromFavorites')->middleware('auth:sanctum');
