@@ -110,7 +110,7 @@ class ProductController extends Controller
         return $this->dashboardPresenter->addDiscount($id);
     }
 
-    public function addDiscountToProduct(AddProductToDiscountRequest $request)
+    public function addDiscount(AddProductToDiscountRequest $request)
     {
         Product::find($request->get('product_id'))
             ->update(['discount_id' => $request->get('discount_id')]);
