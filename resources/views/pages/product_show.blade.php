@@ -56,7 +56,7 @@
                                     <tr>
                                         <td>{{$relation['discount']['title']}}</td>
                                         <td>{{$relation['discount']['size']}}</td>
-                                        <td>{{$relation['discount']['type']}}</td>
+                                        <td>{{$relation['discount']['type']===0?'%':'грн.'}}</td>
                                         <td>{{$relation['discount']['start']}}</td>
                                         <td>{{$relation['discount']['finish']}}</td>
                                         <td class="row">
