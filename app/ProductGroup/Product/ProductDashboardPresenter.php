@@ -5,6 +5,7 @@ namespace App\ProductGroup\Product;
 
 
 use App\Core\DashboardPresenter;
+use App\Discount\Discount;
 use App\ProductGroup\ProductGroup;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -48,6 +49,13 @@ class ProductDashboardPresenter
                 ],
                 'name'      =>  'product-sizes',
                 'items'     =>  $product->sizes,
+            ],
+            'discount'             =>  [
+                'headers'   =>  [
+                    'size'  =>  'Discounts',
+                ],
+                'name'      =>  'discounts',
+                'items'     =>  $product->discount,
             ],
             'product_id'        =>  $product->getKey(),
         ];
@@ -110,5 +118,14 @@ class ProductDashboardPresenter
             ],
         ];
         return (new DashboardPresenter())->getEditPage($product,$name,$fields,$options);
+    }
+
+    public function AddDiscount(int $id)
+    {
+        $discounts = Discount::all();
+        return view('pages.add_discount_to_product',[
+            'product_id'   =>  $id,
+            'items'         =>  $discounts,
+        ]);
     }
 }

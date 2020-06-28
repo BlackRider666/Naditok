@@ -30,6 +30,14 @@
                         </div>
                     </div>
                     @include('components.table',$relation['sizes'])
+                    <div class="panel-hdr">
+                        <h2>
+                            Discount
+                        </h2>
+                        <div class="panel-toolbar">
+                            <a class="btn btn-primary" href="{{route('admin.products.add_discount_to_product',$relation['product_id'])}}"><i class="fal fa-plus"></i> Add discount</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 

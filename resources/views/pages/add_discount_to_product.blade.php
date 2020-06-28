@@ -5,26 +5,26 @@
             <div class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Add Product
+                        Add Discount
                     </h2>
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <form action="{{route('admin.discounts.add_product')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('admin.products.add_discount')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="discount_id" value="{{$discount_id}}">
+                            <input type="hidden" name="product_id" value="{{$product_id}}">
                             <div class="form-group">
-                                <label for="product_id" class="form-label">Product</label>
+                                <label for="product_id" class="form-label">Discount</label>
                                 @include('components.inputs.select',[
                                     'items'    =>  $items,
-                                    'name'     =>  'product_id',
-                                    'value'    =>   old('product_id')
+                                    'name'     =>  'discount_id',
+                                    'value'    =>   old('discount_id')
                                 ])
                             </div>
 
                             @include('components.inputs.submit', [
                                 'function'  => 'Add',
-                                'name'  => 'product',
+                                'name'  => 'discount',
                             ])
                         </form>
                     </div>

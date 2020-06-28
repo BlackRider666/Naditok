@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddProductToDiscountRequest;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\ProductGroup\Product\Product;
 use App\ProductGroup\Product\ProductDashboardPresenter;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -96,5 +98,29 @@ class ProductController extends Controller
     {
         $product->delete();
         return redirect()->route('admin.products.index');
+    }
+
+
+    /**
+     * @param int $id
+     * @return Application|Factory|View
+     */
+    public function getAddDiscountToProduct(int $id)
+    {
+        return $this->dashboardPresenter->addDiscount($id);
+    }
+
+    public function addDiscountToProduct(AddProductToDiscountRequest $request)
+    {
+        Product::find($request->get('product_id'))
+            ->update(['discount_id' => $request->get('discount_id')]);
+        return redirect()->route('admin.products.show',$request->get('product_id'));
+    }
+
+    public function removeDiscount(int $id)
+    {
+        Product::find($request->get('product_id'))
+            ->update(['discount_id' => null]);
+        return redirect()->route('admin.products.show',$id);
     }
 }
