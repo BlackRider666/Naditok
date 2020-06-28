@@ -41,7 +41,7 @@ class ProductController extends Controller
 
     public function show(int $id)
     {
-        $product = ProductGroup::find($id)->with('products')->get();
+        $product = ProductGroup::where('id',$id)->with('products')->first();
         if(!$product)
         {
             return response()->json('Not found!',404);
