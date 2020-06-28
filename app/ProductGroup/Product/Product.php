@@ -91,13 +91,6 @@ class Product extends Model
     }
 
     /**
-     * @return HasMany
-     */
-    public function shipments(): HasMany
-    {
-        return $this->hasMany(Shipment::class);
-    }
-    /**
      * @return string
      */
     public function getFullTitleAttribute(): string
