@@ -46,7 +46,7 @@ class ShipmentController extends Controller
         $shipment->update([
             'quantity'  =>  $shipment->quantity+1,
         ]);
-        return response()->json($shipment->with('product')->get(),200);
+        return response()->json($shipment->with('product')->first(),200);
     }
 
     /**
