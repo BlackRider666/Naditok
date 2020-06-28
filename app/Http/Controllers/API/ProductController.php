@@ -4,10 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductGroupSearchRequest;
-use App\ProductGroup\Product\Product;
 use App\ProductGroup\ProductGroup;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductController extends Controller
 {
@@ -36,7 +34,7 @@ class ProductController extends Controller
             $query->whereHas('products.discount');
         }
         if (array_key_exists('discount_id',$data)) {
-            $query->whereHas('products', function (Builder $sub) use ($data){
+            $query->whereHas('products', function (Builder $sub) use ($data) {
                 $sub->where('discount_id',$data['discount_id']);
             });
         }
