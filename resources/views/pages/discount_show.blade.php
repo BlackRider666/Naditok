@@ -43,7 +43,7 @@
                                 <thead class="bg-fusion-50">
                                 <tr>
                                     <th scope="col">#</th>
-                                    @foreach($headers as $header)
+                                    @foreach($relations['products']['headers'] as $header)
                                         <th scope="col">{{$header}}</th>
                                     @endforeach
                                     <th scope="col">Options</th>
