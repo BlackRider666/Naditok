@@ -18,6 +18,10 @@ class Shipment extends Model
         'size',
     ];
 
+    protected $with = [
+        'product'
+    ];
+
     /**
      * @return BelongsTo
      */

@@ -42,7 +42,8 @@ class Product extends Model
     protected $with = ['images','sizes','discount'];
 
     protected $appends = [
-        'new_price'
+        'new_price',
+        'full_title'
     ];
 
     /**
@@ -99,5 +100,13 @@ class Product extends Model
     public function shipments(): HasMany
     {
         return $this->hasMany(Shipment::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullTitleAttribute(): string
+    {
+        return $this->group->title.' '.$this->title;
     }
 }
