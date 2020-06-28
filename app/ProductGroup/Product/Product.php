@@ -43,7 +43,7 @@ class Product extends Model
 
     protected $appends = [
         'new_price',
-        'full_title'
+        //'full_title'
     ];
     /**
      * @return BelongsTo
