@@ -21,7 +21,7 @@ class ProductController extends Controller
             $query->where(function($sub) use ($data) {
                 $sub->where('title','LIKE','%'.$data['text'].'%')
                     ->orWhere('desc','LIKE','%'.$data['text'].'%')
-                    ->orWhereHas('products', function ($subsub) use ($data) {
+                    ->orWhereHas('products', function (Builder $subsub) use ($data) {
                         $subsub->where('title', 'LIKE','%'.$data['text'].'%');
                     });
             });
@@ -33,16 +33,14 @@ class ProductController extends Controller
             $query->orderByDesc($data['orderBy']);
         }
         if (array_key_exists('discount',$data)) {
-            $query->whereHas('products', function ($sub) {
-                $sub->has('discount');
-            });
+            $query->whereHas('products.discount');
         }
         if (array_key_exists('discount_id',$data)) {
-            $query->whereHas('products', function ($sub) use ($data){
+            $query->whereHas('products', function (Builder $sub) use ($data){
                 $sub->where('discount_id',$data['discount_id']);
             });
         }
-        $products = $query->whereHas('products')->get()->forPage($page,$perPage);
+        $products = $query->get()->forPage($page,$perPage);
         return response()->json($products,200);
     }
 

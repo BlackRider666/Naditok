@@ -25,7 +25,10 @@ class ProductGroupSearchRequest extends FormRequest
     {
         return [
             'text'  =>  'string|max:255',
-            'categoryId'    =>  'int|exists:categories,id'
+            'categoryId'    =>  'int|exists:categories,id',
+            'discount'      =>  'int',
+            'discount_id'   =>  'int|exists:discounts,id',
+            'orderBy'       =>  'string',
         ];
     }
 }
