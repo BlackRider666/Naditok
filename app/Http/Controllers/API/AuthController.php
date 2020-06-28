@@ -217,9 +217,8 @@ class AuthController extends Controller
 
     /**
      * @param string $driver
-     * @return JsonResponse
      */
-    public function handleProviderCallback(string $driver): JsonResponse
+    public function handleProviderCallback(string $driver)
     {
         if ($driver !== 'google' && $driver !== 'facebook') {
            return response()->json([
@@ -250,8 +249,6 @@ class AuthController extends Controller
                 'avatar' => (new StorageManager())->savePictureFromUrl($soc->avatar),
             ]);
         }
-        return response()->json([
-            'token'     =>  $user->createToken('clinic')->plainTextToken,
-        ],200);
+        return http_redirect('http://localhost:3000',['access _token' => $user->createToken('clinic')->plainTextToken]);
     }
 }
