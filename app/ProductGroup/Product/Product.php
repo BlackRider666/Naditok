@@ -43,14 +43,13 @@ class Product extends Model
 
     protected $appends = [
         'new_price',
-        'full_title'
     ];
     /**
      * @return BelongsTo
      */
     public function group(): BelongsTo
     {
-        return $this->belongsTo(ProductGroup::class);
+        return $this->belongsTo(ProductGroup::class,'product_group_id');
     }
 
     /**
@@ -77,6 +76,9 @@ class Product extends Model
         return $this->belongsTo(Discount::class);
     }
 
+    /**
+     * @return int|null
+     */
     public function getNewPriceAttribute(): ?int
     {
         if($this->discount && $this->discount->type === 0)
@@ -91,10 +93,10 @@ class Product extends Model
     }
 
     /**
-     * @return string
+     * @return HasMany
      */
-    public function getFullTitleAttribute(): string
+    public function shipments(): HasMany
     {
-        return $this->group->title.' '.$this->title;
+        return $this->hasMany(Shipment::class);
     }
 }

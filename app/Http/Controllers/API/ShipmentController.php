@@ -16,7 +16,7 @@ class ShipmentController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $shipments = Shipment::where('user_id',$request->user()->getKey())->get();
+        $shipments = Shipment::where('user_id',$request->user()->getKey())->with('product.group')->get();
         return response()->json($shipments,200);
     }
 
