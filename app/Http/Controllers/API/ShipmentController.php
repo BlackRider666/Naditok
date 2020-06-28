@@ -44,9 +44,9 @@ class ShipmentController extends Controller
                 'size'          =>  $request->get('size'),
             ]);
         $shipment->update([
-            'quantity'  =>  $request->get('quantity'),
+            'quantity'  =>  $shipment->quantity+1,
         ]);
-        return response()->json($shipment->with('product'),200);
+        return response()->json($shipment->with('product')->get(),200);
     }
 
     /**
