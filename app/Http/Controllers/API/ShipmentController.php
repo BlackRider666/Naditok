@@ -50,7 +50,8 @@ class ShipmentController extends Controller
         Validator::make($request->all(), [
             'quantity'    =>  'required|int'
         ]);
-        $shipment = Shipment::find($id)->update([
+        $shipment = Shipment::find($id);
+        $shipment->update([
             'quantity'  =>  $request->get('quantity'),
         ]);
         return response()->json($shipment,200);

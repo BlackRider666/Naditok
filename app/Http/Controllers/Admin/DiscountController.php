@@ -11,6 +11,7 @@ use App\Http\Requests\DiscountRequest;
 use App\Http\Requests\DiscountUpdateRequest;
 use App\ProductGroup\Product\Product;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -103,15 +104,35 @@ class DiscountController extends Controller
         return redirect()->route('admin.discounts.index');
     }
 
+    /**
+     * @param int $id
+     * @return Application|Factory|View
+     */
     public function getAddProduct(int $id)
     {
         return $this->dashboardPresenter->getAddProduct($id);
     }
 
-    public function addProduct(AddProductToDiscountRequest $request)
+    /**
+     * @param AddProductToDiscountRequest $request
+     * @return RedirectResponse
+     */
+    public function addProduct(AddProductToDiscountRequest $request): RedirectResponse
     {
         Product::find($request->get('product_id'))
             ->update(['discount_id' => $request->get('discount_id')]);
         return redirect()->route('admin.discounts.show',$request->get('discount_id'));
+    }
+
+    /**
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function removeProduct(int $id): RedirectResponse
+    {
+        $product = Product::find($id);
+        $discount = $product->discount_id;
+        $product->update(['discount_id' => null]);
+        return redirect()->route('admin.discounts.show',$discount);
     }
 }

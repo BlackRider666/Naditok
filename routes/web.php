@@ -39,6 +39,7 @@ Route::name('admin.')->middleware('auth')->group(function (){
     Route::get('/product-add-discount/{product_id}','Admin\ProductController@getAddDiscountToProduct')->name('products.add_discount_to_product');
     Route::post('/product-add-discount','Admin\ProductController@addDiscount')->name('products.add_discount');
     Route::delete('/product-remove-discount/{product_id}','Admin\ProductController@removeDiscount')->name('products.remove-discount');
+    Route::delete('/discount-remove-product/{product_id}','Admin\DiscountController@removeProduct')->name('discounts.remove-product');
 });
 Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login','Auth\LoginController@login');
