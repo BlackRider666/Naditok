@@ -53,7 +53,7 @@
                                 @foreach($relations['products']['items'] as $item)
                                     <tr>
                                         <th scope="row">{{$item->id}}</th>
-                                        @foreach($headers as $key => $value)
+                                        @foreach($relations['products']['headers'] as $key => $value)
                                             @if($key === 'color')
                                                 <td><input type="color" value="{{$item->$key}}" disabled></td>
                                             @else
