@@ -37,7 +37,44 @@
                             Products
                         </h2>
                     </div>
-                    @include('components.table',$relation['products'])
+                    <div class="panel-content">
+                        <div class="frame-wrap">
+                            <table class="table m-0 table-hover">
+                                <thead class="bg-fusion-50">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    @foreach($headers as $header)
+                                        <th scope="col">{{$header}}</th>
+                                    @endforeach
+                                    <th scope="col">Options</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($relations['products']['items'] as $item)
+                                    <tr>
+                                        <th scope="row">{{$item->id}}</th>
+                                        @foreach($headers as $key => $value)
+                                            @if($key === 'color')
+                                                <td><input type="color" value="{{$item->$key}}" disabled></td>
+                                            @else
+                                                <td>{{$item->$key}}</td>
+                                            @endif
+                                        @endforeach
+                                        <td class="row">
+                                            <form class="col" action="{{route('admin.products.remove-discount',$relation['product_id'])}}" method="POST">
+                                                {{method_field('DELETE')}}
+                                                @csrf
+                                                <button type="submit" class="border-0 bg-white">
+                                                    <i class="fal fa-trash-alt text-danger"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 
