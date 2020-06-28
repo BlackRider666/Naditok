@@ -26,11 +26,14 @@ class ShipmentController extends Controller
      */
     public function add_product(Request $request): JsonResponse
     {
-        Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'product_id'    =>  'required|int|exists:products,id',
             'quantity'      =>  'required|int',
             'size'          =>  'required|string',
         ]);
+        if ($validator->failed()) {
+            return response()->json($validator->fails(),422);
+        }
         $shipment = Shipment::create([
             'user_id'       =>  $request->user()->getKey(),
             'product_id'    =>  $request->get('product_id'),
@@ -47,9 +50,12 @@ class ShipmentController extends Controller
      */
     public function update_product(int $id, Request $request): JsonResponse
     {
-        Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'quantity'    =>  'required|int'
         ]);
+        if ($validator->failed()) {
+            return response()->json($validator->fails(),422);
+        }
         $shipment = Shipment::find($id);
         $shipment->update([
             'quantity'  =>  $request->get('quantity'),

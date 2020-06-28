@@ -7,6 +7,7 @@ use App\ProductGroup\Product\ProductImage\ProductImage;
 use App\ProductGroup\Product\ProductSize\ProductSize;
 use App\ProductGroup\ProductGroup;
 use App\Shipment\Shipment;
+use App\Users\UserFavorite\UserFavorite;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -98,5 +99,10 @@ class Product extends Model
     public function shipments(): HasMany
     {
         return $this->hasMany(Shipment::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(UserFavorite::class);
     }
 }

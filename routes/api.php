@@ -38,3 +38,7 @@ Route::get('/shipments','API\ShipmentController@index')->middleware('auth:sanctu
 Route::post('/shipments-add','API\ShipmentController@add_product')->middleware('auth:sanctum');
 Route::post('/shipments-update/{shipment_id}','API\ShipmentController@update_product')->middleware('auth:sanctum');
 Route::delete('/shipments-delete/{shipment_id}','API\ShipmentController@delete_product')->middleware('auth:sanctum');
+
+Route::get('/favorites','API\FavoriteController@index')->middleware('auth:sanctum');
+Route::post('/favorites-add','API\FavoriteController@addToFavorites')->middleware('auth:sanctum');
+Route::delete('/favorites-delete','API\FavoriteController@removeFromFavorites')->middleware('auth:sanctum');

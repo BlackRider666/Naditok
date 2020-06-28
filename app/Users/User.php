@@ -6,6 +6,7 @@ use App\Core\PathManager;
 use App\Shipment\Shipment;
 use App\Users\UserAddress\UserAddress;
 use App\Users\UserChild\UserChild;
+use App\Users\UserFavorite\UserFavorite;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -105,5 +106,13 @@ class User extends Authenticatable
     public function shipments(): HasMany
     {
         return $this->hasMany(Shipment::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(UserFavorite::class);
     }
 }
