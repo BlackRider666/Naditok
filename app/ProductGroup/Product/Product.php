@@ -45,7 +45,6 @@ class Product extends Model
         'new_price',
         'full_title'
     ];
-
     /**
      * @return BelongsTo
      */
@@ -78,9 +77,6 @@ class Product extends Model
         return $this->belongsTo(Discount::class);
     }
 
-    /**
-     * @return int|null
-     */
     public function getNewPriceAttribute(): ?int
     {
         if($this->discount && $this->discount->type === 0)
@@ -101,7 +97,6 @@ class Product extends Model
     {
         return $this->hasMany(Shipment::class);
     }
-
     /**
      * @return string
      */
