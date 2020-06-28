@@ -32,7 +32,11 @@ class FavoriteController extends Controller
 
     public function removeFromFavorites(int $id)
     {
-        UserFavorite::find($id)->delete();
+        $favorite = UserFavorite::find($id);
+        if ($favorite === null) {
+            return response()->json('Not found!',404);
+        }
+        $favorite->delete();
         return response()->json('Removed!',200);
     }
 }
