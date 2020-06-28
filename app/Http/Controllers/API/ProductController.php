@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductGroupSearchRequest;
+use App\ProductGroup\Product\Product;
 use App\ProductGroup\ProductGroup;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -14,29 +15,25 @@ class ProductController extends Controller
         $data = $request->validated();
         $page = array_key_exists('page',$data)?$data['page']:1;
         $perPage = array_key_exists('perPage',$data)?$data['perPage']:12;
-        $query = ProductGroup::query();
+        $query = Product::query();
         if (array_key_exists('text',$data)) {
             $query->where(function($sub) use ($data) {
-                $sub->where('title','LIKE','%'.$data['text'].'%')
-                    ->orWhere('desc','LIKE','%'.$data['text'].'%')
-                    ->orWhereHas('products', function (Builder $subsub) use ($data) {
-                        $subsub->where('title', 'LIKE','%'.$data['text'].'%');
-                    });
+                $sub->where('group.title','LIKE','%'.$data['text'].'%')
+                    ->orWhere('group.desc','LIKE','%'.$data['text'].'%')
+                    ->orWhere('title', 'LIKE','%'.$data['text'].'%');
             });
         }
         if (array_key_exists('categoryId',$data)) {
-            $query->where('category_id',$data['categoryId']);
+            $query->where('group.category_id',$data['categoryId']);
         }
         if (array_key_exists('orderBy',$data)) {
             $query->orderByDesc($data['orderBy']);
         }
         if (array_key_exists('discount',$data)) {
-            $query->whereHas('products.discount');
+            $query->whereHas('discount');
         }
         if (array_key_exists('discount_id',$data)) {
-            $query->whereHas('products', function (Builder $sub) use ($data) {
-                $sub->where('discount_id',$data['discount_id']);
-            });
+            $query->where('discount_id',$data['discount_id']);
         }
         $products = $query->get()->forPage($page,$perPage);
         return response()->json($products,200);
@@ -44,7 +41,7 @@ class ProductController extends Controller
 
     public function show(int $id)
     {
-        $product = ProductGroup::find($id);
+        $product = ProductGroup::find($id)->with('products')->get();
         if(!$product)
         {
             return response()->json('Not found!',404);

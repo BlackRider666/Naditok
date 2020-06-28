@@ -43,7 +43,6 @@ class ProductGroup extends Model
         'comment_count',
         'comment_average_rating',
     ];
-    protected $with = 'products';
     /**
      * @return HasMany
      */

@@ -39,7 +39,7 @@ class Product extends Model
         'product_code'      =>  'string',
     ];
 
-    protected $with = ['images','sizes','discount'];
+    protected $with = ['images','sizes','discount','group'];
 
     protected $appends = [
         'new_price',
