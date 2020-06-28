@@ -23,7 +23,7 @@ class FavoriteController extends Controller
         if ($validator->failed()) {
             return response()->json($validator->fails(),422);
         }
-        $favorite = UserFavorite::findOrCreate([
+        $favorite = UserFavorite::firstOrCreate([
             'user_id'       =>  $request->user()->getKey(),
             'product_id'    =>  $request->get('product_id'),
         ]);
