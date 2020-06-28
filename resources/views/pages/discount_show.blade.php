@@ -61,7 +61,7 @@
                                             @endif
                                         @endforeach
                                         <td class="row">
-                                            <form class="col" action="{{route('admin.products.remove-discount',$relation['product_id'])}}" method="POST">
+                                            <form class="col" action="{{route('admin.products.remove-discount',$item->id)}}" method="POST">
                                                 {{method_field('DELETE')}}
                                                 @csrf
                                                 <button type="submit" class="border-0 bg-white">
