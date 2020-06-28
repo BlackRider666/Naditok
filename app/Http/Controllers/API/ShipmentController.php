@@ -34,11 +34,17 @@ class ShipmentController extends Controller
         if ($validator->failed()) {
             return response()->json($validator->fails(),422);
         }
-        $shipment = Shipment::updateOrCreate([
+        $shipment = Shipment::firstOrCreate([
             'user_id'       =>  $request->user()->getKey(),
             'product_id'    =>  $request->get('product_id'),
-            'quantity'      =>  $request->get('quantity'),
-            'size'          =>  $request->get('size'),
+        ], [
+                'user_id'       =>  $request->user()->getKey(),
+                'product_id'    =>  $request->get('product_id'),
+                'quantity'      =>  0,
+                'size'          =>  $request->get('size'),
+            ]);
+        $shipment->update([
+            'quantity'  =>  $request->get('quantity'),
         ]);
         return response()->json($shipment->with('product'),200);
     }
