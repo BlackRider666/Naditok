@@ -33,10 +33,14 @@ class ProductController extends Controller
             $query->orderByDesc($data['orderBy']);
         }
         if (array_key_exists('discount',$data)) {
-            $query->whereHas('discount');
+            $query->whereHas('products', function ($sub) {
+                $sub->has('discount');
+            });
         }
         if (array_key_exists('discount_id',$data)) {
-            $query->where('discount_id',$data['discount_id']);
+            $query->whereHas('products', function ($sub) use ($data){
+                $sub->where('discount_id',$data['discount_id']);
+            });
         }
         $products = $query->whereHas('products')->get()->forPage($page,$perPage);
         return response()->json($products,200);
