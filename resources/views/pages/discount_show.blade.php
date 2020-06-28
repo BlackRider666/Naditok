@@ -43,17 +43,17 @@
                                 <thead class="bg-fusion-50">
                                 <tr>
                                     <th scope="col">#</th>
-                                    @foreach($relations['products']['headers'] as $header)
+                                    @foreach($relation['products']['headers'] as $header)
                                         <th scope="col">{{$header}}</th>
                                     @endforeach
                                     <th scope="col">Options</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($relations['products']['items'] as $item)
+                                @foreach($relation['products']['items'] as $item)
                                     <tr>
                                         <th scope="row">{{$item->id}}</th>
-                                        @foreach($relations['products']['headers'] as $key => $value)
+                                        @foreach($relation['products']['headers'] as $key => $value)
                                             @if($key === 'color')
                                                 <td><input type="color" value="{{$item->$key}}" disabled></td>
                                             @else
