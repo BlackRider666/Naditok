@@ -37,7 +37,7 @@ class ShipmentController extends Controller
             'quantity'      =>  $request->get('quantity'),
             'size'          =>  $request->get('size'),
         ]);
-        return response()->json($shipment,200);
+        return response()->json($shipment->with('product'),200);
     }
 
     /**

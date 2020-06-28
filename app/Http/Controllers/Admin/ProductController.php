@@ -119,7 +119,7 @@ class ProductController extends Controller
 
     public function removeDiscount(int $id)
     {
-        Product::find($request->get('product_id'))
+        Product::find($id)
             ->update(['discount_id' => null]);
         return redirect()->route('admin.products.show',$id);
     }

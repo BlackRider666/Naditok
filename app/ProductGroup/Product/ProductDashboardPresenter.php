@@ -50,13 +50,7 @@ class ProductDashboardPresenter
                 'name'      =>  'product-sizes',
                 'items'     =>  $product->sizes,
             ],
-            'discount'             =>  [
-                'headers'   =>  [
-                    'size'  =>  'Discounts',
-                ],
-                'name'      =>  'discounts',
-                'items'     =>  $product->discount,
-            ],
+            'discount'      => $product->discount,
             'product_id'        =>  $product->getKey(),
         ];
         return view('pages.product_show',[
