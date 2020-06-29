@@ -148,10 +148,11 @@
                     </li>
                     <li class="{{request()->is('orders/*')|| request()->is('order')?'active':''}}">
                         <a href="{{route('admin.orders.index')}}" title="Orders" data-filter-tags="orders">
-                            <i class="fal fa-money-check"></i>
+                            <i class="fal fa-shopping-cart"></i>
                             <span class="nav-link-text">Orders</span>
                         </a>
                     </li>
+                    <!-- sort-alt for upload-product -->
                 </ul>
                 <div class="filter-message js-filter-message bg-success-600"></div>
             </nav>
