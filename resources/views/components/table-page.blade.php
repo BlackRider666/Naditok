@@ -8,9 +8,11 @@
                     <h2>
                         {{ucfirst($name)}}
                     </h2>
+                    @if(!$withoutToolbar)
                     <div class="panel-toolbar">
                         <a class="btn btn-primary" href="{{route('admin.'.$name.'.create')}}"><i class="fal fa-plus"></i> Create</a>
                     </div>
+                    @endif
                 </div>
                 <div class="panel-container show">
                     @include('components.table',[

@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class DashboardPresenter
 {
-    public function getTablePage(array $headers, string $name, Collection $items)
+    public function getTablePage(array $headers, string $name, Collection $items, bool $withoutToolbar = false)
     {
         return view('components.table-page',[
             'headers'   =>  $headers,
             'name'      =>  $name,
             'items'     =>  $items,
+            'withoutToolbar'    =>  $withoutToolbar,
         ]);
     }
 
