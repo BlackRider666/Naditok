@@ -45,7 +45,7 @@ class ShipmentController extends Controller
             ]);
         $id = $shipment->getKey();
         $shipment->update([
-            'quantity'  =>  $shipment->quantity+1,
+            'quantity'  =>  $shipment->quantity+$request->get('quantity'),
         ]);
         $shipment = Shipment::find($id);
         return response()->json($shipment,200);
