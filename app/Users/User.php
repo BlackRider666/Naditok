@@ -3,6 +3,7 @@
 namespace App\Users;
 
 use App\Core\PathManager;
+use App\Order\Order;
 use App\Shipment\Shipment;
 use App\Users\UserAddress\UserAddress;
 use App\Users\UserChild\UserChild;
@@ -114,5 +115,13 @@ class User extends Authenticatable
     public function favorites(): HasMany
     {
         return $this->hasMany(UserFavorite::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

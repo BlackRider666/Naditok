@@ -38,6 +38,7 @@ class ProductController extends Controller
     }
 
     /**
+     * @param int $product_group_id
      * @return Factory|View
      */
     public function create(int $product_group_id)
@@ -78,7 +79,7 @@ class ProductController extends Controller
 
     /**
      * @param ProductUpdateRequest $request
-     * @param Product $product
+     * @param int $id
      * @return RedirectResponse
      */
     public function update(ProductUpdateRequest $request, int $id): RedirectResponse

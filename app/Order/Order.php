@@ -2,10 +2,12 @@
 
 namespace App\Order;
 
+use App\Order\OrderItem\OrderItem;
 use App\ProductGroup\Product\Product;
 use App\Users\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -13,18 +15,17 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'product_id',
-        'quantity',
-        'price',
         'status',
+        'created_at',
     ];
-
-    protected $with = ['product'];
 
     protected $appends = [
-        'total_price'
+        'price'
     ];
 
+    protected $with = [
+        'items'
+    ];
     /**
      * @return BelongsTo
      */
@@ -34,18 +35,22 @@ class Order extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function product(): BelongsTo
+    public function items(): HasMany
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(OrderItem::class);
     }
 
     /**
      * @return float
      */
-    public function getTotalPriceAttribute(): float
+    public function getPriceAttribute(): float
     {
-        return $this->price * $this->quantity;
+        $price = 0;
+        foreach ($this->items as $item) {
+            $price += $item->total_price;
+        }
+        return $price;
     }
 }

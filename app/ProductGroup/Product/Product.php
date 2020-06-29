@@ -3,6 +3,7 @@
 namespace App\ProductGroup\Product;
 
 use App\Discount\Discount;
+use App\Order\Order;
 use App\ProductGroup\Product\ProductImage\ProductImage;
 use App\ProductGroup\Product\ProductSize\ProductSize;
 use App\ProductGroup\ProductGroup;
@@ -101,8 +102,19 @@ class Product extends Model
         return $this->hasMany(Shipment::class);
     }
 
-    public function favorites()
+    /**
+     * @return HasMany
+     */
+    public function favorites(): HasMany
     {
         return $this->hasMany(UserFavorite::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }
