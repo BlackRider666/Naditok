@@ -42,3 +42,7 @@ Route::delete('/shipments-delete/{shipment_id}','API\ShipmentController@delete_p
 Route::get('/favorites','API\FavoriteController@index')->middleware('auth:sanctum');
 Route::post('/favorites-add','API\FavoriteController@addToFavorites')->middleware('auth:sanctum');
 Route::delete('/favorites-delete/{fav_id}','API\FavoriteController@removeFromFavorites')->middleware('auth:sanctum');
+
+Route::get('/orders','API\OrderController@index')->middleware('auth:sanctum');
+Route::post('/orders','API\OrderController@store')->middleware('auth:sanctum');
+Route::get('/orders/{order_id}','API\OrderController@show')->middleware('auth:sanctum');

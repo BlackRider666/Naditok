@@ -26,7 +26,7 @@ class OrderController extends Controller
      * @param OrderRequest $request
      * @return JsonResponse
      */
-    public function create(OrderRequest $request): JsonResponse
+    public function store(OrderRequest $request): JsonResponse
     {
         if (!$request->user()->address) {
             return response()->json('Dont have address!',422);
