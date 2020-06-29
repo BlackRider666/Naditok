@@ -146,6 +146,12 @@
                             <span class="nav-link-text">Discount</span>
                         </a>
                     </li>
+                    <li class="{{request()->is('orders/*')|| request()->is('order')?'active':''}}">
+                        <a href="{{route('admin.orders.index')}}" title="Orders" data-filter-tags="orders">
+                            <i class="fal fa-money-check"></i>
+                            <span class="nav-link-text">Orders</span>
+                        </a>
+                    </li>
                 </ul>
                 <div class="filter-message js-filter-message bg-success-600"></div>
             </nav>
