@@ -43,11 +43,12 @@ class ShipmentController extends Controller
                 'quantity'      =>  0,
                 'size'          =>  $request->get('size'),
             ]);
+        $id = $shipment->getKey();
         $shipment->update([
             'quantity'  =>  $shipment->quantity+1,
         ]);
-        $shipment = Shipment::find($shipment->getKey());
-        return response()->json($shipment->with('product')->first(),200);
+        $shipment = Shipment::find($id);
+        return response()->json($shipment,200);
     }
 
     /**
