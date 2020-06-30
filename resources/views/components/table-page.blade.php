@@ -19,6 +19,7 @@
                             'headers'   =>  $headers,
                             'name'  => $name,
                             'items' => $items,
+                            'withoutToolbar'    =>  $withoutToolbar,
                         ])
                 </div>
             </div>
