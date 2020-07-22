@@ -73,6 +73,9 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <div class="text-center">
+                                {{ $relation['products']['items']->appends(request()->query())->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

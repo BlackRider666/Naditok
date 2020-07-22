@@ -31,7 +31,7 @@ class ProductGroupCommentController extends Controller
      */
     public function index()
     {
-        $productGroupComments = ProductGroupComment::all();
+        $productGroupComments = ProductGroupComment::paginate(10);
         return $this->dashboardPresenter->getTablePage($productGroupComments);
     }
 

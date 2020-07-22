@@ -7,11 +7,11 @@ namespace App\ProductGroup;
 use App\Brand\Brand;
 use App\Category\Category;
 use App\Core\DashboardPresenter;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductGroupDashboardPresenter
 {
-    public function getTablePage(Collection $product_groups)
+    public function getTablePage(LengthAwarePaginator $product_groups)
     {
         $headers = [
             'title' => 'Title',
@@ -45,7 +45,7 @@ class ProductGroupDashboardPresenter
                     'color' =>  'Color',
                 ],
                 'name'          =>  'products',
-                'items'         =>  $productGroup->products,
+                'items'         =>  $productGroup->products()->paginate(10),
                 'brand_id'      =>  $productGroup->brand->title,
                 'category_id'   =>  $productGroup->category->title,
                 'product_group_id'  =>  $productGroup->getKey(),

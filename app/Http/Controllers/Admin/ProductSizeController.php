@@ -31,7 +31,7 @@ class ProductSizeController extends Controller
      */
     public function index()
     {
-        $productSizes = ProductSize::all();
+        $productSizes = ProductSize::paginate(10);
         return $this->dashboardPresenter->getTablePage($productSizes);
     }
 

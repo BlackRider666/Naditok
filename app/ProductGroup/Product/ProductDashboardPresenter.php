@@ -7,11 +7,11 @@ namespace App\ProductGroup\Product;
 use App\Core\DashboardPresenter;
 use App\Discount\Discount;
 use App\ProductGroup\ProductGroup;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductDashboardPresenter
 {
-    public function getTablePage(Collection $products)
+    public function getTablePage(LengthAwarePaginator $products)
     {
         $headers = [
             'title' => 'Title',
@@ -41,14 +41,14 @@ class ProductDashboardPresenter
                     'thumb'  =>  'Thumb',
                 ],
                 'name'      =>  'product-images',
-                'items'     =>  $product->images,
+                'items'     =>  $product->images()->paginate(10),
             ],
             'sizes'             =>  [
                 'headers'   =>  [
                     'size'  =>  'Sizes',
                 ],
                 'name'      =>  'product-sizes',
-                'items'     =>  $product->sizes,
+                'items'     =>  $product->sizes()->paginate(10),
             ],
             'discount'      => $product->discount,
             'product_id'        =>  $product->getKey(),

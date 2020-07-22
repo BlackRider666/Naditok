@@ -37,7 +37,7 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        $discounts = Discount::all();
+        $discounts = Discount::paginate(10);
         return $this->dashboardPresenter->getTablePage($discounts);
     }
 

@@ -38,5 +38,8 @@
             @endforeach
             </tbody>
         </table>
+        <div class="text-center">
+            {{ $items->appends(request()->query())->links() }}
+        </div>
     </div>
 </div>

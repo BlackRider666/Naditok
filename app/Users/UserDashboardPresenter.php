@@ -3,13 +3,12 @@
 
 namespace App\Users;
 
-use App\Users\User;
 use App\Core\DashboardPresenter;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserDashboardPresenter
 {
-    public function getTablePage(Collection $users)
+    public function getTablePage(LengthAwarePaginator $users)
     {
         $headers = [
             'first_name' => 'First name',

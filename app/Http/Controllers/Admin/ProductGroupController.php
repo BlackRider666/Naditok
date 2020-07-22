@@ -30,7 +30,7 @@ class ProductGroupController extends Controller
      */
     public function index()
     {
-        $productGroups = ProductGroup::all();
+        $productGroups = ProductGroup::paginate(10);
         return $this->dashboardPresenter->getTablePage($productGroups);
     }
 

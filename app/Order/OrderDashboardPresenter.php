@@ -5,11 +5,11 @@ namespace App\Order;
 
 
 use App\Core\DashboardPresenter;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class OrderDashboardPresenter
 {
-    public function getTablePage(Collection $orders)
+    public function getTablePage(LengthAwarePaginator $orders)
     {
         $headers = [
             'user_id'       =>  'User ID',

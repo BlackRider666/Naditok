@@ -6,11 +6,11 @@ namespace App\Discount;
 
 use App\Core\DashboardPresenter;
 use App\ProductGroup\Product\Product;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class DiscountDashboardPresenter
 {
-    public function getTablePage(Collection $discounts)
+    public function getTablePage(LengthAwarePaginator $discounts)
     {
         $headers = [
             'title' => 'Title',

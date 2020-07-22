@@ -31,7 +31,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::all();
+        $brands = Brand::paginate(10);
         return $this->dashboardPresenter->getTablePage($brands);
     }
 

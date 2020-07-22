@@ -6,11 +6,11 @@ namespace App\ProductGroup\ProductGroupComment;
 
 use App\Core\DashboardPresenter;
 use App\ProductGroup\ProductGroup;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductGroupCommentDashboardPresenter
 {
-    public function getTablePage(Collection $comments)
+    public function getTablePage(LengthAwarePaginator $comments)
     {
         $headers = [
             'author'            =>  'Author',

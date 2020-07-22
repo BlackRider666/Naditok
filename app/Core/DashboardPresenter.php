@@ -4,12 +4,12 @@
 namespace App\Core;
 
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class DashboardPresenter
 {
-    public function getTablePage(array $headers, string $name, Collection $items, bool $withoutToolbar = false)
+    public function getTablePage(array $headers, string $name, LengthAwarePaginator $items, bool $withoutToolbar = false)
     {
         return view('components.table-page',[
             'headers'   =>  $headers,

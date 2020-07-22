@@ -5,11 +5,11 @@ namespace App\Brand;
 
 
 use App\Core\DashboardPresenter;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class BrandDashboardPresenter
 {
-    public function getTablePage(Collection $brands)
+    public function getTablePage(LengthAwarePaginator $brands)
     {
         $headers = [
             'title' => 'Title',

@@ -6,10 +6,11 @@ namespace App\Category;
 
 use App\Core\DashboardPresenter;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryDashboardPresenter
 {
-    public function getTablePage(Collection $categories)
+    public function getTablePage(LengthAwarePaginator $categories)
     {
         $headers = [
             'title' => 'Title',
