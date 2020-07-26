@@ -43,6 +43,7 @@ class OrderController extends Controller
                 'price'         =>  $shipment->product->price,
                 'order_id'      =>  $order->getKey(),
             ]);
+            $shipment->delete();
         }
         return response()->json($order,200);
     }
