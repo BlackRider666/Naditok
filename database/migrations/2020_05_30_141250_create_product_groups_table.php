@@ -18,6 +18,7 @@ class CreateProductGroupsTable extends Migration
             $table->string('title');
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('category_id');
+            $table->integer('age');
             $table->text('desc');
             $table->integer('weight')->default(0);
             $table->integer('length')->default(0);

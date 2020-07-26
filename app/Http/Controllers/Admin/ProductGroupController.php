@@ -10,6 +10,7 @@ use App\ProductGroup\ProductGroupDashboardPresenter;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductGroupController extends Controller
@@ -26,11 +27,20 @@ class ProductGroupController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productGroups = ProductGroup::paginate(10);
+        $search =  trim($request->input('search'));
+        if ($search!="") {
+            $productGroups = ProductGroup::where(function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%');
+            })->paginate(10);
+            $productGroups->appends(['search' => $search]);
+        } else {
+            $productGroups = ProductGroup::paginate(10);
+        }
         return $this->dashboardPresenter->getTablePage($productGroups);
     }
 

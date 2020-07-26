@@ -25,11 +25,23 @@ class OrderController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::paginate(10);
+        $search =  trim($request->input('search'));
+        if ($search!="") {
+            $orders = Order::where(function ($query) use ($search) {
+                $query->whereHas('user', function ($sub) use ($search) {
+                    $sub->where('first_name', 'like', '%'.$search.'%')
+                        ->orWhere('last_name', 'like', '%'.$search.'%');
+                });
+            })->paginate(10);
+            $orders->appends(['search' => $search]);
+        } else {
+            $orders = Order::paginate(10);
+        }
         return $this->dashboardPresenter->getTablePage($orders);
     }
 

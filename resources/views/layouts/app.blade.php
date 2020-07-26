@@ -152,6 +152,13 @@
                             <span class="nav-link-text">Orders</span>
                         </a>
                     </li>
+                    <li class="nav-title">Import</li>
+                    <li class="{{request()->is('import/*')|| request()->is('import')?'active':''}}">
+                        <a href="{{route('admin.import.kiddy')}}" title="Kiddy" data-filter-tags="kiddy">
+                            <i class="fal fa-upload"></i>
+                            <span class="nav-link-text">Kiddy</span>
+                        </a>
+                    </li>
                     <!-- sort-alt for upload-product -->
                 </ul>
                 <div class="filter-message js-filter-message bg-success-600"></div>

@@ -42,7 +42,9 @@ Route::name('admin.')->middleware('auth')->group(function (){
     Route::delete('/discount-remove-product/{product_id}','Admin\DiscountController@removeProduct')->name('discounts.remove-product');
     Route::resource('orders','Admin\OrderController')->except([
         'create', 'store', 'destroy'
-    ]);;
+    ]);
+    Route::get('/import/kiddy','Admin\ImportController@kiddy')->name('import.kiddy');
+    Route::post('import/kiddy/brand','Admin\ImportController@kiddyBrand')->name('import.kiddy.brand');
 });
 Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login','Auth\LoginController@login');

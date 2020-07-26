@@ -28,11 +28,21 @@ class UsersController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
+        $search =  trim($request->input('search'));
+        if ($search!="") {
+            $users = User::where(function ($query) use ($search) {
+                $query->where('first_name', 'like', '%'.$search.'%')
+                    ->orWhere('last_name', 'like', '%'.$search.'%');
+            })->paginate(10);
+            $users->appends(['search' => $search]);
+        } else {
+            $users = User::paginate(10);
+        }
         return $this->dashboardPresenter->getTablePage($users);
     }
 

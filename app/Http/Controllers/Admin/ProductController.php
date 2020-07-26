@@ -29,11 +29,20 @@ class ProductController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(10);
+        $search =  trim($request->input('search'));
+        if ($search!="") {
+            $products = Product::where(function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%');
+            })->paginate(10);
+            $products->appends(['search' => $search]);
+        } else {
+            $products = Product::paginate(10);
+        }
         return $this->dashboardPresenter->getTablePage($products);
     }
 

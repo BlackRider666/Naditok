@@ -32,6 +32,7 @@ class ProductGroupDashboardPresenter
             'length'        =>  'Length',
             'width'         =>  'Width',
             'height'        =>  'Height',
+            'age'           =>  'Age',
         ];
         return view('pages.group_show',[
             'header'    =>  $header,
@@ -49,6 +50,7 @@ class ProductGroupDashboardPresenter
                 'brand_id'      =>  $productGroup->brand->title,
                 'category_id'   =>  $productGroup->category->title,
                 'product_group_id'  =>  $productGroup->getKey(),
+                'age'           =>  $productGroup->age_string,
             ],
         ]);
     }
@@ -59,8 +61,42 @@ class ProductGroupDashboardPresenter
         unset($casts['id']);
         $name = 'product-groups';
         $options = [
-            'brand_id'    =>  Brand::all()->toArray(),
-            'category_id'    =>  Category::all()->toArray(),
+            'brand_id'      =>  Brand::all()->toArray(),
+            'category_id'   =>  Category::all()->toArray(),
+            'age'           =>  [
+                [
+                    'id'    => 0,
+                    'title' => 'Не указано',
+                ],
+                [
+                    'id'    => 1,
+                    'title' => 'От 0 до 1 года',
+                ],
+                [
+                    'id'    => 2,
+                    'title' => 'От 1 до 2 лет',
+                ],
+                [
+                    'id'    => 3,
+                    'title' => 'От 2 до 3 лет',
+                ],
+                [
+                    'id'    => 4,
+                    'title' => 'От 3 до 5 лет',
+                ],
+                [
+                    'id'    => 5,
+                    'title' => 'От 5 до 7 лет',
+                ],
+                [
+                    'id'    => 6,
+                    'title' => 'От 7 до 12 лет',
+                ],
+                [
+                    'id'    => 7,
+                    'title' => 'Старше 12 лет',
+                ],
+            ],
         ];
         return (new DashboardPresenter())->getCreatePage($casts,$name,$options);
     }

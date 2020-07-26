@@ -11,6 +11,7 @@ use App\Http\Requests\CategoryUpdateRequest;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -28,11 +29,20 @@ class CategoryController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(10);
+        $search =  trim($request->input('search'));
+        if ($search!="") {
+            $categories = Category::where(function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%');
+            })->paginate(10);
+            $categories->appends(['search' => $search]);
+        } else {
+            $categories = Category::paginate(10);
+        }
         return $this->dashboardPresenter->getTablePage($categories);
     }
 

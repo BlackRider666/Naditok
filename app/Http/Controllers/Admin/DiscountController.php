@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DiscountController extends Controller
@@ -33,11 +34,20 @@ class DiscountController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $discounts = Discount::paginate(10);
+        $search =  trim($request->input('search'));
+        if ($search!="") {
+            $discounts = Discount::where(function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%');
+            })->paginate(10);
+            $discounts->appends(['search' => $search]);
+        } else {
+            $discounts = Discount::paginate(10);
+        }
         return $this->dashboardPresenter->getTablePage($discounts);
     }
 

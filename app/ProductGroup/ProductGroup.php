@@ -24,6 +24,7 @@ class ProductGroup extends Model
         'length',
         'width',
         'height',
+        'age',
     ];
 
     protected $casts = [
@@ -35,6 +36,7 @@ class ProductGroup extends Model
         'length'        =>  'integer',
         'width'         =>  'integer',
         'height'        =>  'integer',
+        'age'           =>  'select',
     ];
 
     protected $appends = [
@@ -42,6 +44,7 @@ class ProductGroup extends Model
         'brand_title',
         'comment_count',
         'comment_average_rating',
+        'age_string',
     ];
     /**
      * @return HasMany
@@ -75,22 +78,60 @@ class ProductGroup extends Model
         return $this->hasMany(ProductGroupComment::class);
     }
 
+    /**
+     * @return string
+     */
     public function getCategoryTitleAttribute(): string
     {
         return $this->category->title;
     }
 
+    /**
+     * @return string
+     */
     public function getBrandTitleAttribute(): string
     {
         return $this->brand->title;
     }
+
+    /**
+     * @return mixed
+     */
     public function getCommentCountAttribute()
     {
         return $this->comments->count();
     }
+
+    /**
+     * @return mixed
+     */
     public function getCommentAverageRatingAttribute()
     {
         return $this->comments->average('rating');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAgeStringAttribute()
+    {
+        if ($this->age === 1) {
+            return 'От 0 до 1 года';
+        } elseif ($this->age === 2) {
+            return 'От 1 до 2 лет';
+        } elseif ($this->age === 3) {
+            return 'От 2 до 3 лет';
+        } elseif ($this->age === 4) {
+            return 'От 3 до 5 лет';
+        } elseif ($this->age === 5) {
+            return 'От 5 до 7 лет';
+        } elseif ($this->age === 6) {
+            return 'От 7 до 12 лет';
+        } elseif ($this->age === 7) {
+            return 'Старше 12 лет';
+        } else {
+            return 'Не указано';
+        }
     }
 
 }

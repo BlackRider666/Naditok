@@ -27,11 +27,20 @@ class ProductGroupCommentController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productGroupComments = ProductGroupComment::paginate(10);
+        $search =  trim($request->input('search'));
+        if ($search!="") {
+            $productGroupComments = ProductGroupComment::where(function ($query) use ($search) {
+                $query->where('author', 'like', '%'.$search.'%');
+            })->paginate(10);
+            $productGroupComments->appends(['search' => $search]);
+        } else {
+            $productGroupComments = ProductGroupComment::paginate(10);
+        }
         return $this->dashboardPresenter->getTablePage($productGroupComments);
     }
 

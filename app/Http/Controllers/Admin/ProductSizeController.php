@@ -27,11 +27,20 @@ class ProductSizeController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productSizes = ProductSize::paginate(10);
+        $search =  trim($request->input('search'));
+        if ($search!="") {
+            $productSizes = ProductSize::where(function ($query) use ($search) {
+                $query->where('size', 'like', '%'.$search.'%');
+            })->paginate(10);
+            $productSizes->appends(['search' => $search]);
+        } else {
+            $productSizes = ProductSize::paginate(10);
+        }
         return $this->dashboardPresenter->getTablePage($productSizes);
     }
 

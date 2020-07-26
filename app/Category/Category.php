@@ -14,6 +14,7 @@ class Category extends Model
         'title',
         'parent_id',
         'thumb',
+        'out_id',
     ];
 
     protected $casts = [

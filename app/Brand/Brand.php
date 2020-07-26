@@ -12,6 +12,7 @@ class Brand extends Model
     protected $fillable = [
         'title',
         'thumb',
+        'out_id',
     ];
 
     protected $casts = [

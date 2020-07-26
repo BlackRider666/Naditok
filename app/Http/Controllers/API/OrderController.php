@@ -40,7 +40,7 @@ class OrderController extends Controller
             OrderItem::create([
                 'product_id'    =>  $shipment->product_id,
                 'quantity'      =>  $shipment->quantity,
-                'price'         =>  $shipment->price,
+                'price'         =>  $shipment->product->price,
                 'order_id'      =>  $order->getKey(),
             ]);
         }

@@ -32,6 +32,7 @@ class ProductGroupRequest extends FormRequest
             'length'        =>  'integer',
             'width'         =>  'integer',
             'height'        =>  'integer',
+            'age'           =>  'required|int',
         ];
     }
 }

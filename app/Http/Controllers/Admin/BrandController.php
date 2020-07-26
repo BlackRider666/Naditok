@@ -27,11 +27,20 @@ class BrandController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $brands = Brand::paginate(10);
+        $search =  trim($request->input('search'));
+        if ($search!="") {
+            $brands = Brand::where(function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%');
+            })->paginate(10);
+            $brands->appends(['search' => $search]);
+        } else {
+            $brands = Brand::paginate(10);
+        }
         return $this->dashboardPresenter->getTablePage($brands);
     }
 
