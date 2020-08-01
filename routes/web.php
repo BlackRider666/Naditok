@@ -45,6 +45,11 @@ Route::name('admin.')->middleware('auth')->group(function (){
     ]);
     Route::get('/import/kiddy','Admin\ImportController@kiddy')->name('import.kiddy');
     Route::post('import/kiddy/brand','Admin\ImportController@kiddyBrand')->name('import.kiddy.brand');
+    Route::post('import/kiddy/category','Admin\ImportController@kiddyCategory')->name('import.kiddy.category');
+    Route::post('import/kiddy/product','Admin\ImportController@kiddyProduct')->name('import.kiddy.product');
+    Route::get('test', function () {
+        return ini_get('post_max_size');
+    });
 });
 Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login','Auth\LoginController@login');

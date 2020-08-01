@@ -23,11 +23,14 @@ services:
       - db
 
   php:
-    image: php:7.2-fpm
+    image: php:7.4-fpm
     container_name: "naditok-php"
     working_dir: "/var/www/"
     volumes:
       - "./:/var/www/"
+      - "./docker/php/custom.php.ini:/usr/local/etc/php/custom.d/custom.ini"
+    environment:
+      PHP_INI_SCAN_DIR: "/usr/local/etc/php/custom.d:/usr/local/etc/php/conf.d"
     ports:
       - "9000:9000"
     depends_on:

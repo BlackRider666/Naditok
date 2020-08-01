@@ -15,12 +15,12 @@
                     'value' =>  old($key),
                     ])
             @endif
+            @error($key)
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
-        @error($key)
-        <span class="invalid-feedback">
-                    {{ $message }}
-                </span>
-        @enderror
     @else
         <div class="form-group">
             <div class="custom-control custom-checkbox">
