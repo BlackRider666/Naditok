@@ -77,6 +77,7 @@ class ImportController extends Controller
 
     public function kiddyProduct(KiddyProductRequest $request)
     {
+        phpinfo();
         if ($request->file('file_product')->getClientOriginalName() !== "import_products.csv") {
             return redirect()->back()->withErrors([
                 'file_product'  => 'Is not a product'
