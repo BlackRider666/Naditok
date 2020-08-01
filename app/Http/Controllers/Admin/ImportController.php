@@ -82,8 +82,8 @@ class ImportController extends Controller
                 'file_product'  => 'Is not a product'
             ]);
         }
-        dd($request->file('file_product'));
         $file = file_get_contents($request->file('file_product'));
+        dd($file);
         $delimiter = ',';
         $rows = explode(PHP_EOL, $file);
         $data = [];
