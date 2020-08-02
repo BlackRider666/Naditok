@@ -51,6 +51,10 @@ class StorageManager
         $this->getLocalPublicDisk()->delete($type.'/'.$file);
     }
 
+    /**
+     * @param string $avatar
+     * @return string
+     */
     public function savePictureFromUrl(string $avatar): string
     {
         $file = file_get_contents($avatar);
@@ -59,6 +63,24 @@ class StorageManager
             $this->getLocalPublicDisk()->makeDirectory('user_avatar');
         }
         $this->getLocalPublicDisk()->put('user_avatar/' . $filename, $file);
+        return $filename;
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @param string $type
+     * @return string
+     */
+    public function saveFile(UploadedFile $file, string $type): string
+    {
+        $filename = uniqid(time(), true) . '.' . $file->getClientOriginalExtension();
+        if (!$this->getLocalPublicDisk()->exists($type)) {
+            $this->getLocalPublicDisk()->makeDirectory($type);
+        }
+        $this->getLocalPublicDisk()->putFileAs(
+            $type , $file, $filename
+        );
+
         return $filename;
     }
 }

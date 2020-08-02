@@ -25,6 +25,7 @@ class ProductGroup extends Model
         'width',
         'height',
         'age',
+        'out_id',
     ];
 
     protected $casts = [

@@ -15,7 +15,15 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"><i class="fal fa-times"></i></span>
                                 </button>
-                                <strong>Well Done!</strong> {{ session('done') }}
+                                <strong>Выполнено!</strong> {{ session('done') }}
+                            </div>
+                        @endif
+                        @if(session('alert'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                </button>
+                                <strong>Ошибка!</strong> {{ session('alert') }}
                             </div>
                         @endif
                         <h3>Update Brands</h3>
@@ -59,27 +67,48 @@
                                 'name'      => 'Categories',
                             ])
                         </form>
-                            <hr>
-                            <h3>Update Product</h3>
-                            <form action="{{route('admin.import.kiddy.product')}}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="file" class="form-label">File (.csv)</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input {{$errors->has('file_product') ? 'is-invalid':''}}" id="file" name="file_product" required>
-                                        <label class="custom-file-label" for="customFile">Choose file</label>
-                                        @error('file_product')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
+                        <hr>
+                        <h3>Update Product</h3>
+                        <form action="{{route('admin.import.kiddy.product')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="file" class="form-label">File (.csv)</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input {{$errors->has('file_product') ? 'is-invalid':''}}" id="file" name="file_product" required>
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                    @error('file_product')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
                                     </div>
+                                    @enderror
                                 </div>
-                                @include('components.inputs.submit', [
-                                    'function'  => 'Import',
-                                    'name'      => 'Products',
-                                ])
-                            </form>
+                            </div>
+                            @include('components.inputs.submit', [
+                                'function'  => 'Import',
+                                'name'      => 'Products',
+                            ])
+                        </form>
+                        <hr>
+                        <h3>Update Photos</h3>
+                        <form action="{{route('admin.import.kiddy.photos')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="file" class="form-label">File (.zip)</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input {{$errors->has('photos') ? 'is-invalid':''}}" id="file" name="photos" required>
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                    @error('photos')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            @include('components.inputs.submit', [
+                                'function'  => 'Import',
+                                'name'      => 'Photos',
+                            ])
+                        </form>
                     </div>
                 </div>
             </div>

@@ -6,5 +6,5 @@ chmod +x composer
 php -r "unlink('composer-setup.php');"
 echo "Finished"
 
-php composer install
-php artisan migrate:fresh --seed
+#php composer install
+#php artisan migrate:fresh --seed

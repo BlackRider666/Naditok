@@ -4,19 +4,38 @@ namespace App\Http\Controllers\Admin;
 
 use App\Brand\Brand;
 use App\Category\Category;
+use App\Core\StorageManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Import\Kiddy\KiddyBrandRequest;
 use App\Http\Requests\Import\Kiddy\KiddyCategoryRequest;
+use App\Http\Requests\Import\Kiddy\KiddyPhotoRequest;
 use App\Http\Requests\Import\Kiddy\KiddyProductRequest;
+use App\Jobs\ImportKiddyProducts;
+use App\ProductGroup\Product\Product;
+use App\ProductGroup\Product\ProductSize\ProductSize;
+use App\ProductGroup\ProductGroup;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
+use Illuminate\View\View;
+use Intervention\Image\Facades\Image;
 
 class ImportController extends Controller
 {
+    /**
+     * @return Application|Factory|View
+     */
     public function kiddy()
     {
         return view('pages.import.kiddy');
     }
 
-    public function kiddyBrand(KiddyBrandRequest $request)
+    /**
+     * @param KiddyBrandRequest $request
+     * @return RedirectResponse
+     */
+    public function kiddyBrand(KiddyBrandRequest $request): RedirectResponse
     {
         if ($request->file('file_brand')->getClientOriginalName() !== "import_brands.csv") {
             return redirect()->back()->withErrors([
@@ -42,9 +61,14 @@ class ImportController extends Controller
                 'thumb' =>  '',
             ]);
         }
-        return redirect()->route('admin.import.kiddy')->with('done','Brands updated!');
+        return redirect()->route('admin.import.kiddy')->with('done','Бренды обновлены!');
     }
-    public function kiddyCategory(KiddyCategoryRequest $request)
+
+    /**
+     * @param KiddyCategoryRequest $request
+     * @return RedirectResponse
+     */
+    public function kiddyCategory(KiddyCategoryRequest $request): RedirectResponse
     {
         if ($request->file('file_category')->getClientOriginalName() !== "import_types.csv") {
             return redirect()->back()->withErrors([
@@ -64,7 +88,7 @@ class ImportController extends Controller
         unset($data[count($data)]);
         foreach ($data as $cat) {
             if (substr(substr(trim($cat[1]),1),0,-1) !== '') {
-                $cata = Category::updateOrCreate([
+                Category::updateOrCreate([
                     'out_id' =>  $cat[0],
                 ],[
                     'title'     =>  trim(substr(substr(trim(isset($cat[2])?$cat[1].$cat[2]:$cat[1]),1),0,-1),'\xD0'),
@@ -72,42 +96,36 @@ class ImportController extends Controller
                 ]);
             }
         }
-        return redirect()->route('admin.import.kiddy')->with('done','Categories updated!');
+        return redirect()->route('admin.import.kiddy')->with('done','Категории обновлены!');
     }
 
-    public function kiddyProduct(KiddyProductRequest $request)
+    /**
+     * @param KiddyProductRequest $request
+     * @return RedirectResponse
+     */
+    public function kiddyProduct(KiddyProductRequest $request): RedirectResponse
     {
-        phpinfo();
         if ($request->file('file_product')->getClientOriginalName() !== "import_products.csv") {
             return redirect()->back()->withErrors([
                 'file_product'  => 'Is not a product'
             ]);
         }
-        $file = file_get_contents($request->file('file_product'));
-        dd($file);
-        $delimiter = ',';
-        $rows = explode(PHP_EOL, $file);
-        $data = [];
+        $path = (new StorageManager())->saveFile($request->file('file_product'),'kiddy');
+        ImportKiddyProducts::dispatch($path);
+        return redirect()->route('admin.import.kiddy')->with('done','Обновление продуктов поставлено в очередь!');
+    }
 
-        foreach ($rows as $row)
-        {
-            $data[] = explode($delimiter, $row);
+    /**
+     * @param KiddyPhotoRequest $request
+     * @return RedirectResponse
+     */
+    public function kiddyPhotos(KiddyPhotoRequest $request): RedirectResponse
+    {
+        if ($request->file('file_product')->getClientOriginalName() !== "Изображения.zip") {
+            return redirect()->back()->withErrors([
+                'file_product'  => 'Is not a photos'
+            ]);
         }
-        dd($data);
-        unset($data[0]);
-        unset($data[count($data)]);
-        dd($data);
-        foreach ($data as $cat) {
-            if (substr(substr(trim($cat[1]),1),0,-1) !== '') {
-                $cata = Category::updateOrCreate([
-                    'out_id' =>  $cat[0],
-                ],[
-                    'title'     =>  trim(substr(substr(trim(isset($cat[2])?$cat[1].$cat[2]:$cat[1]),1),0,-1),'\xD0'),
-                    'parent_id' =>  10,
-                ]);
-                logs($cata->__toString());
-            }
-        }
-        return redirect()->route('admin.import.kiddy')->with('done','Products updated!');
+        dd($request->file('photos'));
     }
 }

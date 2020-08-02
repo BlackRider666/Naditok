@@ -8,6 +8,7 @@ use App\Users\User;
 use App\Users\UserDashboardPresenter;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
@@ -71,6 +72,7 @@ class UsersController extends Controller
             $data['avatar'] = (new StorageManager())
                 ->savePicture($request->file('avatar'),'user_avatar',400);
         }
+        $data['password'] = Hash::make($data['password']);
         User::create($data);
         return redirect()->route('admin.users.index');
     }
