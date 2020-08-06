@@ -50,7 +50,7 @@ class CategoryDashboardPresenter
             'thumb',
         ];
         $options = [
-            'for_select'    =>  Category::where('id','!=',$category->getKey())->get(),
+            'parent_id'    =>  Category::where('id','!=',$category->getKey())->get(),
         ];
         return (new DashboardPresenter())->getEditPage($category,$name,$fields, $options);
     }

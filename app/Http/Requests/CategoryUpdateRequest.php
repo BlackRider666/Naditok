@@ -25,7 +25,7 @@ class CategoryUpdateRequest extends FormRequest
     {
         return [
             'title'     =>  'required|string|max:255',
-            'parent_id' =>  'int|exists:categories,id',
+            'parent_id' =>  'int',
             'thumb'     =>  'image',
         ];
     }

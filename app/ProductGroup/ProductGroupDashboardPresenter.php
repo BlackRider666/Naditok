@@ -114,6 +114,10 @@ class ProductGroupDashboardPresenter
             'width',
             'height',
         ];
-        return (new DashboardPresenter())->getEditPage($productGroup,$name,$fields);
+        $options = [
+            'category_id'    =>  Category::where('id','!=',0)->get(),
+            'brand_id'       => Brand::all(),
+        ];
+        return (new DashboardPresenter())->getEditPage($productGroup,$name,$fields,$options);
     }
 }
