@@ -27,7 +27,7 @@ class CategoryUpdateRequest extends FormRequest
             'title'     =>  'required|string|max:255',
             'parent_id' =>  'int',
             'thumb'     =>  'image',
-            'desc'      =>  'string',
+            'desc'      =>  'nullable|string',
         ];
     }
 }
