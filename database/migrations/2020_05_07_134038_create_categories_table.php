@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('thumb')->default('');
             $table->bigInteger('parent_id')->nullable();
             $table->string('out_id')->default('');
+            $table->text('desc')->nullable();
             $table->timestamps();
         });
     }

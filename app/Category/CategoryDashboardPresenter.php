@@ -26,6 +26,7 @@ class CategoryDashboardPresenter
             'title'    =>  'Title',
             'parent_id'     =>  'Parent id',
             'thumb_url'     =>  'Thumb',
+            'desc'          =>  'Desc'
         ];
         return (new DashboardPresenter())->getShowPage($header, $category, $fields);
     }
@@ -48,6 +49,7 @@ class CategoryDashboardPresenter
             'title',
             'parent_id',
             'thumb',
+            'desc',
         ];
         $options = [
             'parent_id'    =>  Category::where('id','!=',$category->getKey())->get(),

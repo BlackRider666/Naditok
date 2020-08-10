@@ -15,12 +15,14 @@ class Category extends Model
         'parent_id',
         'thumb',
         'out_id',
+        'desc',
     ];
 
     protected $casts = [
         'title'       =>  'string',
         'parent_id'   =>  'select',
         'thumb'       =>  'image',
+        'desc'        =>  'text',
     ];
 
     protected $appends = [
