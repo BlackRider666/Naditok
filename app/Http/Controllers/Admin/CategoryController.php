@@ -37,7 +37,8 @@ class CategoryController extends Controller
         $search =  trim($request->input('search'));
         if ($search!="") {
             $categories = Category::where(function ($query) use ($search) {
-                $query->where('title', 'like', '%'.$search.'%');
+                $query->where('title_ru', 'like', '%'.$search.'%');
+                $query->where('title_ua', 'like', '%'.$search.'%');
             })->paginate(10);
             $categories->appends(['search' => $search]);
         } else {

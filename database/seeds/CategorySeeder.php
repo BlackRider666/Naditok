@@ -13,74 +13,77 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::create([
-            'title' =>  'Одежда и обувь',
+            'title_ru' =>  'Одежда и обувь',
+            'slug'  =>  'odezhda-i-obuv'
         ]);
         Category::create([
-            'title'     =>  'Игрушки',
+            'title_ru'     =>  'Игрушки',
+            'slug'      =>  'igrushki'
         ]);
         Category::create([
-            'title'     =>  'Детская комната',
+            'title_ru'     =>  'Детская комната',
+            'slug'      =>  'detskaya-komnata'
         ]);
         Category::create([
-            'title'     =>  'Коляски и автокресла',
+            'title_ru'     =>  'Коляски и автокресла',
+            'slug'      =>  'detskie-kolyaski'
         ]);
         Category::create([
-            'title'     =>  'Все для кормления',
+            'title_ru'     =>  'Все для кормления',
+            'slug'      =>  'vse-dlya-kormleniya'
         ]);
         Category::create([
-            'title'     =>  'Уход и гигиена',
+            'title_ru'     =>  'Уход и гигиена',
+            'slug'      =>  'uhod-i-gigiena'
         ]);
         Category::create([
-            'title'     =>  'Детский транспорт',
+            'title_ru'     =>  'Детский транспорт',
+            'slug'      =>  'detskij-transport'
         ]);
         Category::create([
-            'title'     =>  'Детские аксессуары',
+            'title_ru'     =>  'Детские аксессуары',
+            'slug'      =>  'detskie-aksesuary'
         ]);
 
         Category::create([
-            'title'     =>  'Test',
+            'title_ru'     =>  'Test',
             'parent_id' =>  1,
+            'slug'      =>  'test_1'
         ]);
         Category::create([
-            'title'     =>  'Test',
+            'title_ru'     =>  'Test',
             'parent_id' =>  2,
+            'slug'      =>  'test_2'
         ]);
         Category::create([
-            'title'     =>  'Test',
+            'title_ru'     =>  'Test',
             'parent_id' =>  3,
+            'slug'      =>  'test_3'
         ]);
         Category::create([
-            'title'     =>  'Test',
+            'title_ru'     =>  'Test',
             'parent_id' =>  4,
+            'slug'      =>  'test_4'
         ]);
         Category::create([
-            'title'     =>  'Test',
+            'title_ru'     =>  'Test',
             'parent_id' =>  5,
+            'slug'      =>  'test_5'
         ]);
         Category::create([
-            'title'     =>  'Test',
+            'title_ru'     =>  'Test',
             'parent_id' =>  6,
+            'slug'      =>  'test_6'
         ]);
         Category::create([
-            'title'     =>  'Test',
+            'title_ru'     =>  'Test',
             'parent_id' =>  7,
+            'slug'      =>  'test_7'
         ]);
         Category::create([
-            'title'     =>  'Test',
+            'title_ru'     =>  'Test',
             'parent_id' =>  8,
-        ]);
-
-        Category::create([
-            'title'     =>  'Test',
-            'parent_id' =>  9,
-        ]);
-        Category::create([
-            'title'     =>  'Test',
-            'parent_id' =>  10,
-        ]);
-        Category::create([
-            'title'     =>  'Test',
-            'parent_id' =>  11,
+            'slug'      =>  'test_8'
         ]);
     }
 }

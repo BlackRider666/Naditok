@@ -24,10 +24,13 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'     =>  'required|string|max:255',
-            'parent_id' =>  'int|exists:categories,id',
-            'thumb'     =>  'required|image',
-            'desc'      =>  'nullable|string',
+            'title_ru'      =>  'required|string|max:255',
+            'title_ua'      =>  'string|max:255',
+            'parent_id'     =>  'int|exists:categories,id',
+            'thumb'         =>  'required|image',
+            'desc_ru'       =>  'nullable|string',
+            'desc_ua'       =>  'nullable|string',
+            'slug'          =>  'required|string|max:255|unique',
         ];
     }
 }

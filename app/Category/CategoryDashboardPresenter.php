@@ -13,7 +13,7 @@ class CategoryDashboardPresenter
     public function getTablePage(LengthAwarePaginator $categories)
     {
         $headers = [
-            'title' => 'Title',
+            'title_ru' => 'Title RU',
         ];
         $name = 'categories';
         return (new DashboardPresenter())->getTablePage($headers, $name, $categories);
@@ -21,12 +21,15 @@ class CategoryDashboardPresenter
 
     public function getShowPage(Category $category)
     {
-        $header = $category->title;
+        $header = $category->title_ru;
         $fields = [
-            'title'    =>  'Title',
+            'title_ru'    =>  'Title RU',
+            'title_ua'    =>  'Title UA',
             'parent_id'     =>  'Parent id',
             'thumb_url'     =>  'Thumb',
-            'desc'          =>  'Desc'
+            'desc_ru'       =>  'Desc RU',
+            'desc_ua'       =>  'Desc RU',
+            'slug'          =>  'URL'
         ];
         return (new DashboardPresenter())->getShowPage($header, $category, $fields);
     }
@@ -46,10 +49,13 @@ class CategoryDashboardPresenter
     {
         $name = 'categories';
         $fields = [
-            'title',
+            'title_ru',
+            'title_ua',
             'parent_id',
-            'thumb',
-            'desc',
+            'thumb_url',
+            'desc_ru',
+            'desc_ua',
+            'slug',
         ];
         $options = [
             'parent_id'    =>  Category::where('id','!=',$category->getKey())->get(),

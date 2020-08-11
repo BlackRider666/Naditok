@@ -11,18 +11,24 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-        'title',
+        'title_ru',
+        'title_ua',
         'parent_id',
         'thumb',
         'out_id',
-        'desc',
+        'desc_ru',
+        'desc_ua',
+        'slug',
     ];
 
     protected $casts = [
-        'title'       =>  'string',
-        'parent_id'   =>  'select',
-        'thumb'       =>  'image',
-        'desc'        =>  'text',
+        'title_ru'      =>  'string',
+        'title_ua'      =>  'string',
+        'parent_id'     =>  'select',
+        'thumb'         =>  'image',
+        'desc_ru'       =>  'text',
+        'desc_ua'       =>  'text',
+        'slug'          =>  'string',
     ];
 
     protected $appends = [
