@@ -52,7 +52,7 @@ class CategoryDashboardPresenter
             'title_ru',
             'title_ua',
             'parent_id',
-            'thumb_url',
+            'thumb',
             'desc_ru',
             'desc_ua',
             'slug',

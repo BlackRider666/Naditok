@@ -25,12 +25,12 @@ class CategoryUpdateRequest extends FormRequest
     {
         return [
             'title_ru'      =>  'required|string|max:255',
-            'title_ua'      =>  'required|string|max:255',
+            'title_ua'      =>  'nullable|string|max:255',
             'parent_id'     =>  'int',
             'thumb'         =>  'image',
             'desc_ru'       =>  'nullable|string',
             'desc_ua'       =>  'nullable|string',
-            'slug'          =>  'required|string|max:255',
+            'slug'          =>  'required|string|max:255|unique:categories,slug,'.$this->category->id,
         ];
     }
 }
