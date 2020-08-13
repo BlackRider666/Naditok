@@ -22,7 +22,7 @@ class CreateCategoriesTable extends Migration
             $table->string('out_id')->default('');
             $table->text('desc_ru')->nullable();
             $table->text('desc_ua')->nullable();
-            $table->string('slug')->unique();
+            $table->string('slug')->unique()->nullable();
             $table->timestamps();
         });
     }
