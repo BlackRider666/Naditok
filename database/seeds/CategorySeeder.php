@@ -470,5 +470,302 @@ class CategorySeeder extends Seeder
             'title_ru'     =>  'Тапочки',
             'parent_id' =>  25,
         ]);
+
+        Category::create([
+            'title_ru'     =>  'Боди с длинным рукавом',
+            'parent_id' =>  32,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Боди с коротким рукавом',
+            'parent_id' =>  32,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Боди утепленный',
+            'parent_id' =>  32,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Боди-майка',
+            'parent_id' =>  32,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Человечек из интерлока',
+            'parent_id' =>  34,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Человечек утепленный',
+            'parent_id' =>  34,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Человечек с шапочкой',
+            'parent_id' =>  34,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Человечек из кулира',
+            'parent_id' =>  34,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Человечек из велюра',
+            'parent_id' =>  34,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Человечек из ткани с начесом',
+            'parent_id' =>  34,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Ползунки из интерлока',
+            'parent_id' =>  35,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Ползунки из кулира',
+            'parent_id' =>  35,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Ползунки из ткани с начесом',
+            'parent_id' =>  35,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Распашонка из интерлока',
+            'parent_id' =>  36,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Распашонка из кулира',
+            'parent_id' =>  36,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Распашонка из ткани с начесом',
+            'parent_id' =>  36,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Носки хлопковые',
+            'parent_id' =>  50,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Носки махровые',
+            'parent_id' =>  50,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Носки ажурные',
+            'parent_id' =>  50,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Носки шерстяные',
+            'parent_id' =>  50,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Набор носок',
+            'parent_id' =>  50,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Носки-чешки',
+            'parent_id' =>  50,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Носки-тапочки',
+            'parent_id' =>  50,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Колготки хлопковые',
+            'parent_id' =>  52,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Колготки махровые',
+            'parent_id' =>  52,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Колготки ажурные',
+            'parent_id' =>  52,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Комплекты',
+            'parent_id' =>  14,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Комплект для малыша',
+            'parent_id' =>  137,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Утепленный комплект',
+            'parent_id' =>  137,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Комплект с штанами',
+            'parent_id' =>  137,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Комплект с шортами,бриджами',
+            'parent_id' =>  137,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Комплект с юбкой',
+            'parent_id' =>  137,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Комплект с леггинсами',
+            'parent_id' =>  137,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Крестильный комплект',
+            'parent_id' =>  53,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Крестильное платье',
+            'parent_id' =>  53,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Крыжма',
+            'parent_id' =>  53,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Полотенце для крещения',
+            'parent_id' =>  53,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Комплект для малыша',
+            'parent_id' =>  54,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Нарядное платье',
+            'parent_id' =>  54,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Конверты в роддом',
+            'parent_id' =>  54,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Шапка',
+            'parent_id' =>  55,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Панамка',
+            'parent_id' =>  55,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Бейс',
+            'parent_id' =>  55,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Комплект шапка и шарф',
+            'parent_id' =>  55,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Комплект шапка и хомут',
+            'parent_id' =>  55,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Повязка',
+            'parent_id' =>  55,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Манишка',
+            'parent_id' =>  55,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Шарф',
+            'parent_id' =>  55,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Хомут',
+            'parent_id' =>  55,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Шлем',
+            'parent_id' =>  55,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Нарядное платье',
+            'parent_id' =>  62,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Трикотажное платье',
+            'parent_id' =>  62,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Носки хлопковые',
+            'parent_id' =>  67,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Носки махровые',
+            'parent_id' =>  67,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Носки ажурные',
+            'parent_id' =>  67,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Носки шерстяные',
+            'parent_id' =>  67,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Набор носок',
+            'parent_id' =>  67,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Носки-чешки',
+            'parent_id' =>  67,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Носки-тапочки',
+            'parent_id' =>  67,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Леггинсы трикотажные',
+            'parent_id' =>  68,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Леггинсы утепленные',
+            'parent_id' =>  68,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Колготки хлопковые',
+            'parent_id' =>  69,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Колготки махровые',
+            'parent_id' =>  69,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Колготки ажурные',
+            'parent_id' =>  69,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Кальсоны',
+            'parent_id' =>  69,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Майка и трусики',
+            'parent_id' =>  89,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Термобелье',
+            'parent_id' =>  89,
+        ]);
+
+        Category::create([
+            'title_ru'     =>  'Пижама с длинным рукавом',
+            'parent_id' =>  90,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Пижама с коротким рукавом',
+            'parent_id' =>  90,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Ночная рубашка',
+            'parent_id' =>  90,
+        ]);
     }
 }
