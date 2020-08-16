@@ -49,6 +49,11 @@ class ImportTorgSoftProducts implements ShouldQueue
         {
             $data[] = explode($delimiter, $row);
         }
+        $conn_id = ftp_connect(env('FTP_HOST'));
+        ftp_login($conn_id,env('FTP_USER'), env('FTP_PASS'));
+        ftp_pasv($conn_id, true);
+        $path = '/img/';
+        $photo = ftp_nlist($conn_id,$path);
         foreach ($data as $product) {
             if (isset($product[11])) {
                 $brand = Brand::firstOrCreate([
@@ -94,7 +99,7 @@ class ImportTorgSoftProducts implements ShouldQueue
                     'product_id'    => $prod->getKey(),
                     'size'          => substr(substr(trim($product[8]),1),0,-1)
                 ]);
-                if (in_array($path.$product[0].'.jpeg',$data))
+                if (in_array($path.$product[0].'.jpeg',$photo))
                 {
                     $h = fopen('php://temp', 'r+');
                     ftp_fget($conn_id, $h, $path.$product[0].'.jpeg', FTP_BINARY);
@@ -110,7 +115,7 @@ class ImportTorgSoftProducts implements ShouldQueue
                         'product_id'    =>  $prod->getKey(),
                         'thumb'         =>  $filename,
                     ]);
-                } elseif (in_array($path.$product[0].'.jpg',$data)) {
+                } elseif (in_array($path.$product[0].'.jpg',$photo)) {
                     $h = fopen('php://temp', 'r+');
                     ftp_fget($conn_id, $h, $path.$product[0].'.jpg', FTP_BINARY);
                     $fstats = fstat($h);
