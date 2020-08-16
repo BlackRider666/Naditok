@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Brand\Brand;
 use App\Category\Category;
+use App\Category\CategoryImport\CategoryImport;
 use App\Core\StorageManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Import\Kiddy\KiddyBrandRequest;
@@ -12,6 +13,7 @@ use App\Http\Requests\Import\Kiddy\KiddyPhotoRequest;
 use App\Http\Requests\Import\Kiddy\KiddyProductRequest;
 use App\Jobs\ImportKiddyProducts;
 use App\ProductGroup\Product\Product;
+use App\ProductGroup\Product\ProductImage\ProductImage;
 use App\ProductGroup\Product\ProductSize\ProductSize;
 use App\ProductGroup\ProductGroup;
 use Illuminate\Contracts\Foundation\Application;

@@ -76,5 +76,9 @@ class ImportTorgSoftSeeder extends Seeder
             'cat_id'  => 52,
             'out_id'    =>  29,
         ]);
+        CategoryImport::create([
+            'cat_id'  => 24,
+            'out_id'    =>  32,
+        ]);
     }
 }
