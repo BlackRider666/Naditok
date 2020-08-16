@@ -84,7 +84,7 @@ class ProductGroup extends Model
      */
     public function getCategoryTitleAttribute(): string
     {
-        return $this->category->title;
+        return $this->category->title_ru;
     }
 
     /**
