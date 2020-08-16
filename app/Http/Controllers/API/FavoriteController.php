@@ -27,6 +27,7 @@ class FavoriteController extends Controller
             'user_id'       =>  $request->user()->getKey(),
             'product_id'    =>  $request->get('product_id'),
         ]);
+        $favorite = UserFavorite::find($favorite->getKey());
         return response()->json($favorite,200);
     }
 
