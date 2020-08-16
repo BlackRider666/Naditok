@@ -7,6 +7,7 @@ use App\Http\Requests\ProductGroupSearchRequest;
 use App\ProductGroup\Product\Product;
 use App\ProductGroup\ProductGroup;
 use Illuminate\Database\Eloquent\Builder;
+use function foo\func;
 
 class ProductController extends Controller
 {
@@ -17,14 +18,17 @@ class ProductController extends Controller
         $perPage = array_key_exists('perPage',$data)?$data['perPage']:12;
         $query = Product::query();
         if (array_key_exists('text',$data)) {
-            $query->where(function($sub) use ($data) {
-                $sub->where('group.title','LIKE','%'.$data['text'].'%')
-                    ->orWhere('group.desc','LIKE','%'.$data['text'].'%')
-                    ->orWhere('title', 'LIKE','%'.$data['text'].'%');
-            });
+            $query->whereHas('group',function($sub) use ($data) {
+                $sub->where('title','LIKE','%'.$data['text'].'%')
+                    ->orWhere('desc','LIKE','%'.$data['text'].'%');
+
+            })
+                ->orWhere('title', 'LIKE','%'.$data['text'].'%');
         }
         if (array_key_exists('categoryId',$data)) {
-            $query->where('group.category_id',$data['categoryId']);
+            $query->whereHas('group', function ($sub) use ($data){
+                $sub->where('category_id',$data['categoryId']);
+            });
         }
         if (array_key_exists('orderBy',$data)) {
             $query->orderByDesc($data['orderBy']);

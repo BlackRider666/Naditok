@@ -74,7 +74,7 @@ class ImportTorgSoftProducts implements ShouldQueue
                 $group = ProductGroup::updateOrCreate([
                     'out_id' =>  substr(substr(trim($product[2]),1),0,-1),
                 ],[
-                    'title'         => $product[1],
+                    'title'         => substr(substr(trim($product[1]),1),0,-1),
                     'brand_id'      => $brand->getKey(),
                     'category_id'   => $category->getKey(),
                     'age'           => isset($product[13])?
@@ -98,7 +98,7 @@ class ImportTorgSoftProducts implements ShouldQueue
                     'quantity'          =>  trim($product[6]),
                     'minimum'           =>  trim($product[7]),
                     'status'            =>  'active',
-                    'color'             =>  '#fff',
+                    'color'             =>  '#000',
                 ]);
                 ProductSize::firstOrCreate([
                     'product_id'    => $prod->getKey(),
