@@ -16,7 +16,7 @@ class CreateProductGroupsTable extends Migration
         Schema::create('product_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->integer('out_id')->default(0);
+            $table->bigInteger('out_id')->default(0);
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('category_id');
             $table->integer('age');

@@ -767,5 +767,18 @@ class CategorySeeder extends Seeder
             'title_ru'     =>  'Ночная рубашка',
             'parent_id' =>  90,
         ]);
+
+        Category::create([
+            'title_ru'     =>  'Пледы для новорожденных',
+            'parent_id' =>  26,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Одеяла для новорожденных',
+            'parent_id' =>  26,
+        ]);
+        Category::create([
+            'title_ru'     =>  'Комплекты в кроватку,бортики',
+            'parent_id' =>  26,
+        ]);
     }
 }

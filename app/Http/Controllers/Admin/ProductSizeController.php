@@ -65,11 +65,12 @@ class ProductSizeController extends Controller
     }
 
     /**
-     * @param ProductSize $productSize
+     * @param int $id
      * @return Factory|View
      */
-    public function show(ProductSize $productSize)
+    public function show(int $id)
     {
+        $productSize = ProductSize::find($id);
         return $this->dashboardPresenter->getShowPage($productSize);
     }
 

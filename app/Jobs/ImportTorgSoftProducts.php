@@ -31,7 +31,7 @@ class ImportTorgSoftProducts implements ShouldQueue
     {
         //
     }
-
+    public $timeout = 1200;
     /**
      * Execute the job.
      *
@@ -77,10 +77,15 @@ class ImportTorgSoftProducts implements ShouldQueue
                     'title'         => $product[1],
                     'brand_id'      => $brand->getKey(),
                     'category_id'   => $category->getKey(),
-                    'age'           => substr(substr(trim($product[13]),1),0,-1)===''?
+                    'age'           => isset($product[13])?
+                        substr(substr(trim($product[13]),1),0,-1)===''?
                         0
                         :
-                        substr(substr(trim($product[13]),1),0,-1)
+                        is_int(substr(substr(trim($product[13]),1),0,-1))?
+                            substr(substr(trim($product[13]),1),0,-1)
+                            :
+                            0
+                        :0
                     ,
                     'desc'          => $product[3],
                 ]);
@@ -89,10 +94,10 @@ class ImportTorgSoftProducts implements ShouldQueue
                 ],[
                     'product_group_id'  =>  $group->getKey(),
                     'title'             =>  '',
-                    'price'             =>  $product[5],
-                    'quantity'          =>  $product[6],
-                    'minimum'           =>  $product[7],
-                    'status'            =>  $product[15],
+                    'price'             =>  floatval(trim($product[5])),
+                    'quantity'          =>  trim($product[6]),
+                    'minimum'           =>  trim($product[7]),
+                    'status'            =>  'active',
                     'color'             =>  '#fff',
                 ]);
                 ProductSize::firstOrCreate([

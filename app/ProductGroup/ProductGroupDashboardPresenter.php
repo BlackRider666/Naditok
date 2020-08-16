@@ -48,7 +48,7 @@ class ProductGroupDashboardPresenter
                 'name'          =>  'products',
                 'items'         =>  $productGroup->products()->paginate(10),
                 'brand_id'      =>  $productGroup->brand->title,
-                'category_id'   =>  $productGroup->category->title,
+                'category_id'   =>  $productGroup->category->title_ru,
                 'product_group_id'  =>  $productGroup->getKey(),
                 'age'           =>  $productGroup->age_string,
             ],

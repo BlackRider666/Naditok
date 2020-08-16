@@ -49,6 +49,7 @@ class ProductDashboardPresenter
                 ],
                 'name'      =>  'product-sizes',
                 'items'     =>  $product->sizes()->paginate(10),
+                'withoutToolbar'    =>  false,
             ],
             'discount'      => $product->discount,
             'product_id'        =>  $product->getKey(),
