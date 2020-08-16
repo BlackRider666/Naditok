@@ -9,6 +9,6 @@ class BrandController extends Controller
 {
     public function index()
     {
-        return response()->json(Brand::orderByDesc('created_at')->paginate(10),200);
+        return response()->json(Brand::orderByDesc('created_at')->paginate(8),200);
     }
 }
