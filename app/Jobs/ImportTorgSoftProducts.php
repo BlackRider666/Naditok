@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Brand\Brand;
 use App\Category\Category;
+use App\Category\CategoryImport\CategoryImport;
 use App\Core\StorageManager;
 use App\ProductGroup\Product\Product;
 use App\ProductGroup\Product\ProductImage\ProductImage;
@@ -62,7 +63,8 @@ class ImportTorgSoftProducts implements ShouldQueue
                 ]);
             }
             if (isset($product[5])) {
-                $category = Category::where('out_id',$product[5])->first();
+                $cat_import = CategoryImport::where('out_id',$product[5])->first();
+                $category = Category::find($cat_import->cat_id);
             }
             if (isset($brand) && isset($category)) {
                 $group = ProductGroup::updateOrCreate([

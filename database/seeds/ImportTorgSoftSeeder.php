@@ -13,23 +13,23 @@ class ImportTorgSoftSeeder extends Seeder
     public function run()
     {
         CategoryImport::create([
-            'category_id'  => 32,
+            'cat_id'  => 32,
             'out_id'    =>  41,
         ]);
         CategoryImport::create([
-            'category_id'  => 33,
+            'cat_id'  => 33,
             'out_id'    =>  4105,
         ]);
         CategoryImport::create([
-            'category_id'  => 34,
+            'cat_id'  => 34,
             'out_id'    =>  40,
         ]);
         CategoryImport::create([
-            'category_id'  => 35,
+            'cat_id'  => 35,
             'out_id'    =>  42,
         ]);
         CategoryImport::create([
-            'category_id'  => 36,
+            'cat_id'  => 36,
             'out_id'    =>  43,
         ]);
     }
