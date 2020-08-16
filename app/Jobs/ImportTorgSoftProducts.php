@@ -49,11 +49,6 @@ class ImportTorgSoftProducts implements ShouldQueue
         {
             $data[] = explode($delimiter, $row);
         }
-        $conn_id = ftp_connect(env('FTP_HOST'));
-        ftp_login($conn_id,env('FTP_USER'), env('FTP_PASS'));
-        ftp_pasv($conn_id, true);
-        $path = '/img/';
-        $data = ftp_nlist($conn_id,$path);
         foreach ($data as $product) {
             if (isset($product[11])) {
                 $brand = Brand::firstOrCreate([
