@@ -7,7 +7,9 @@
                 @foreach($headers as $header)
                     <th scope="col">{{$header}}</th>
                 @endforeach
-                <th scope="col">Options</th>
+                @if(!$withoutShow||!$withoutToolbar)
+                    <th scope="col">Options</th>
+                @endif
             </tr>
             </thead>
             <tbody>
@@ -15,14 +17,21 @@
                 <tr>
                     <th scope="row">{{$item->id}}</th>
                     @foreach($headers as $key => $value)
-                        @if($key === 'color')
-                            <td><input type="color" value="{{$item->$key}}" disabled></td>
+                        @if(array_key_exists($key,$options))
+                            <?php $option = $options[$key]->where('id',$item->$key)->first()->toArray()?>
+                            <td>{{array_key_exists('title_ru',$option)?$option['title_ru']:$option['title']}}</td>
                         @else
-                            <td>{{$item->$key}}</td>
+                            @if($key === 'color')
+                                <td><input type="color" value="{{$item->$key}}" disabled></td>
+                            @else
+                                <td>{{$item->$key}}</td>
+                            @endif
                         @endif
                     @endforeach
                     <td class="row">
-                        <a class="col" href="{{route('admin.'.$name.'.show',$item->id)}}"><i class="fal fa-eye text-info"></i></a>
+                        @if(!$withoutShow)
+                            <a class="col" href="{{route('admin.'.$name.'.show',$item->id)}}"><i class="fal fa-eye text-info"></i></a>
+                        @endif
                         @if(!$withoutToolbar)
                         <a class="col" href="{{route('admin.'.$name.'.edit', $item->id)}}"><i class="fal fa-edit text-warning"></i></a>
                         <form class="col" action="{{route('admin.'.$name.'.destroy',$item->id)}}" method="POST">

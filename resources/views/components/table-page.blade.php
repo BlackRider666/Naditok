@@ -8,7 +8,7 @@
                     <h2>
                         {{ucfirst($name)}}
                     </h2>
-                    @if(!$withoutToolbar)
+                    @if(!$withoutCreate)
                     <div class="panel-toolbar">
                         <a class="btn btn-primary" href="{{route('admin.'.$name.'.create')}}"><i class="fal fa-plus"></i> Create</a>
                     </div>
@@ -31,6 +31,8 @@
                             'name'  => $name,
                             'items' => $items,
                             'withoutToolbar'    =>  $withoutToolbar,
+                            'options'           =>  $options,
+                            'withoutShow'       =>  $withoutShow
                         ])
                 </div>
             </div>

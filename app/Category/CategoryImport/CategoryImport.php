@@ -2,6 +2,7 @@
 
 namespace App\Category\CategoryImport;
 
+use App\Category\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class CategoryImport extends Model
@@ -13,4 +14,14 @@ class CategoryImport extends Model
         'out_id',
         'exporter',
     ];
+
+    protected $casts = [
+        'cat_id'    =>  'select',
+        'out_id'    =>  'integer',
+    ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'cat_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Category;
 
+use App\Category\CategoryImport\CategoryImport;
 use App\Core\PathManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
@@ -48,5 +49,10 @@ class Category extends Model
     public function child()
     {
         return $this->hasMany($this,'parent_id');
+    }
+
+    public function imports()
+    {
+        return $this->hasMany(CategoryImport::class,'cat_id');
     }
 }

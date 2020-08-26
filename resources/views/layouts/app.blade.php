@@ -159,6 +159,12 @@
                             <span class="nav-link-text">Kiddy</span>
                         </a>
                     </li>
+                    <li class="{{request()->is('import-category/*')|| request()->is('import->category')?'active':''}}">
+                        <a href="{{route('admin.import-category.index')}}" title="Import Category" data-filter-tags="import-category">
+                            <i class="fal fa-upload"></i>
+                            <span class="nav-link-text">Import Category</span>
+                        </a>
+                    </li>
                     <!-- sort-alt for upload-product -->
                 </ul>
                 <div class="filter-message js-filter-message bg-success-600"></div>

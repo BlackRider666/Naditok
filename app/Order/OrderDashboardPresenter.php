@@ -17,7 +17,7 @@ class OrderDashboardPresenter
             'status'        =>  'Status'
         ];
         $name = 'orders';
-        return (new DashboardPresenter())->getTablePage($headers, $name, $orders,true);
+        return (new DashboardPresenter())->getTablePage($headers, $name, $orders,true,[],true);
     }
 
     public function getShowPage(Order $order)

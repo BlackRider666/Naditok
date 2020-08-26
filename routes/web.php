@@ -48,6 +48,9 @@ Route::name('admin.')->middleware('auth')->group(function (){
     Route::post('import/kiddy/category','Admin\ImportController@kiddyCategory')->name('import.kiddy.category');
     Route::post('import/kiddy/product','Admin\ImportController@kiddyProduct')->name('import.kiddy.product');
     Route::post('import/kiddy/photos','Admin\ImportController@kiddyPhotos')->name('import.kiddy.photos');
+    Route::resource('import-category','Admin\ImportCategoryController')->except([
+        'edit', 'update', 'destroy'
+    ]);
 });
 Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login','Auth\LoginController@login');

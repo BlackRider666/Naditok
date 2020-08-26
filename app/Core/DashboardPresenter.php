@@ -9,13 +9,24 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class DashboardPresenter
 {
-    public function getTablePage(array $headers, string $name, LengthAwarePaginator $items, bool $withoutToolbar = false)
+    public function getTablePage(
+        array $headers,
+        string $name,
+        LengthAwarePaginator $items,
+        bool $withoutToolbar = false,
+        array $options = [],
+        bool $withoutCreate = false,
+        bool $withoutShow = false
+        )
     {
         return view('components.table-page',[
             'headers'   =>  $headers,
             'name'      =>  $name,
             'items'     =>  $items,
             'withoutToolbar'    =>  $withoutToolbar,
+            'options'           =>  $options,
+            'withoutCreate'     =>  $withoutCreate,
+            'withoutShow'       =>  $withoutShow
         ]);
     }
 
