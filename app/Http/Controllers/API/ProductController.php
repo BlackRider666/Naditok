@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductGroupSearchRequest;
 use App\ProductGroup\Product\Product;
 use App\ProductGroup\ProductGroup;
+use App\Users\UserViewed\UserViewed;
 use Illuminate\Database\Eloquent\Builder;
 use function foo\func;
 
@@ -46,6 +47,14 @@ class ProductController extends Controller
     public function show(int $id)
     {
         $product = ProductGroup::where('id',$id)->with('products')->first();
+        if (auth('sanctum')->user()!==null) {
+            foreach ($product->products() as $prod) {
+                UserViewed::create([
+                    'product_id'    =>  $prod->getKey(),
+                    'user_id'       =>  auth('sanctum')->user()->getKey(),
+                ]);
+            }
+        }
         if(!$product)
         {
             return response()->json('Not found!',404);

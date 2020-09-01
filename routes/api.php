@@ -46,3 +46,10 @@ Route::delete('/favorites-delete/{fav_id}','API\FavoriteController@removeFromFav
 Route::get('/orders','API\OrderController@index')->middleware('auth:sanctum');
 Route::post('/orders','API\OrderController@store')->middleware('auth:sanctum');
 Route::get('/orders/{order_id}','API\OrderController@show')->middleware('auth:sanctum');
+
+Route::get('/comparison','API\ComparisonController@index')->middleware('auth:sanctum');
+Route::post('/comparison-add/{product_id}','API\ComparisonController@store')->middleware('auth:sanctum');
+Route::delete('/comparison-delete/{product_id}','API\ComparisonController@destroy')->middleware('auth:sanctum');
+
+Route::get('/last-viewed','API\ProductViewedController@lastViewed')->middleware('auth:sanctum');
+Route::get('/recommended-products','API\ProductViewedController@recommendedProducts')->middleware('auth:sanctum');

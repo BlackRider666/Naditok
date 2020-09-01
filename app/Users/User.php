@@ -7,7 +7,9 @@ use App\Order\Order;
 use App\Shipment\Shipment;
 use App\Users\UserAddress\UserAddress;
 use App\Users\UserChild\UserChild;
+use App\Users\UserComparison\UserComparison;
 use App\Users\UserFavorite\UserFavorite;
+use App\Users\UserViewed\UserViewed;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -123,5 +125,21 @@ class User extends Authenticatable
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function comparisons(): HasMany
+    {
+        return $this->hasMany(UserComparison::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function viewed(): HasMany
+    {
+        return $this->hasMany(UserViewed::class);
     }
 }
