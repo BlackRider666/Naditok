@@ -45,7 +45,6 @@ Route::name('admin.')->middleware('auth')->group(function (){
     ]);
     Route::get('/import/kiddy','Admin\ImportController@kiddy')->name('import.kiddy');
     Route::post('import/kiddy/brand','Admin\ImportController@kiddyBrand')->name('import.kiddy.brand');
-    Route::post('import/kiddy/category','Admin\ImportController@kiddyCategory')->name('import.kiddy.category');
     Route::post('import/kiddy/product','Admin\ImportController@kiddyProduct')->name('import.kiddy.product');
     Route::post('import/kiddy/photos','Admin\ImportController@kiddyPhotos')->name('import.kiddy.photos');
     Route::resource('import-category','Admin\ImportCategoryController')->except([

@@ -42,6 +42,9 @@ class ProductDashboardPresenter
                 ],
                 'name'      =>  'product-images',
                 'items'     =>  $product->images()->paginate(10),
+                'withoutToolbar'    =>  false,
+                'withoutShow'       =>  false,
+                'options'           =>  [],
             ],
             'sizes'             =>  [
                 'headers'   =>  [
@@ -50,6 +53,8 @@ class ProductDashboardPresenter
                 'name'      =>  'product-sizes',
                 'items'     =>  $product->sizes()->paginate(10),
                 'withoutToolbar'    =>  false,
+                'withoutShow'       =>  false,
+                'options'           =>  [],
             ],
             'discount'      => $product->discount,
             'product_id'        =>  $product->getKey(),

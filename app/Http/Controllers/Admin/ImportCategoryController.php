@@ -54,7 +54,7 @@ class ImportCategoryController extends Controller
     }
 
     /**
-     * @param CategoryRequest $request
+     * @param CategoryImportRequest $request
      * @return RedirectResponse
      */
     public function store(CategoryImportRequest $request): RedirectResponse

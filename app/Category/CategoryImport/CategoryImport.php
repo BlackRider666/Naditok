@@ -16,6 +16,7 @@ class CategoryImport extends Model
     ];
 
     protected $casts = [
+        'exporter'  =>  'select',
         'cat_id'    =>  'select',
         'out_id'    =>  'integer',
     ];

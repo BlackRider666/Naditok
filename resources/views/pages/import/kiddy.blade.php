@@ -47,27 +47,6 @@
                             ])
                         </form>
                         <hr>
-                        <h3>Update Category</h3>
-                        <form action="{{route('admin.import.kiddy.category')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <label for="file" class="form-label">File (.csv)</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input {{$errors->has('file_category') ? 'is-invalid':''}}" id="file" name="file_category" required>
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                    @error('file_category')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            @include('components.inputs.submit', [
-                                'function'  => 'Import',
-                                'name'      => 'Categories',
-                            ])
-                        </form>
-                        <hr>
                         <h3>Update Product</h3>
                         <form action="{{route('admin.import.kiddy.product')}}" method="POST" enctype="multipart/form-data">
                             @csrf

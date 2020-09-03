@@ -67,41 +67,6 @@ class ImportController extends Controller
     }
 
     /**
-     * @param KiddyCategoryRequest $request
-     * @return RedirectResponse
-     */
-    public function kiddyCategory(KiddyCategoryRequest $request): RedirectResponse
-    {
-        if ($request->file('file_category')->getClientOriginalName() !== "import_types.csv") {
-            return redirect()->back()->withErrors([
-                'file_category'  => 'Is not a category'
-            ]);
-        }
-        $file = file_get_contents($request->file('file_category'));
-        $delimiter = ',';
-        $rows = explode(PHP_EOL, $file);
-        $data = [];
-
-        foreach ($rows as $row)
-        {
-            $data[] = explode($delimiter, $row);
-        }
-        unset($data[0]);
-        unset($data[count($data)]);
-        foreach ($data as $cat) {
-            if (substr(substr(trim($cat[1]),1),0,-1) !== '') {
-                Category::updateOrCreate([
-                    'out_id' =>  $cat[0],
-                ],[
-                    'title'     =>  trim(substr(substr(trim(isset($cat[2])?$cat[1].$cat[2]:$cat[1]),1),0,-1),'\xD0'),
-                    'parent_id' =>  10,
-                ]);
-            }
-        }
-        return redirect()->route('admin.import.kiddy')->with('done','Категории обновлены!');
-    }
-
-    /**
      * @param KiddyProductRequest $request
      * @return RedirectResponse
      */

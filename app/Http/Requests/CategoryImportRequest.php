@@ -26,6 +26,7 @@ class CategoryImportRequest extends FormRequest
         return [
             'cat_id'    =>  'required|int|exists:categories,id',
             'out_id'    =>  'required|int',
+            'exporter'  =>  'required|string',
         ];
     }
 }

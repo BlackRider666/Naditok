@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\ProductGroup\Product\Product;
+use App\ProductGroup\ProductGroup;
 use App\Users\UserViewed\UserViewed;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -25,8 +26,10 @@ class ProductViewedController extends Controller
      */
     public function recommendedProducts(): JsonResponse
     {
-        $category_id = UserViewed::where('user_id',auth('sanctum')->user()->getKey())->first()->product()->category_id;
-        $products = Product::where('category_id',$category_id?:0)->get();
+        $viewed = UserViewed::where('user_id',auth('sanctum')->user()->getKey())->first();
+        $category_id = $viewed!== null?$viewed->product->category_id:0;
+        $product_groups = ProductGroup::where('category_id',$category_id)->pluck('id');
+        $products = Product::whereIn('product_group_id',$product_groups)->orderByDesc('created_at')->paginate(20);
         return response()->json([
             'products'  =>  $products,
         ],200);

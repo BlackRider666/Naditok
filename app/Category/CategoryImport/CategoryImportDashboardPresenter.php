@@ -12,8 +12,8 @@ class CategoryImportDashboardPresenter
     public function getTablePage(LengthAwarePaginator $categories)
     {
         $headers = [
-            'cat_id'    => 'Category',
-            'out_id'    => 'Out ID',
+            'cat_id'    =>  'Category',
+            'out_id'    =>  'Out ID',
             'exporter'  =>  'Exporter'
         ];
         $name = 'import-category';
@@ -30,6 +30,16 @@ class CategoryImportDashboardPresenter
         $name = 'import-category';
         $options = [
             'cat_id'    =>  Category::all()->toArray(),
+            'exporter'  =>  [
+                [
+                    'id'        =>  'torgsoft',
+                    'title'     =>  'Торгсофт' ,
+                ],
+                [
+                    'id'        =>  'kiddy',
+                    'title'     =>  'Kiddy'
+                ]
+            ],
         ];
         return (new DashboardPresenter())->getCreatePage($casts,$name,$options);
     }
