@@ -57,7 +57,7 @@ class ImportKiddyProducts implements ShouldQueue
         foreach ($data as $product) {
             if (isset($product[2]) && isset($product[3])) {
                 $brand = Brand::where('out_id',$product[2])->first();
-                $import_cat = CategoryImport::where('out_id',$product[3])->first();
+                $import_cat = CategoryImport::where('exporter','kiddy')->where('out_id',$product[3])->first();
                 $category = Category::find($import_cat->cat_id);
                 if ($brand && $category) {
                     $group = ProductGroup::updateOrCreate([

@@ -63,7 +63,7 @@ class ImportTorgSoftProducts implements ShouldQueue
                 ]);
             }
             if (isset($product[5])) {
-                $cat_import = CategoryImport::where('out_id',(int)$product[5])->first();
+                $cat_import = CategoryImport::where('exporter','torgsoft')->where('out_id',(int)$product[5])->first();
                 if (isset($cat_import)) {
                     $category = Category::find($cat_import->cat_id);
                 } else {
